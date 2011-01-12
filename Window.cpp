@@ -57,7 +57,9 @@ void Window::run() {
 
 }
 
-void Window::addEvent(sf::Event event, EventHandler handler) {
+void Window::addEvent(sf::Event event, EventHandler &handler) {
+
+    
 
 }
 
