@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* 
  * File:   main.cpp
  * Author: zapo
@@ -26,6 +25,3 @@ int main(int argc, char** argv) {
 
     return EXIT_SUCCESS;
 }
-
-=======
->>>>>>> c0ee7ba97b40fa548a914a9b81a50b4864ee6e28
