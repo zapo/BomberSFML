@@ -23,14 +23,8 @@ int main(int argc, char **argv){
   sf::SocketUDP socket;
 
   char buffer[128+1];
-  strcpy(buffer,"Hello World !!!\n");
 
-  /* Envoi de donnée sur le socket */
-  /*if(socket.Send(buffer, sizeof(buffer), servAddr, write_port) != sf::Socket::Done)
-    cout << "Error on socket\n";
-
-  strcpy(buffer, "");
-  */
+  
    socket.Bind(receive_port);
 
    socket.Receive(buffer, sizeof(buffer), received, servAddr, receive_port);
@@ -38,13 +32,8 @@ int main(int argc, char **argv){
     cout << buffer << endl;
 
     socket.Close();
-    float test = 3.2;
-    sf::Sleep(test);
-  /* Envoi de donnée sur le socket */
-  if(socket.Send(buffer, sizeof(buffer), servAddr, write_port) != sf::Socket::Done)
-    cout << "Error on socket\n";
+   
 
-  cout << "Message envoyé sur le socket\n";
   
 
   socket.Close();

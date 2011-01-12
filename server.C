@@ -34,17 +34,6 @@ int main(int argc, char **argv){
   if(socket.Send(buffer, sizeof(buffer), servAddr, write_port) != sf::Socket::Done)
     cout << "Error on Sending\n";
 
-  strcpy(buffer, "");
-  //socket.Close();    
-float test = 2.2;
-    sf::Sleep(test);
-  if(!socket.Bind(receive_port))
-    cout << "Error on Binding\n";
-
-  if(socket.Receive(buffer, sizeof(buffer), received, servAddr, receive_port) != sf::Socket::Done)
-  cout << "Error on reception\n";
-
-  cout << buffer << endl;
 
   socket.Close();
 
