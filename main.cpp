@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Window.h"
-#include "ClosingEventHandler.h"
+#include "system/events/handlers/EventHandler.h"
 
 using namespace std;
 using namespace BMSfml;
