@@ -15,6 +15,8 @@
                    displayName="Source Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>Window.cpp</itemPath>
+      <itemPath>Window.h</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -38,6 +40,9 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <commandLine>-lsfml-graphics -lsfml-window -lsfml-system</commandLine>
+        </ccTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
