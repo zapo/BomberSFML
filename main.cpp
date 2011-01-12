@@ -22,24 +22,12 @@ int main(int argc, char** argv) {
     // Create the main rendering window
     Window window(800, 600, 32, "Test Window");
 
-    ClosingEventHandler closeHandler;
+    ClosingEventHandler *closeHandler = new ClosingEventHandler();
 
-    /*sf::Event::KeyEvent qEvent;
-    qEvent.Code = sf::Key::Q;*/
-    //window.addEvent((sf::Event)qEvent, (EventHandler)closeHandler);
+    window.addEventHandler((EventHandler*)closeHandler);
 
-    map<sf::Event, EventHandler&> eventHandlers = window.getEventHandlers();
-
-    map<sf::Event, EventHandler&>::iterator it;
-
-    for(it = eventHandlers.begin(); it != eventHandlers.end(); it++) {
-
-        //cout << it->first << " => " << it->second << endl;
-
-    }
 
     
-
 
     // Run the main window loop
     window.run();

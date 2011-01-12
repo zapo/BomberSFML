@@ -8,6 +8,8 @@
 #ifndef EVENTHANDLER_H
 #define	EVENTHANDLER_H
 
+#include <SFML/Graphics.hpp>
+
 namespace BMSfml {
 
     class EventHandler {
@@ -16,7 +18,7 @@ namespace BMSfml {
         EventHandler();
         EventHandler(const EventHandler& orig);
         virtual ~EventHandler();
-        virtual void handle(void* params) = 0;
+        virtual void handle(sf::Event &event) = 0;
     private:
 
     };

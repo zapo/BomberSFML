@@ -8,7 +8,7 @@
 #include "Window.h"
 #include <iostream>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -41,11 +41,11 @@ void Window::run() {
         sf::Event event;
         while (this->sfWindow->GetEvent(event))
         {
-            // Close window : exit
-            switch (event.Type) {
-                case sf::Event::Closed:
-                    this->sfWindow->Close();
-                    break;
+            for(int i = 0; i < this->getEventHandlers().size(); i++) {
+
+                EventHandler *eh = this->getEventHandlers()[i];
+                eh->handle(event);
+
             }
         }
 
@@ -58,13 +58,15 @@ void Window::run() {
 
 }
 
-void Window::addEvent(sf::Event &event, EventHandler &handler) {
+void Window::addEventHandler(EventHandler *handler) {
 
-    //this->eventHandlers.insert(pair<sf::Event, EventHandler>(event, handler));
+    if(handler != NULL) {
+        this->eventHandlers.push_back(handler);
+    }
 
 }
 
-map<sf::Event, EventHandler&> Window::getEventHandlers() {
+ vector<EventHandler*> Window::getEventHandlers() {
 
     return this->eventHandlers;
 
