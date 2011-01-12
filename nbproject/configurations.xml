@@ -5,17 +5,21 @@
                    displayName="Header Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>EventHandler.h</itemPath>
       <itemPath>Window.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>client.C</itemPath>
+      <itemPath>server.C</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>EventHandler.cpp</itemPath>
       <itemPath>Window.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -41,9 +45,13 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-lsfml-graphics -lsfml-window -lsfml-system</commandLine>
+          <commandLine>-lsfml-graphics -lsfml-window -lsfml-system -lsfml-network</commandLine>
         </ccTool>
       </compileType>
+      <item path="client.C" ex="true" tool="1">
+      </item>
+      <item path="server.C" ex="true" tool="1">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>

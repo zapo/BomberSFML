@@ -33,8 +33,11 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/EventHandler.o \
+	${OBJECTDIR}/server.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/Window.o
+	${OBJECTDIR}/Window.o \
+	${OBJECTDIR}/client.o
 
 
 # C Compiler Flags
@@ -61,6 +64,16 @@ dist/Release/GNU-Linux-x86/bombersfml: ${OBJECTFILES}
 	${MKDIR} -p dist/Release/GNU-Linux-x86
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bombersfml ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/EventHandler.o: EventHandler.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/EventHandler.o EventHandler.cpp
+
+${OBJECTDIR}/server.o: server.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/server.o server.C
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -70,6 +83,11 @@ ${OBJECTDIR}/Window.o: Window.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Window.o Window.cpp
+
+${OBJECTDIR}/client.o: client.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/client.o client.C
 
 # Subprojects
 .build-subprojects:

@@ -33,6 +33,7 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/EventHandler.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Window.o
 
@@ -41,8 +42,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
-CXXFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+CCFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-network
+CXXFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-network
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -60,6 +61,11 @@ LDLIBSOPTIONS=
 dist/Debug/GNU-Linux-x86/bombersfml: ${OBJECTFILES}
 	${MKDIR} -p dist/Debug/GNU-Linux-x86
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/bombersfml ${OBJECTFILES} ${LDLIBSOPTIONS} 
+
+${OBJECTDIR}/EventHandler.o: EventHandler.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/EventHandler.o EventHandler.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
