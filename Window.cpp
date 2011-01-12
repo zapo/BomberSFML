@@ -8,6 +8,7 @@
 #include "Window.h"
 #include <iostream>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <map>
 
 using namespace std;
 
@@ -57,9 +58,15 @@ void Window::run() {
 
 }
 
-void Window::addEvent(sf::Event event, EventHandler &handler) {
+void Window::addEvent(sf::Event &event, EventHandler &handler) {
 
-    
+    //this->eventHandlers.insert(pair<sf::Event, EventHandler>(event, handler));
+
+}
+
+map<sf::Event, EventHandler&> Window::getEventHandlers() {
+
+    return this->eventHandlers;
 
 }
 

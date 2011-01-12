@@ -10,6 +10,7 @@
 
 #include "EventHandler.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <map>
 
 
 using namespace std;
@@ -23,9 +24,11 @@ namespace BMSfml {
         Window(const Window& orig);
         virtual ~Window();
 
-        void addEvent(sf::Event, EventHandler&);
+        void addEvent(sf::Event&, EventHandler&);
 
         void run();
+
+        map<sf::Event, EventHandler&> getEventHandlers();
     private:
 
         string title;
@@ -35,7 +38,7 @@ namespace BMSfml {
 
         sf::RenderWindow *sfWindow;
 
-        
+        map<sf::Event, EventHandler&> eventHandlers;
 
     };
 
