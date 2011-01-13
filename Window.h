@@ -24,6 +24,9 @@ public:
 	vector<EventHandler*> getEventHandlers();
 	void addEventHandler(EventHandler*);
 
+	void addDrawableObject(sf::Drawable*);
+	vector<sf::Drawable*> getDrawableObjects();
+
 	void run();
 
 
@@ -31,12 +34,8 @@ public:
 private:
 
 	string title;
-	int width;
-	int height;
-	int colors;
-
-
 	vector<EventHandler*> eventHandlers;
+	vector<sf::Drawable*> drawableObjects;
 
 };
 

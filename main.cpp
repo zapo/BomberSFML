@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Window.h"
 #include "ClosingEventHandler.h"
+#include "MoveRectEventHandler.h"
 
 
 using namespace std;
@@ -20,11 +21,24 @@ int main(int argc, char** argv) {
 
 	Window window(800, 600, 32, "Test Window");
 
-	ClosingEventHandler *closeHandler = new ClosingEventHandler();
+	ClosingEventHandler closeHandler;
 
-	window.addEventHandler((EventHandler*) closeHandler);
+
+	window.addEventHandler((EventHandler*) &closeHandler);
+
+
+
+	sf::Shape rect = sf::Shape::Rectangle(0, 0, 50, 50, sf::Color(255,255,255));
+
+	window.addDrawableObject((sf::Drawable*)&rect);
+
+	MoveRectEventHandler moveHandler(&rect);
+	window.addEventHandler((EventHandler*) &moveHandler);
+
 
 	window.run();
+
+
 
 	return EXIT_SUCCESS;
 }

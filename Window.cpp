@@ -15,10 +15,7 @@ using namespace std;
 Window::Window(int width, int height, int colors, string title) :
 
 		sf::RenderWindow(sf::VideoMode(width, height, colors), title),
-		title(title),
-		width(width),
-		height(height),
-		colors(colors)
+		title(title)
 
 {}
 
@@ -47,8 +44,19 @@ void Window::run() {
 			}
 		}
 
+
+
 		// Clear the screen (fill it with black color)
 		this->Clear();
+
+		for(unsigned int i = 0; i < this->getDrawableObjects().size(); i++) {
+
+			sf::Drawable *dro = this->getDrawableObjects()[i];
+
+			if(dro != NULL) {
+				this->Draw(*dro);
+			}
+		}
 
 		// Display window contents on screen
 		this->Display();
@@ -69,6 +77,14 @@ void Window::addEventHandler(EventHandler *handler) {
 
 	return this->eventHandlers;
 
+}
+
+
+void Window::addDrawableObject(sf::Drawable* object) {
+	this->drawableObjects.push_back(object);
+}
+vector<sf::Drawable*> Window::getDrawableObjects() {
+	return this->drawableObjects;
 }
 
 
