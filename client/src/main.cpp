@@ -20,6 +20,8 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+
+
 	Window window(800, 600, 32, "Test Window");
 
 	ClosingEventHandler closeHandler;
@@ -38,22 +40,41 @@ int main(int argc, char** argv) {
 
 
 	sf::SocketTCP sock;
-	unsigned short port = 8888;
+	unsigned short port = 8889;
 
-	if (sock.Connect(port, sf::IPAddress::LocalHost, 20.) == sf::Socket::Done) {
+	if (sock.Connect(port, sf::IPAddress::LocalHost) != sf::Socket::Done) {
+		cout << "Can't connect" << endl;
+		return 1;
+	}
 
-		char message[128] = "Yo server";
+	bool connected = true;
 
-		sock.Send(message, sizeof(message));
+	while(connected) {
+
+		sf::Packet packet;
+
+		std::string Message;
+		std::cout << "Say something to the server : ";
+		std::getline(std::cin, Message);
+
+		packet << Message;
+
+		connected = (sock.Send(packet) == sf::Socket::Done);
+
+		sf::Packet received;
+
+		connected = (sock.Receive(received) == sf::Socket::Done);
+
+		received >> Message;
+
+		cout << Message << endl;
 
 	}
 
 
+	sock.Close();
 
-
-
-	window.run();
-
+	//window.run();
 
 
 	return EXIT_SUCCESS;
