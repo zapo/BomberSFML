@@ -10,6 +10,7 @@
 #include "Window.h"
 #include "ClosingEventHandler.h"
 #include "MoveRectEventHandler.h"
+#include <SFML/Network.hpp>
 
 
 using namespace std;
@@ -34,6 +35,21 @@ int main(int argc, char** argv) {
 
 	MoveRectEventHandler moveHandler(&rect);
 	window.addEventHandler((EventHandler*) &moveHandler);
+
+
+	sf::SocketTCP sock;
+	unsigned short port = 8888;
+
+	if (sock.Connect(port, sf::IPAddress::LocalHost, 20.) == sf::Socket::Done) {
+
+		char message[128] = "Yo server";
+
+		sock.Send(message, sizeof(message));
+
+	}
+
+
+
 
 
 	window.run();

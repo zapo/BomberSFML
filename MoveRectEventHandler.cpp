@@ -19,8 +19,6 @@ void MoveRectEventHandler::handle(sf::Event &event) {
 
 	if(event.Type == sf::Event::KeyPressed) {
 
-
-
 		float left = shape->GetPosition().x;
 		float top = shape->GetPosition().y;
 
@@ -28,19 +26,19 @@ void MoveRectEventHandler::handle(sf::Event &event) {
 
 
 		if(handledWindow->GetInput().IsKeyDown(sf::Key::Right)){
-			left += 2;
+			left += 10;
 		}
 
 		if(handledWindow->GetInput().IsKeyDown(sf::Key::Left)){
-			left -= 2;
+			left -= 10;
 		}
 
 		if(handledWindow->GetInput().IsKeyDown(sf::Key::Up)){
-			top -= 2;
+			top -= 10;
 		}
 
 		if(handledWindow->GetInput().IsKeyDown(sf::Key::Down)){
-			top += 2;
+			top += 10;
 		}
 
 		shape->SetPosition(left, top);
