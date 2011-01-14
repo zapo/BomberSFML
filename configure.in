@@ -1,0 +1,32 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.67])
+AC_INIT(BomberSFML, 0.01, antoineniek@gmail.com)
+AM_INIT_AUTOMAKE
+
+# Checks for programs.
+AC_PROG_CXX
+
+# Get sfml libs
+AC_ARG_WITH([sfml-include-path],
+  [AS_HELP_STRING([--with-sfml-include-path],
+    [location of the SFML headers, defaults to /usr/include/SFML])],
+  [SFML_CFLAGS="-I$withval"],
+  [SFML_CFLAGS='-I/usr/include/SFML'])
+AC_SUBST([SFML_CFLAGS])
+
+AC_ARG_WITH([sfml-lib-path],
+  [AS_HELP_STRING([--with-sfml-lib-path], [location of the SFML libraries])],
+  [SFML_LIBS="-L$withval -lsfml-graphics -lsfml-network -lsfml-system"],
+  [SFML_LIBS='-lsfml-graphics -lsfml-network -lsfml-system'])
+AC_SUBST([SFML_LIBS])
+
+AC_CONFIG_FILES([
+
+    Makefile
+    client/Makefile
+    server/Makefile
+])
+
+AC_OUTPUT
