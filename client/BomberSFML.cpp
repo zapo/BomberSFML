@@ -22,32 +22,22 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-	Application* app = Application::getInstance();
+	Application *app = Application::getInstance();
 
 	sf::SocketTCP sock;
 	unsigned short port = 8889;
 
-	ClosingEventHandler closeHandler;
-
 	Connection *connection = new Connection(sock, port, sf::IPAddress::LocalHost);
 
+	Window *window = new Window(800, 600, 32, "Test Window");
+
+	app->setWindow(window);
 	app->setConnection(connection);
 
+	ClosingEventHandler *closeHandler = new ClosingEventHandler;
+    window->addEventHandler((EventHandler*) closeHandler);
 
-	Window window(800, 600, 32, "Test Window");
-
-	app->setWindow(&window);
-
-
-
-	window.addEventHandler((EventHandler*) &closeHandler);
-
-
-
-
-	window.run();
-
-	delete app;
+	window->run();
 
 
 	return EXIT_SUCCESS;

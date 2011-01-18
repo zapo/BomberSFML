@@ -11,7 +11,7 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 
-class Connection : sf::Thread {
+class Connection : public sf::Thread {
 public:
 	Connection(sf::SocketTCP& sock, unsigned int port, sf::IPAddress const& address);
 

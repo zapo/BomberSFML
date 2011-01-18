@@ -142,7 +142,8 @@ Window.o: Window.cpp Window.h /usr/include/SFML/Graphics.hpp \
  /usr/include/SFML/Graphics/RenderTarget.hpp \
  /usr/include/SFML/Graphics/View.hpp /usr/include/SFML/Graphics/Shape.hpp \
  /usr/include/SFML/Graphics/Sprite.hpp \
- /usr/include/SFML/Graphics/String.hpp EventHandler.h
+ /usr/include/SFML/Graphics/String.hpp EventHandler.h \
+ /usr/include/c++/4.4/iostream
 
 Window.h:
 
@@ -571,3 +572,5 @@ Window.h:
 /usr/include/SFML/Graphics/String.hpp:
 
 EventHandler.h:
+
+/usr/include/c++/4.4/iostream:

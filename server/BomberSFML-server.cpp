@@ -12,9 +12,6 @@
 
 #include "Client.h"
 
-#define IS_ALIVE 1
-#define ALIVE 2
-
 #include <vector>
 
 using namespace std;
@@ -22,6 +19,8 @@ using namespace std;
 int main() {
 
 	vector<Client*> clients;
+	vector<Client*>::iterator ico;
+
 
 	bool running = true;
 
@@ -53,12 +52,5 @@ int main() {
 	}
 
 
-
-
-
-
-
-
-
-	return 0;
+	return EXIT_SUCCESS;
 }

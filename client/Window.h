@@ -33,9 +33,16 @@ public:
 
 private:
 
+
+	sf::Mutex drawableObjectsMutex;
+	sf::Mutex eventHandlersMutex;
 	string title;
+
 	vector<EventHandler*> eventHandlers;
 	vector<sf::Drawable*> drawableObjects;
+
+	vector<sf::Drawable*>::iterator ido;
+	vector<EventHandler*>::iterator iho;
 
 };
 

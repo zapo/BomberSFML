@@ -9,16 +9,14 @@
 #include "Window.h"
 #include "Application.h"
 #include "MoveRectEventHandler.h"
+#include <SFML/Graphics.hpp>
 #include <iostream>
-#define IS_ALIVE 1
-#define ALIVE 2
 
 using namespace std;
 
-Connection::Connection(sf::SocketTCP& sock, unsigned int port, sf::IPAddress const& address) : host(address), port(port), socket(sock), sf::Thread() {
-
-	this->Launch();
-
+Connection::Connection(sf::SocketTCP& sock, unsigned int port,
+		sf::IPAddress const& address) :
+	host(address), port(port), socket(sock), sf::Thread() {
 }
 
 Connection::~Connection() {
@@ -27,7 +25,7 @@ Connection::~Connection() {
 
 bool Connection::connect() {
 
-	cout << "Trying to connect to " << host << endl;
+	cout << "Trying to connect to server..." << endl;
 	return socket.Connect(port, host) == sf::Socket::Done;
 }
 
@@ -36,40 +34,42 @@ bool Connection::isConnected() {
 	return socket.IsValid();
 }
 
-
-
 void Connection::Run() {
 
-		if(!connect()) {
-			cout << "Cant contect ..." << endl;
-			return;
-		}
+	if (!connect() || !isConnected()) {
+		cout << "Cant contect ..." << endl;
+		return;
+	}
 
-		sf::Packet received;
-
-		if(socket.Receive(received) == sf::Socket::Done) {
-
-			sf::Uint16 x,y;
-
-			if(!received >> x >> y) {
-				cout << "error while reading data";
-			}
-
-			cout << "got " << x << "and" << y;
-
-			Window* win = Application::getInstance()->getWindow();
+	cout << "Got a valid socket connected to '" << host << "' !" << endl;
 
 
-			sf::Shape rect = sf::Shape::Rectangle(x, y, 50, 50, sf::Color(255,255,255));
 
-			win->addDrawableObject((sf::Drawable*)&rect);
+	sf::Packet received;
 
-			MoveRectEventHandler moveHandler(&rect);
-			win->addEventHandler((EventHandler*) &moveHandler);
+	if (socket.Receive(received) == sf::Socket::Done) {
 
-		}
+		sf::Uint16 x, y;
 
+		received >> x >> y;
 
+		Window *win = Application::getInstance()->getWindow();
+
+		sf::Color fillColor = sf::Color(128, 128, 128);
+
+		sf::Shape *rect = new sf::Shape();
+
+		rect->AddPoint(x, y, fillColor);
+		rect->AddPoint(x, y + 10, fillColor);
+		rect->AddPoint(x + 10, y + 10, fillColor);
+		rect->AddPoint(x + 10, y, fillColor);
+
+		win->addDrawableObject((sf::Drawable*) rect);
+
+		MoveRectEventHandler *moveHandler = new MoveRectEventHandler(rect);
+		win->addEventHandler((EventHandler*) moveHandler);
+
+	}
 
 
 }

@@ -45,7 +45,7 @@ void Client::Run() {
 	pposition << x << y;
 
 	if(socket.Send(pposition) == sf::Socket::Done) {
-		std::cout << "Sent : " << x << " and " << y << std::endl;
+		std::cout << "Sent position : " << x << " and " << y << "to client : " << std::endl;
 	}
 
 }

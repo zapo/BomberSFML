@@ -120,7 +120,8 @@ Application.o: Application.cpp Application.h \
  /usr/include/SFML/Network/Selector.hpp \
  /usr/include/SFML/Network/SocketUDP.hpp \
  /usr/include/SFML/Network/SelectorBase.hpp \
- /usr/include/SFML/Network/Selector.inl
+ /usr/include/SFML/Network/Selector.inl Connection.h \
+ /usr/include/c++/4.4/iostream
 
 Application.h:
 
@@ -491,3 +492,7 @@ Application.h:
 /usr/include/SFML/Network/SelectorBase.hpp:
 
 /usr/include/SFML/Network/Selector.inl:
+
+Connection.h:
+
+/usr/include/c++/4.4/iostream:

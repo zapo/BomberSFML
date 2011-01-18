@@ -7,9 +7,10 @@
 
 #include "Application.h"
 #include <SFML/Network.hpp>
+#include "Connection.h"
+#include <iostream>
 
-
-Application* Application::instance = 0;
+Application* Application::instance = NULL;
 
 Application::Application() {
 
@@ -18,6 +19,7 @@ Application::Application() {
 Application* Application::getInstance() {
 
 	if(!instance) {
+		std::cout << "Application instanciation" << std::endl;
 		instance = new Application;
 	}
 
@@ -27,6 +29,9 @@ Application* Application::getInstance() {
 
 
 Application::~Application() {
+
+	connection->Wait();
+
 	delete instance;
 }
 
@@ -41,6 +46,7 @@ Window* Application::getWindow() {
 void Application::setConnection(Connection *connection) {
 
 	this->connection = connection;
+	this->connection->Launch();
 
 }
 
