@@ -46,7 +46,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_client_OBJECTS = BomberSFML.$(OBJEXT) ClosingEventHandler.$(OBJEXT) \
 	EventHandler.$(OBJEXT) MoveRectEventHandler.$(OBJEXT) \
-	Window.$(OBJEXT)
+	Window.$(OBJEXT) Application.$(OBJEXT) Connection.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
 client_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -162,7 +162,11 @@ client_SOURCES = \
     MoveRectEventHandler.cpp \
     MoveRectEventHandler.h \
     Window.cpp \
-    Window.h
+    Window.h \
+    Application.h \
+    Application.cpp \
+    Connection.h \
+    Connection.cpp
 
 AM_CPPFLAGS = $(SFML_CFLAGS)
 client_LDADD = $(SFML_LIBS)
@@ -247,8 +251,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/Application.Po
 include ./$(DEPDIR)/BomberSFML.Po
 include ./$(DEPDIR)/ClosingEventHandler.Po
+include ./$(DEPDIR)/Connection.Po
 include ./$(DEPDIR)/EventHandler.Po
 include ./$(DEPDIR)/MoveRectEventHandler.Po
 include ./$(DEPDIR)/Window.Po

@@ -9,77 +9,50 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
+
+#include "Client.h"
+
+#define IS_ALIVE 1
+#define ALIVE 2
+
 #include <vector>
 
 using namespace std;
 
 int main() {
 
+	vector<Client*> clients;
 
 	bool running = true;
 
-	sf::IPAddress servAddr = sf::IPAddress::LocalHost;
+
+
 	unsigned short listenPort = 8889;
 
 	sf::SocketTCP listener;
 
 	listener.Listen(listenPort);
 
-	sf::SelectorTCP selector;
-
-	selector.Add(listener);
 
 	while(running) {
 
-		unsigned int nbSockets = selector.Wait();
+		sf::SocketTCP clientSocket;
+		sf::IPAddress clientAddress;
 
-		for(unsigned int i = 0; i < nbSockets; i++) {
+		cout << "Waiting for connections on " << listenPort << endl;
 
-			sf::SocketTCP readySock = selector.GetSocketReady(i);
+		if(listener.Accept(clientSocket, &clientAddress) == sf::Socket::Done) {
 
-			if(readySock == listener) {
+			cout << "Incoming connection..." << endl;
+			Client *c = new Client(clientSocket, clientAddress);
 
-				sf::IPAddress address;
-				sf::SocketTCP client;
-
-				listener.Accept(client, &address);
-				std::cout << "Client connected ! (" << address << ")" << std::endl;
-
-				selector.Add(client);
-
-			} else {
-
-				sf::Packet packet;
-
-				if(readySock.Receive(packet) == sf::Socket::Done) {
-
-					std::string message;
-
-					packet >> message;
-
-					std::cout << "A client says \"" << message << "\"" <<endl;
-
-					if(message == "HELLO") {
-
-						sf::Packet sendback;
-
-						std::string message = "OLLEH";
-
-						sendback << message;
-
-						readySock.Send(sendback);
-					}
-
-				} else {
-					selector.Remove(readySock);
-				}
-
-
-			}
+			clients.push_back(c);
 
 		}
 
 	}
+
+
 
 
 

@@ -1,24 +1,41 @@
-BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
+Connection.o: Connection.cpp Connection.h /usr/include/SFML/Network.hpp \
+ /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
+ /usr/include/c++/4.4/climits \
+ /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/limits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/features.h \
+ /usr/include/bits/predefs.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-32.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/stdio_lim.h /usr/include/SFML/System/Clock.hpp \
+ /usr/include/SFML/System/Lock.hpp \
+ /usr/include/SFML/System/NonCopyable.hpp \
+ /usr/include/SFML/System/Mutex.hpp \
+ /usr/include/SFML/System/Unix/Mutex.hpp /usr/include/pthread.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sched.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h /usr/include/time.h \
+ /usr/include/bits/sched.h /usr/include/bits/time.h \
+ /usr/include/xlocale.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/setjmp.h /usr/include/SFML/System/Randomizer.hpp \
+ /usr/include/SFML/System/Sleep.hpp /usr/include/SFML/System/Thread.hpp \
+ /usr/include/SFML/System/Unix/Thread.hpp \
+ /usr/include/SFML/System/Unicode.hpp /usr/include/c++/4.4/iterator \
  /usr/include/c++/4.4/i686-linux-gnu/bits/c++config.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/os_defines.h \
- /usr/include/features.h /usr/include/bits/predefs.h \
- /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/4.4/cstddef \
- /usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h /usr/include/stdlib.h \
- /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/xlocale.h \
- /usr/include/sys/types.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/time.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/time.h \
- /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/alloca.h /usr/include/bits/stdlib.h \
- /usr/include/c++/4.4/iostream /usr/include/c++/4.4/ostream \
- /usr/include/c++/4.4/ios /usr/include/c++/4.4/iosfwd \
- /usr/include/c++/4.4/bits/stringfwd.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_types.h \
+ /usr/include/c++/4.4/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/4.4/bits/concept_check.h \
+ /usr/include/c++/4.4/bits/stl_iterator.h \
+ /usr/include/c++/4.4/bits/cpp_type_traits.h \
+ /usr/include/c++/4.4/ext/type_traits.h /usr/include/c++/4.4/bits/move.h \
+ /usr/include/c++/4.4/ostream /usr/include/c++/4.4/ios \
+ /usr/include/c++/4.4/iosfwd /usr/include/c++/4.4/bits/stringfwd.h \
  /usr/include/c++/4.4/bits/postypes.h /usr/include/c++/4.4/cwchar \
  /usr/include/wchar.h /usr/include/stdio.h \
  /usr/lib/gcc/i686-linux-gnu/4.4.5/include/stdarg.h \
@@ -27,15 +44,9 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/c++/4.4/bits/stl_algobase.h \
  /usr/include/c++/4.4/bits/functexcept.h \
  /usr/include/c++/4.4/exception_defines.h \
- /usr/include/c++/4.4/bits/cpp_type_traits.h \
- /usr/include/c++/4.4/ext/type_traits.h \
  /usr/include/c++/4.4/ext/numeric_traits.h \
- /usr/include/c++/4.4/bits/stl_pair.h /usr/include/c++/4.4/bits/move.h \
- /usr/include/c++/4.4/bits/concept_check.h \
- /usr/include/c++/4.4/bits/stl_iterator_base_types.h \
- /usr/include/c++/4.4/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/4.4/bits/stl_iterator.h \
- /usr/include/c++/4.4/debug/debug.h /usr/include/c++/4.4/bits/localefwd.h \
+ /usr/include/c++/4.4/bits/stl_pair.h /usr/include/c++/4.4/debug/debug.h \
+ /usr/include/c++/4.4/bits/localefwd.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/c++locale.h \
  /usr/include/c++/4.4/clocale /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/c++/4.4/cctype \
@@ -43,11 +54,9 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/c++/4.4/ext/atomicity.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/gthr.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
- /usr/include/bits/setjmp.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/getopt.h \
- /usr/include/bits/unistd.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/bits/unistd.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/atomic_word.h \
  /usr/include/c++/4.4/bits/locale_classes.h /usr/include/c++/4.4/string \
  /usr/include/c++/4.4/bits/allocator.h \
@@ -71,59 +80,64 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/c++/4.4/bits/locale_facets.tcc \
  /usr/include/c++/4.4/bits/basic_ios.tcc \
  /usr/include/c++/4.4/bits/ostream.tcc /usr/include/c++/4.4/istream \
- /usr/include/c++/4.4/bits/istream.tcc Window.h \
- /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
- /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
- /usr/include/c++/4.4/climits \
- /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/limits.h \
- /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/stdio_lim.h /usr/include/SFML/System/Clock.hpp \
- /usr/include/SFML/System/Lock.hpp \
- /usr/include/SFML/System/NonCopyable.hpp \
- /usr/include/SFML/System/Mutex.hpp \
- /usr/include/SFML/System/Unix/Mutex.hpp \
- /usr/include/SFML/System/Randomizer.hpp \
- /usr/include/SFML/System/Sleep.hpp /usr/include/SFML/System/Thread.hpp \
- /usr/include/SFML/System/Unix/Thread.hpp \
- /usr/include/SFML/System/Unicode.hpp /usr/include/c++/4.4/iterator \
+ /usr/include/c++/4.4/bits/istream.tcc \
  /usr/include/c++/4.4/bits/stream_iterator.h /usr/include/c++/4.4/locale \
  /usr/include/c++/4.4/bits/locale_facets_nonio.h \
  /usr/include/c++/4.4/ctime \
  /usr/include/c++/4.4/i686-linux-gnu/bits/time_members.h \
  /usr/include/c++/4.4/i686-linux-gnu/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/4.4/bits/codecvt.h \
- /usr/include/c++/4.4/bits/locale_facets_nonio.tcc \
- /usr/include/SFML/System/Unicode.inl \
+ /usr/include/c++/4.4/bits/locale_facets_nonio.tcc /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib.h /usr/include/SFML/System/Unicode.inl \
  /usr/include/SFML/System/Vector2.hpp \
  /usr/include/SFML/System/Vector2.inl \
  /usr/include/SFML/System/Vector3.hpp \
- /usr/include/SFML/System/Vector3.inl \
+ /usr/include/SFML/System/Vector3.inl /usr/include/SFML/Network/Ftp.hpp \
+ /usr/include/SFML/Network/SocketTCP.hpp \
+ /usr/include/SFML/Network/SocketHelper.hpp \
+ /usr/include/SFML/Network/Unix/SocketHelper.hpp \
+ /usr/include/sys/socket.h /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm-generic/socket.h \
+ /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/socket2.h /usr/include/netinet/in.h \
+ /usr/include/stdint.h /usr/include/bits/in.h /usr/include/netinet/tcp.h \
+ /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/netdb.h \
+ /usr/include/c++/4.4/vector /usr/include/c++/4.4/bits/stl_construct.h \
+ /usr/include/c++/4.4/bits/stl_uninitialized.h \
+ /usr/include/c++/4.4/bits/stl_vector.h \
+ /usr/include/c++/4.4/bits/stl_bvector.h \
+ /usr/include/c++/4.4/bits/vector.tcc /usr/include/SFML/Network/Http.hpp \
+ /usr/include/SFML/Network/IPAddress.hpp /usr/include/c++/4.4/map \
+ /usr/include/c++/4.4/bits/stl_tree.h /usr/include/c++/4.4/bits/stl_map.h \
+ /usr/include/c++/4.4/bits/stl_multimap.h \
+ /usr/include/SFML/Network/Packet.hpp \
+ /usr/include/SFML/Network/Selector.hpp \
+ /usr/include/SFML/Network/SocketUDP.hpp \
+ /usr/include/SFML/Network/SelectorBase.hpp \
+ /usr/include/SFML/Network/Selector.inl Window.h \
+ /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/Window/Context.hpp /usr/include/SFML/Window/Event.hpp \
  /usr/include/SFML/Window/Input.hpp \
  /usr/include/SFML/Window/WindowListener.hpp \
- /usr/include/SFML/Window/VideoMode.hpp \
+ /usr/include/SFML/Window/VideoMode.hpp /usr/include/c++/4.4/cstdlib \
  /usr/include/SFML/Window/Window.hpp \
  /usr/include/SFML/Window/WindowHandle.hpp \
  /usr/include/SFML/Window/WindowSettings.hpp \
  /usr/include/SFML/Window/WindowStyle.hpp /usr/include/c++/4.4/queue \
- /usr/include/c++/4.4/deque /usr/include/c++/4.4/bits/stl_construct.h \
- /usr/include/c++/4.4/bits/stl_uninitialized.h \
- /usr/include/c++/4.4/bits/stl_deque.h \
- /usr/include/c++/4.4/bits/deque.tcc /usr/include/c++/4.4/vector \
- /usr/include/c++/4.4/bits/stl_vector.h \
- /usr/include/c++/4.4/bits/stl_bvector.h \
- /usr/include/c++/4.4/bits/vector.tcc \
- /usr/include/c++/4.4/bits/stl_heap.h \
+ /usr/include/c++/4.4/deque /usr/include/c++/4.4/bits/stl_deque.h \
+ /usr/include/c++/4.4/bits/deque.tcc /usr/include/c++/4.4/bits/stl_heap.h \
  /usr/include/c++/4.4/bits/stl_queue.h \
  /usr/include/SFML/Window/OpenGL.hpp /usr/include/GL/gl.h \
- /usr/include/GL/glext.h /usr/include/inttypes.h /usr/include/stdint.h \
- /usr/include/GL/glu.h /usr/include/SFML/Graphics/Color.hpp \
- /usr/include/SFML/Graphics/Font.hpp \
+ /usr/include/GL/glext.h /usr/include/inttypes.h /usr/include/GL/glu.h \
+ /usr/include/SFML/Graphics/Color.hpp /usr/include/SFML/Graphics/Font.hpp \
  /usr/include/SFML/System/Resource.hpp /usr/include/c++/4.4/set \
- /usr/include/c++/4.4/bits/stl_tree.h /usr/include/c++/4.4/bits/stl_set.h \
+ /usr/include/c++/4.4/bits/stl_set.h \
  /usr/include/c++/4.4/bits/stl_multiset.h \
  /usr/include/SFML/System/Resource.inl \
  /usr/include/SFML/System/ResourcePtr.inl \
@@ -132,8 +146,6 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/c++/4.4/bits/algorithmfwd.h \
  /usr/include/c++/4.4/bits/stl_tempbuf.h \
  /usr/include/SFML/Graphics/Rect.inl /usr/include/SFML/Graphics/Image.hpp \
- /usr/include/c++/4.4/map /usr/include/c++/4.4/bits/stl_map.h \
- /usr/include/c++/4.4/bits/stl_multimap.h \
  /usr/include/SFML/Graphics/PostFX.hpp \
  /usr/include/SFML/Graphics/Drawable.hpp \
  /usr/include/SFML/Graphics/Matrix3.hpp /usr/include/math.h \
@@ -146,33 +158,24 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/SFML/Graphics/RenderTarget.hpp \
  /usr/include/SFML/Graphics/View.hpp /usr/include/SFML/Graphics/Shape.hpp \
  /usr/include/SFML/Graphics/Sprite.hpp \
- /usr/include/SFML/Graphics/String.hpp ClosingEventHandler.h \
- EventHandler.h MoveRectEventHandler.h /usr/include/SFML/Network.hpp \
- /usr/include/SFML/Network/Ftp.hpp \
- /usr/include/SFML/Network/SocketTCP.hpp \
- /usr/include/SFML/Network/SocketHelper.hpp \
- /usr/include/SFML/Network/Unix/SocketHelper.hpp \
- /usr/include/sys/socket.h /usr/include/sys/uio.h /usr/include/bits/uio.h \
- /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
- /usr/include/asm/socket.h /usr/include/asm-generic/socket.h \
- /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
- /usr/include/bits/socket2.h /usr/include/netinet/in.h \
- /usr/include/bits/in.h /usr/include/netinet/tcp.h \
- /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
- /usr/include/bits/siginfo.h /usr/include/bits/netdb.h \
- /usr/include/SFML/Network/Http.hpp \
- /usr/include/SFML/Network/IPAddress.hpp \
- /usr/include/SFML/Network/Packet.hpp \
- /usr/include/SFML/Network/Selector.hpp \
- /usr/include/SFML/Network/SocketUDP.hpp \
- /usr/include/SFML/Network/SelectorBase.hpp \
- /usr/include/SFML/Network/Selector.inl Application.h Connection.h
+ /usr/include/SFML/Graphics/String.hpp Application.h \
+ MoveRectEventHandler.h EventHandler.h /usr/include/c++/4.4/iostream
 
-/usr/include/c++/4.4/cstdlib:
+Connection.h:
 
-/usr/include/c++/4.4/i686-linux-gnu/bits/c++config.h:
+/usr/include/SFML/Network.hpp:
 
-/usr/include/c++/4.4/i686-linux-gnu/bits/os_defines.h:
+/usr/include/SFML/System.hpp:
+
+/usr/include/SFML/Config.hpp:
+
+/usr/include/c++/4.4/climits:
+
+/usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/limits.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
 
 /usr/include/features.h:
 
@@ -186,17 +189,29 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 
 /usr/include/gnu/stubs-32.h:
 
-/usr/include/c++/4.4/i686-linux-gnu/bits/cpu_defines.h:
+/usr/include/bits/posix1_lim.h:
 
-/usr/include/c++/4.4/cstddef:
+/usr/include/bits/local_lim.h:
 
-/usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h:
+/usr/include/linux/limits.h:
 
-/usr/include/stdlib.h:
+/usr/include/bits/posix2_lim.h:
 
-/usr/include/bits/waitflags.h:
+/usr/include/bits/xopen_lim.h:
 
-/usr/include/bits/waitstatus.h:
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/SFML/System/Clock.hpp:
+
+/usr/include/SFML/System/Lock.hpp:
+
+/usr/include/SFML/System/NonCopyable.hpp:
+
+/usr/include/SFML/System/Mutex.hpp:
+
+/usr/include/SFML/System/Unix/Mutex.hpp:
+
+/usr/include/pthread.h:
 
 /usr/include/endian.h:
 
@@ -204,33 +219,59 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 
 /usr/include/bits/byteswap.h:
 
-/usr/include/xlocale.h:
-
-/usr/include/sys/types.h:
+/usr/include/sched.h:
 
 /usr/include/bits/types.h:
 
 /usr/include/bits/typesizes.h:
 
+/usr/lib/gcc/i686-linux-gnu/4.4.5/include/stddef.h:
+
 /usr/include/time.h:
 
-/usr/include/sys/select.h:
-
-/usr/include/bits/select.h:
-
-/usr/include/bits/sigset.h:
+/usr/include/bits/sched.h:
 
 /usr/include/bits/time.h:
 
-/usr/include/sys/sysmacros.h:
+/usr/include/xlocale.h:
 
 /usr/include/bits/pthreadtypes.h:
 
-/usr/include/alloca.h:
+/usr/include/bits/setjmp.h:
 
-/usr/include/bits/stdlib.h:
+/usr/include/SFML/System/Randomizer.hpp:
 
-/usr/include/c++/4.4/iostream:
+/usr/include/SFML/System/Sleep.hpp:
+
+/usr/include/SFML/System/Thread.hpp:
+
+/usr/include/SFML/System/Unix/Thread.hpp:
+
+/usr/include/SFML/System/Unicode.hpp:
+
+/usr/include/c++/4.4/iterator:
+
+/usr/include/c++/4.4/i686-linux-gnu/bits/c++config.h:
+
+/usr/include/c++/4.4/i686-linux-gnu/bits/os_defines.h:
+
+/usr/include/c++/4.4/i686-linux-gnu/bits/cpu_defines.h:
+
+/usr/include/c++/4.4/cstddef:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/4.4/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/4.4/bits/concept_check.h:
+
+/usr/include/c++/4.4/bits/stl_iterator.h:
+
+/usr/include/c++/4.4/bits/cpp_type_traits.h:
+
+/usr/include/c++/4.4/ext/type_traits.h:
+
+/usr/include/c++/4.4/bits/move.h:
 
 /usr/include/c++/4.4/ostream:
 
@@ -264,23 +305,9 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 
 /usr/include/c++/4.4/exception_defines.h:
 
-/usr/include/c++/4.4/bits/cpp_type_traits.h:
-
-/usr/include/c++/4.4/ext/type_traits.h:
-
 /usr/include/c++/4.4/ext/numeric_traits.h:
 
 /usr/include/c++/4.4/bits/stl_pair.h:
-
-/usr/include/c++/4.4/bits/move.h:
-
-/usr/include/c++/4.4/bits/concept_check.h:
-
-/usr/include/c++/4.4/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/4.4/bits/stl_iterator_base_funcs.h:
-
-/usr/include/c++/4.4/bits/stl_iterator.h:
 
 /usr/include/c++/4.4/debug/debug.h:
 
@@ -305,14 +332,6 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 /usr/include/c++/4.4/i686-linux-gnu/bits/gthr.h:
 
 /usr/include/c++/4.4/i686-linux-gnu/bits/gthr-default.h:
-
-/usr/include/pthread.h:
-
-/usr/include/sched.h:
-
-/usr/include/bits/sched.h:
-
-/usr/include/bits/setjmp.h:
 
 /usr/include/unistd.h:
 
@@ -384,58 +403,6 @@ BomberSFML.o: BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 
 /usr/include/c++/4.4/bits/istream.tcc:
 
-Window.h:
-
-/usr/include/SFML/Graphics.hpp:
-
-/usr/include/SFML/Window.hpp:
-
-/usr/include/SFML/System.hpp:
-
-/usr/include/SFML/Config.hpp:
-
-/usr/include/c++/4.4/climits:
-
-/usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/limits.h:
-
-/usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/syslimits.h:
-
-/usr/include/limits.h:
-
-/usr/include/bits/posix1_lim.h:
-
-/usr/include/bits/local_lim.h:
-
-/usr/include/linux/limits.h:
-
-/usr/include/bits/posix2_lim.h:
-
-/usr/include/bits/xopen_lim.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/SFML/System/Clock.hpp:
-
-/usr/include/SFML/System/Lock.hpp:
-
-/usr/include/SFML/System/NonCopyable.hpp:
-
-/usr/include/SFML/System/Mutex.hpp:
-
-/usr/include/SFML/System/Unix/Mutex.hpp:
-
-/usr/include/SFML/System/Randomizer.hpp:
-
-/usr/include/SFML/System/Sleep.hpp:
-
-/usr/include/SFML/System/Thread.hpp:
-
-/usr/include/SFML/System/Unix/Thread.hpp:
-
-/usr/include/SFML/System/Unicode.hpp:
-
-/usr/include/c++/4.4/iterator:
-
 /usr/include/c++/4.4/bits/stream_iterator.h:
 
 /usr/include/c++/4.4/locale:
@@ -454,6 +421,26 @@ Window.h:
 
 /usr/include/c++/4.4/bits/locale_facets_nonio.tcc:
 
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/alloca.h:
+
+/usr/include/bits/stdlib.h:
+
 /usr/include/SFML/System/Unicode.inl:
 
 /usr/include/SFML/System/Vector2.hpp:
@@ -464,6 +451,92 @@ Window.h:
 
 /usr/include/SFML/System/Vector3.inl:
 
+/usr/include/SFML/Network/Ftp.hpp:
+
+/usr/include/SFML/Network/SocketTCP.hpp:
+
+/usr/include/SFML/Network/SocketHelper.hpp:
+
+/usr/include/SFML/Network/Unix/SocketHelper.hpp:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/socket2.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/stdint.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/netinet/tcp.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/netdb.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/bits/siginfo.h:
+
+/usr/include/bits/netdb.h:
+
+/usr/include/c++/4.4/vector:
+
+/usr/include/c++/4.4/bits/stl_construct.h:
+
+/usr/include/c++/4.4/bits/stl_uninitialized.h:
+
+/usr/include/c++/4.4/bits/stl_vector.h:
+
+/usr/include/c++/4.4/bits/stl_bvector.h:
+
+/usr/include/c++/4.4/bits/vector.tcc:
+
+/usr/include/SFML/Network/Http.hpp:
+
+/usr/include/SFML/Network/IPAddress.hpp:
+
+/usr/include/c++/4.4/map:
+
+/usr/include/c++/4.4/bits/stl_tree.h:
+
+/usr/include/c++/4.4/bits/stl_map.h:
+
+/usr/include/c++/4.4/bits/stl_multimap.h:
+
+/usr/include/SFML/Network/Packet.hpp:
+
+/usr/include/SFML/Network/Selector.hpp:
+
+/usr/include/SFML/Network/SocketUDP.hpp:
+
+/usr/include/SFML/Network/SelectorBase.hpp:
+
+/usr/include/SFML/Network/Selector.inl:
+
+Window.h:
+
+/usr/include/SFML/Graphics.hpp:
+
+/usr/include/SFML/Window.hpp:
+
 /usr/include/SFML/Window/Context.hpp:
 
 /usr/include/SFML/Window/Event.hpp:
@@ -473,6 +546,8 @@ Window.h:
 /usr/include/SFML/Window/WindowListener.hpp:
 
 /usr/include/SFML/Window/VideoMode.hpp:
+
+/usr/include/c++/4.4/cstdlib:
 
 /usr/include/SFML/Window/Window.hpp:
 
@@ -486,21 +561,9 @@ Window.h:
 
 /usr/include/c++/4.4/deque:
 
-/usr/include/c++/4.4/bits/stl_construct.h:
-
-/usr/include/c++/4.4/bits/stl_uninitialized.h:
-
 /usr/include/c++/4.4/bits/stl_deque.h:
 
 /usr/include/c++/4.4/bits/deque.tcc:
-
-/usr/include/c++/4.4/vector:
-
-/usr/include/c++/4.4/bits/stl_vector.h:
-
-/usr/include/c++/4.4/bits/stl_bvector.h:
-
-/usr/include/c++/4.4/bits/vector.tcc:
 
 /usr/include/c++/4.4/bits/stl_heap.h:
 
@@ -514,8 +577,6 @@ Window.h:
 
 /usr/include/inttypes.h:
 
-/usr/include/stdint.h:
-
 /usr/include/GL/glu.h:
 
 /usr/include/SFML/Graphics/Color.hpp:
@@ -525,8 +586,6 @@ Window.h:
 /usr/include/SFML/System/Resource.hpp:
 
 /usr/include/c++/4.4/set:
-
-/usr/include/c++/4.4/bits/stl_tree.h:
 
 /usr/include/c++/4.4/bits/stl_set.h:
 
@@ -551,12 +610,6 @@ Window.h:
 /usr/include/SFML/Graphics/Rect.inl:
 
 /usr/include/SFML/Graphics/Image.hpp:
-
-/usr/include/c++/4.4/map:
-
-/usr/include/c++/4.4/bits/stl_map.h:
-
-/usr/include/c++/4.4/bits/stl_multimap.h:
 
 /usr/include/SFML/Graphics/PostFX.hpp:
 
@@ -596,72 +649,10 @@ Window.h:
 
 /usr/include/SFML/Graphics/String.hpp:
 
-ClosingEventHandler.h:
-
-EventHandler.h:
+Application.h:
 
 MoveRectEventHandler.h:
 
-/usr/include/SFML/Network.hpp:
+EventHandler.h:
 
-/usr/include/SFML/Network/Ftp.hpp:
-
-/usr/include/SFML/Network/SocketTCP.hpp:
-
-/usr/include/SFML/Network/SocketHelper.hpp:
-
-/usr/include/SFML/Network/Unix/SocketHelper.hpp:
-
-/usr/include/sys/socket.h:
-
-/usr/include/sys/uio.h:
-
-/usr/include/bits/uio.h:
-
-/usr/include/bits/socket.h:
-
-/usr/include/bits/sockaddr.h:
-
-/usr/include/asm/socket.h:
-
-/usr/include/asm-generic/socket.h:
-
-/usr/include/asm/sockios.h:
-
-/usr/include/asm-generic/sockios.h:
-
-/usr/include/bits/socket2.h:
-
-/usr/include/netinet/in.h:
-
-/usr/include/bits/in.h:
-
-/usr/include/netinet/tcp.h:
-
-/usr/include/arpa/inet.h:
-
-/usr/include/netdb.h:
-
-/usr/include/rpc/netdb.h:
-
-/usr/include/bits/siginfo.h:
-
-/usr/include/bits/netdb.h:
-
-/usr/include/SFML/Network/Http.hpp:
-
-/usr/include/SFML/Network/IPAddress.hpp:
-
-/usr/include/SFML/Network/Packet.hpp:
-
-/usr/include/SFML/Network/Selector.hpp:
-
-/usr/include/SFML/Network/SocketUDP.hpp:
-
-/usr/include/SFML/Network/SelectorBase.hpp:
-
-/usr/include/SFML/Network/Selector.inl:
-
-Application.h:
-
-Connection.h:
+/usr/include/c++/4.4/iostream:

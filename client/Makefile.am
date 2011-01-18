@@ -9,7 +9,11 @@ client_SOURCES=\
     MoveRectEventHandler.cpp \
     MoveRectEventHandler.h \
     Window.cpp \
-    Window.h
+    Window.h \
+    Application.h \
+    Application.cpp \
+    Connection.h \
+    Connection.cpp
     
 AM_CPPFLAGS=$(SFML_CFLAGS)
 client_LDADD=$(SFML_LIBS)

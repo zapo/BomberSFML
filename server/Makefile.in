@@ -44,7 +44,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_server_OBJECTS = BomberSFML-server.$(OBJEXT)
+am_server_OBJECTS = BomberSFML-server.$(OBJEXT) Client.$(OBJEXT)
 server_OBJECTS = $(am_server_OBJECTS)
 am__DEPENDENCIES_1 =
 server_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -57,6 +57,10 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(server_SOURCES)
 DIST_SOURCES = $(server_SOURCES)
 ETAGS = etags
@@ -148,7 +152,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 server_SOURCES = \
-    BomberSFML-server.cpp
+    BomberSFML-server.cpp \
+    Client.h \
+    Client.cpp
 
 AM_CPPFLAGS = $(SFML_CFLAGS)
 server_LDADD = $(SFML_LIBS)
@@ -234,6 +240,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/BomberSFML-server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Client.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
