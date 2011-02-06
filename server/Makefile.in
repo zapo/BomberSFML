@@ -44,7 +44,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_server_OBJECTS = BomberSFML-server.$(OBJEXT) Client.$(OBJEXT)
+am_server_OBJECTS = BomberSFML-server.$(OBJEXT) Client.$(OBJEXT) \
+	Channel.$(OBJEXT)
 server_OBJECTS = $(am_server_OBJECTS)
 am__DEPENDENCIES_1 =
 server_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -154,10 +155,12 @@ top_srcdir = @top_srcdir@
 server_SOURCES = \
     BomberSFML-server.cpp \
     Client.h \
-    Client.cpp
+    Client.cpp \
+    Channel.cpp \
+    Channel.h
 
-AM_CPPFLAGS = $(SFML_CFLAGS)
-server_LDADD = $(SFML_LIBS)
+AM_CPPFLAGS = $(SFML_CFLAGS) -I../../../BomberSFML-network
+server_LDADD = $(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network
 all: all-am
 
 .SUFFIXES:
@@ -240,6 +243,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/BomberSFML-server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Channel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Client.Po@am__quote@
 
 .cpp.o:

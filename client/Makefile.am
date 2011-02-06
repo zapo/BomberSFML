@@ -6,14 +6,19 @@ client_SOURCES=\
     ClosingEventHandler.h \
     EventHandler.cpp \
     EventHandler.h \
-    MoveRectEventHandler.cpp \
-    MoveRectEventHandler.h \
+    MoveEventHandler.cpp \
+    MoveEventHandler.h \
     Window.cpp \
     Window.h \
-    Application.h \
-    Application.cpp \
     Connection.h \
-    Connection.cpp
-    
-AM_CPPFLAGS=$(SFML_CFLAGS)
-client_LDADD=$(SFML_LIBS)
+    Connection.cpp \
+    Character.h \
+    Game.h \
+    Game.cpp \
+    ShootEventHandler.cpp \
+    ShootEventHandler.h \
+    Anim.h
+
+AM_CPPFLAGS=$(SFML_CFLAGS) -I../../BomberSFML-network/
+
+client_LDADD=$(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network

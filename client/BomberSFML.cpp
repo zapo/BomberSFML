@@ -7,38 +7,60 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "Window.h"
 #include "ClosingEventHandler.h"
-#include "MoveRectEventHandler.h"
-#include <SFML/Network.hpp>
-#include "Application.h"
+#include "MoveEventHandler.h"
 #include "Connection.h"
-
-
-using namespace std;
+#include "Character.h"
+#include "Game.h"
+#include "Window.h"
+#include "ShootEventHandler.h"
 
 /*
  * 
  */
+
+sf::Image Character::tankImage;
+
 int main(int argc, char** argv) {
 
-	Application *app = Application::getInstance();
 
-	sf::SocketTCP sock;
-	unsigned short port = 8889;
+	long id = 41;
 
-	Connection *connection = new Connection(sock, port, sf::IPAddress::LocalHost);
+	Window *window = new Window(800, 600, 32, "BombrerSFML");
+	Connection *connection = new Connection(new sf::SocketTCP, 8889, sf::IPAddress::LocalHost, id);
 
-	Window *window = new Window(800, 600, 32, "Test Window");
+	Game *game = new Game(*window, *connection);
 
-	app->setWindow(window);
-	app->setConnection(connection);
+	game->loadRessources();
 
-	ClosingEventHandler *closeHandler = new ClosingEventHandler;
-    window->addEventHandler((EventHandler*) closeHandler);
+	Character *me = new Character(id);
 
-	window->run();
+	game->addCharacter(id, *me);
+	game->setMainCharacter(*me);
 
+	window->addEventHandler(new ClosingEventHandler());
+	window->addEventHandler(new MoveEventHandler(*me, *connection));
+	window->addEventHandler(new ShootEventHandler(*me));
+
+
+	if(!connection->connect()) {
+
+		std::cout << "A problem occurred while connecting to host, terminating..." << std::endl;
+		std::cout.flush();
+
+		delete game;
+		exit(2);
+
+	}
+
+	window->Launch();
+	game->Launch();
+
+
+	window->Wait();
+	game->Terminate();
+
+	delete game;
 
 	return EXIT_SUCCESS;
 }

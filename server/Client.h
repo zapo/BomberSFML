@@ -12,20 +12,28 @@
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 
+class Channel;
+class Character;
+
 class Client: public sf::Thread {
 public:
-	Client(sf::SocketTCP&, sf::IPAddress&);
+	Client(sf::SocketTCP&, sf::IPAddress&, Channel& channel, sf::Uint32 id);
+	long getId();
+
 
 	virtual ~Client();
-	sf::Vector2<int>& getPosition();
+	Character& getPlayer();
+
 
 private:
 	virtual void Run();
 
-	sf::Vector2<int> position;
+	Character *character;
 	sf::SocketTCP socket;
 	sf::IPAddress ipaddress;
+	Channel* channel;
 
+	long id;
 };
 
 #endif /* CLIENT_H_ */

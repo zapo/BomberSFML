@@ -14,7 +14,7 @@
 # PARTICULAR PURPOSE.
 
 
-
+VPATH = ..
 pkgdatadir = $(datadir)/bombersfml
 pkgincludedir = $(includedir)/bombersfml
 pkglibdir = $(libdir)/bombersfml
@@ -140,10 +140,10 @@ SFML_LIBS = -lsfml-graphics -lsfml-network -lsfml-system
 SHELL = /bin/bash
 STRIP = 
 VERSION = 0.01
-abs_builddir = /home/zapo/src/BomberSFML
-abs_srcdir = /home/zapo/src/BomberSFML
-abs_top_builddir = /home/zapo/src/BomberSFML
-abs_top_srcdir = /home/zapo/src/BomberSFML
+abs_builddir = /home/zapo/src/BomberSFML/build
+abs_srcdir = /home/zapo/src/BomberSFML/build/..
+abs_top_builddir = /home/zapo/src/BomberSFML/build
+abs_top_srcdir = /home/zapo/src/BomberSFML/build/..
 ac_ct_CXX = g++
 am__include = include
 am__leading_dot = .
@@ -176,12 +176,12 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = .
+srcdir = ..
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = 
 top_builddir = .
-top_srcdir = .
+top_srcdir = ..
 SUBDIRS = client server
 all: all-recursive
 

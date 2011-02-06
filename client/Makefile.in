@@ -45,8 +45,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_client_OBJECTS = BomberSFML.$(OBJEXT) ClosingEventHandler.$(OBJEXT) \
-	EventHandler.$(OBJEXT) MoveRectEventHandler.$(OBJEXT) \
-	Window.$(OBJEXT) Application.$(OBJEXT) Connection.$(OBJEXT)
+	EventHandler.$(OBJEXT) MoveEventHandler.$(OBJEXT) \
+	Window.$(OBJEXT) Connection.$(OBJEXT) Game.$(OBJEXT) \
+	ShootEventHandler.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
 client_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -159,17 +160,21 @@ client_SOURCES = \
     ClosingEventHandler.h \
     EventHandler.cpp \
     EventHandler.h \
-    MoveRectEventHandler.cpp \
-    MoveRectEventHandler.h \
+    MoveEventHandler.cpp \
+    MoveEventHandler.h \
     Window.cpp \
     Window.h \
-    Application.h \
-    Application.cpp \
     Connection.h \
-    Connection.cpp
+    Connection.cpp \
+    Character.h \
+    Game.h \
+    Game.cpp \
+    ShootEventHandler.cpp \
+    ShootEventHandler.h \
+    Anim.h
 
-AM_CPPFLAGS = $(SFML_CFLAGS)
-client_LDADD = $(SFML_LIBS)
+AM_CPPFLAGS = $(SFML_CFLAGS) -I../../BomberSFML-network/
+client_LDADD = $(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network
 all: all-am
 
 .SUFFIXES:
@@ -251,12 +256,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Application.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/BomberSFML.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ClosingEventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/EventHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MoveRectEventHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Game.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MoveEventHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ShootEventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Window.Po@am__quote@
 
 .cpp.o:

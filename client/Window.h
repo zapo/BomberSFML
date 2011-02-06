@@ -9,40 +9,44 @@
 #define	WINDOW_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <list>
 
 class EventHandler;
 
 using namespace std;
 
-class Window : public sf::RenderWindow {
+class Window : public sf::RenderWindow, public sf::Thread {
 
 public:
 
 	Window(int,int,int,string);
 	Window(const Window& orig);
 	virtual ~Window();
-	vector<EventHandler*> getEventHandlers();
+	list<EventHandler*> getEventHandlers();
 	void addEventHandler(EventHandler*);
 
+	void removeDrawableObject(sf::Drawable*);
 	void addDrawableObject(sf::Drawable*);
-	vector<sf::Drawable*> getDrawableObjects();
+	list<sf::Drawable*> getDrawableObjects();
 
-	void run();
-
-
+	sf::Mutex drawableObjectsMutex;
 
 private:
 
+	virtual void Run();
 
-	sf::Mutex drawableObjectsMutex;
+
+
 	sf::Mutex eventHandlersMutex;
 	string title;
 
-	vector<EventHandler*> eventHandlers;
-	vector<sf::Drawable*> drawableObjects;
 
-	vector<sf::Drawable*>::iterator ido;
-	vector<EventHandler*>::iterator iho;
+	list<EventHandler*> eventHandlers;
+	list<sf::Drawable*> drawableObjects;
+
+	list<sf::Drawable*>::iterator ido;
+	list<EventHandler*>::iterator iho;
 
 };
 

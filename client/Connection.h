@@ -9,22 +9,38 @@
 #define CONNECTION_H_
 
 #include <SFML/Network.hpp>
-#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
-class Connection : public sf::Thread {
+class Character;
+
+class Connection {
 public:
-	Connection(sf::SocketTCP& sock, unsigned int port, sf::IPAddress const& address);
+	Connection(sf::SocketTCP *socket, unsigned int port, sf::IPAddress const& address, long id);
 
-	virtual void Run();
-	bool isConnected();
+	bool isValid();
 	virtual ~Connection();
+	bool connect();
+
+	std::map<long, Character> getPlayers();
+
+	bool setPosition(Character &character);
+	bool close();
+	bool auth();
+
+	sf::Mutex connectionMutex;
+
 
 private:
-	bool connect();
-	sf::SocketTCP socket;
+
+	sf::SocketTCP *socket;
 	sf::IPAddress host;
 	unsigned int port;
+	long id;
+
+
+
 
 };
+
 
 #endif /* CONNECTION_H_ */

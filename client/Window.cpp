@@ -5,34 +5,41 @@
  * Created on 12 janvier 2011, 09:27
  */
 
+#include <list>
 #include "Window.h"
-#include <vector>
 #include "EventHandler.h"
 #include <iostream>
 
 using namespace std;
 
 
-Window::Window(int width, int height, int colors, string title) :
-
-		sf::RenderWindow(sf::VideoMode(width, height, colors), title),
-		title(title)
-
-{}
+Window::Window(int width, int height, int colors, string title) : sf::RenderWindow(sf::VideoMode(width, height, colors),  title), sf::Thread(), title(title) {
+	this->SetActive(false);
+}
 
 Window::Window(const Window& orig) {
 }
 
 Window::~Window() {
+
+	for(ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
+		delete *ido;
+	}
+	drawableObjects.clear();
+
+	for(iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
+		delete *iho;
+	}
+	eventHandlers.clear();
+
 }
 
-void Window::run() {
+void Window::Run() {
 
-	// Start game loop
+
 	while (this->IsOpened()) {
-		// Process events
-		sf::Event event;
 
+		sf::Event event;
 
 		while (this->GetEvent(event)) {
 
@@ -51,7 +58,6 @@ void Window::run() {
 
 		}
 
-		// Clear the screen (fill it with black color)
 		this->Clear();
 
 		drawableObjectsMutex.Lock();
@@ -90,10 +96,20 @@ void Window::addEventHandler(EventHandler *handler) {
 
 }
 
- vector<EventHandler*> Window::getEventHandlers() {
+ list<EventHandler*> Window::getEventHandlers() {
 
 	return this->eventHandlers;
 
+}
+
+void Window::removeDrawableObject(sf::Drawable* object) {
+
+	drawableObjectsMutex.Lock();
+
+	drawableObjects.remove(object);
+	delete object;
+
+	drawableObjectsMutex.Unlock();
 }
 
 
@@ -105,7 +121,7 @@ void Window::addDrawableObject(sf::Drawable* object) {
 
 	drawableObjectsMutex.Unlock();
 }
-vector<sf::Drawable*> Window::getDrawableObjects() {
+list<sf::Drawable*> Window::getDrawableObjects() {
 
 	return this->drawableObjects;
 

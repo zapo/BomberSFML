@@ -2978,6 +2978,7 @@ fi
 
 
 
+
 # Check whether --with-sfml-lib-path was given.
 if test "${with_sfml_lib_path+set}" = set; then :
   withval=$with_sfml_lib_path; SFML_LIBS="-L$withval -lsfml-graphics -lsfml-network -lsfml-system"

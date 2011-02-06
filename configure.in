@@ -16,6 +16,7 @@ AC_ARG_WITH([sfml-include-path],
   [SFML_CFLAGS='-I/usr/include/SFML'])
 AC_SUBST([SFML_CFLAGS])
 
+
 AC_ARG_WITH([sfml-lib-path],
   [AS_HELP_STRING([--with-sfml-lib-path], [location of the SFML libraries])],
   [SFML_LIBS="-L$withval -lsfml-graphics -lsfml-network -lsfml-system"],

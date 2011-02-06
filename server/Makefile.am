@@ -3,7 +3,9 @@ bin_PROGRAMS=server
 server_SOURCES=\
     BomberSFML-server.cpp \
     Client.h \
-    Client.cpp
+    Client.cpp \
+    Channel.cpp \
+    Channel.h
     
-AM_CPPFLAGS=$(SFML_CFLAGS)
-server_LDADD=$(SFML_LIBS)
+AM_CPPFLAGS=$(SFML_CFLAGS) -I../../../BomberSFML-network
+server_LDADD=$(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network
