@@ -19,6 +19,6 @@ client_SOURCES=\
     ShootEventHandler.h \
     Anim.h
 
-AM_CPPFLAGS=$(SFML_CFLAGS) -I../../BomberSFML-network/
+AM_CPPFLAGS=$(SFML_CFLAGS) -I../../../BomberSFML-network/
 
-client_LDADD=$(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network
+client_LDADD=$(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network -lboost_serialization
