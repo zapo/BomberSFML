@@ -9,11 +9,12 @@
 #include "Window.h"
 #include "EventHandler.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
 
-Window::Window(int width, int height, int colors, string title) : sf::RenderWindow(sf::VideoMode(width, height, colors),  title), sf::Thread(), title(title) {
+Window::Window(int width, int height, int colors, string title) : sf::RenderWindow(sf::VideoMode(width, height, colors),  title), sf::Thread(), title(title), printFramerate(false){
 	this->SetActive(false);
 }
 
@@ -73,6 +74,20 @@ void Window::Run() {
 
 		drawableObjectsMutex.Unlock();
 
+		if(printFramerate) {
+
+			ostringstream text;
+
+			text << (int)(1.f / GetFrameTime()) << " fps";
+
+			framerate.SetText(text.str());
+			framerate.SetSize(20);
+			framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20 ));
+
+			this->Draw(framerate);
+
+		}
+
 
 		// Display window contents on screen
 		this->Display();
@@ -124,6 +139,12 @@ void Window::addDrawableObject(sf::Drawable* object) {
 list<sf::Drawable*> Window::getDrawableObjects() {
 
 	return this->drawableObjects;
+
+}
+
+void Window::setPrintFramerate(bool print) {
+
+	printFramerate = print;
 
 }
 

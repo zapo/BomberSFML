@@ -26,8 +26,10 @@ Game.o: ../../client/Game.cpp ../../client/Game.h \
  /usr/include/c++/4.4/backward/binders.h \
  /usr/include/c++/4.4/bits/stl_map.h \
  /usr/include/c++/4.4/initializer_list \
- /usr/include/c++/4.4/bits/stl_multimap.h /usr/include/SFML/System.hpp \
- /usr/include/SFML/Config.hpp /usr/include/c++/4.4/climits \
+ /usr/include/c++/4.4/bits/stl_multimap.h ../../client/Window.h \
+ /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
+ /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
+ /usr/include/c++/4.4/climits \
  /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/limits.h \
  /usr/lib/gcc/i686-linux-gnu/4.4.5/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
@@ -98,8 +100,7 @@ Game.o: ../../client/Game.cpp ../../client/Game.h \
  /usr/include/SFML/System/Vector2.hpp \
  /usr/include/SFML/System/Vector2.inl \
  /usr/include/SFML/System/Vector3.hpp \
- /usr/include/SFML/System/Vector3.inl ../../client/Window.h \
- /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
+ /usr/include/SFML/System/Vector3.inl \
  /usr/include/SFML/Window/Context.hpp /usr/include/SFML/Window/Event.hpp \
  /usr/include/SFML/Window/Input.hpp \
  /usr/include/SFML/Window/WindowListener.hpp \
@@ -348,6 +349,12 @@ Game.o: ../../client/Game.cpp ../../client/Game.h \
 
 /usr/include/c++/4.4/bits/stl_multimap.h:
 
+../../client/Window.h:
+
+/usr/include/SFML/Graphics.hpp:
+
+/usr/include/SFML/Window.hpp:
+
 /usr/include/SFML/System.hpp:
 
 /usr/include/SFML/Config.hpp:
@@ -569,12 +576,6 @@ Game.o: ../../client/Game.cpp ../../client/Game.h \
 /usr/include/SFML/System/Vector3.hpp:
 
 /usr/include/SFML/System/Vector3.inl:
-
-../../client/Window.h:
-
-/usr/include/SFML/Graphics.hpp:
-
-/usr/include/SFML/Window.hpp:
 
 /usr/include/SFML/Window/Context.hpp:
 

@@ -102,6 +102,19 @@ void Client::Run() {
 
 					// tests goes here
 
+					map<long, Character> players = channel->getPlayers();
+					map<long, Character>::iterator pit;
+
+					MessageInfo::Type type = MessageInfo::OK;
+
+					bool fit = true;
+
+					for(pit = players.begin(); pit != players.end(); pit++) {
+
+						if(pit->second.getId() == copy.getId()) continue;
+
+					}
+
 					*character = copy;
 
 					conf.setType(MessageInfo::OK);

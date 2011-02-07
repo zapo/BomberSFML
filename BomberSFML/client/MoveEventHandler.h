@@ -25,7 +25,7 @@ public:
 private:
 	Character* shape;
 	Connection *connection;
-	static const float speed = 2;
+	static const float speed = 200;
 	Window *window;
 };
 

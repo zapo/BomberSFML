@@ -14,6 +14,7 @@
 #include "Game.h"
 #include "Window.h"
 #include "ShootEventHandler.h"
+#include <sstream>
 
 /*
  * 
@@ -24,9 +25,13 @@ sf::Image Character::tankImage;
 int main(int argc, char** argv) {
 
 
-	long id = 41;
+	long id = 45;
 
-	Window *window = new Window(800, 600, 32, "BombrerSFML");
+	ostringstream title ;
+	title << "BombrerSFML with id " << id;
+
+	Window *window = new Window(800, 600, 32, title.str());
+
 	Connection *connection = new Connection(new sf::SocketTCP, 8889, sf::IPAddress::LocalHost, id);
 
 	Game *game = new Game(*window, *connection);
@@ -42,6 +47,7 @@ int main(int argc, char** argv) {
 	window->addEventHandler(new MoveEventHandler(*me, *connection));
 	window->addEventHandler(new ShootEventHandler(*me));
 
+	window->setPrintFramerate(true);
 
 	if(!connection->connect()) {
 
@@ -54,11 +60,11 @@ int main(int argc, char** argv) {
 	}
 
 	window->Launch();
-	game->Launch();
+	game->run();
 
 
 	window->Wait();
-	game->Terminate();
+	game->setIsRunning(false);
 
 	delete game;
 

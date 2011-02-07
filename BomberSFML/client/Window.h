@@ -30,13 +30,17 @@ public:
 	void addDrawableObject(sf::Drawable*);
 	list<sf::Drawable*> getDrawableObjects();
 
+	void setPrintFramerate(bool print);
+
 	sf::Mutex drawableObjectsMutex;
 
 private:
 
 	virtual void Run();
 
+	bool printFramerate;
 
+	sf::String framerate;
 
 	sf::Mutex eventHandlersMutex;
 	string title;

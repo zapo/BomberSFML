@@ -13,7 +13,7 @@
 #include <iostream>
 
 Game::Game(Window &window, Connection &connection) :
-	window(&window), connection(&connection), sf::Thread() {
+	window(&window), connection(&connection), isRunning(false) {
 
 }
 
@@ -46,7 +46,7 @@ void Game::addCharacter(long id, Character &character) {
 
 
 		window->addDrawableObject((sf::Drawable*) &character);
-		std::cout << "Character with id " << id << " added to game"
+		std::cout << "Character " << id << " added to game"
 				<< std::endl;
 	}
 }
@@ -54,9 +54,7 @@ void Game::addCharacter(long id, Character &character) {
 void Game::deleteCharacter(long id) {
 	if(hasCharacter(id)) {
 
-
-
-		std::cout << "deleting " << characters[id] << std::endl;
+		std::cout << "Deleting character " << id << std::endl;
 		window->removeDrawableObject(characters[id]);
 
 		characters.erase(id);
@@ -81,13 +79,19 @@ Connection& Game::getConnection() {
 	return *connection;
 }
 
-void Game::Run() {
+void Game::setIsRunning(bool running) {
+	isRunning = running;
+}
+
+void Game::run() {
+
+	isRunning = true;
 
 	if (connection->auth()) {
 
 		std::cout << "Authenticated !" << std::endl;
 
-		while (true) {
+		while (isRunning) {
 
 			sf::Sleep(0.050);
 
@@ -121,7 +125,6 @@ void Game::Run() {
 			if(characters.size() > positions.size()) {
 				map<long, Character*>::iterator ppit;
 
-				std::cout << "someone left the game" << std::endl;
 				for(ppit = characters.begin(); ppit != characters.end(); ppit++) {
 
 					if(positions.find(ppit->first) == positions.end()) {

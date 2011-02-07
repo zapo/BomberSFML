@@ -21,19 +21,53 @@
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.874662206" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.874662206.12311305" name=""/>
 							<builder buildPath="${workspace_loc:/BomberSFML/build}" id="org.eclipse.cdt.build.core.settings.default.builder.14393762" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="-1" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2143643257" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2143643257" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs">
+								<option id="org.eclipse.cdt.build.core.settings.holder.libpaths.1767599509" name="Library Paths" superClass="org.eclipse.cdt.build.core.settings.holder.libpaths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/BomberSFML-network/Debug}&quot;"/>
+								</option>
+								<option id="org.eclipse.cdt.build.core.settings.holder.libfiles.1856484484" name="Library Files" superClass="org.eclipse.cdt.build.core.settings.holder.libfiles" valueType="libFiles">
+									<listOptionValue builtIn="false" value="../BomberSFML-network"/>
+								</option>
+							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1768345069" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2060192678" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/BomberSFML-network}&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.478963506" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.2009961585" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.949937339" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/BomberSFML-network}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.4"/>
+									<listOptionValue builtIn="false" value="/usr/include/SFML"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.4/backward"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.4/i686-linux-gnu"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.4/include"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.4/include-fixed"/>
+									<listOptionValue builtIn="false" value="/usr/local/include"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2079965542" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1075334912" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1764659947" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/BomberSFML-network}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/SFML"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.366044410" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
 				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="BomberSFML-network;cdt.managedbuild.config.gnu.so.debug.22805898" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/BomberSFML-network"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/BomberSFML-network/Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="BomberSFML-network"/>
+					</externalSetting>
+				</externalSettings>
 			</storageModule>
 			<storageModule moduleId="scannerConfiguration">
 				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
@@ -118,7 +152,7 @@
 					</scannerInfoProvider>
 				</profile>
 				<scannerConfigBuildInfo instanceId="0.1287940827">
-					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+					<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 					<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
 						<buildOutputProvider>
 							<openAction enabled="true" filePath=""/>
@@ -201,7 +235,7 @@
 					</profile>
 				</scannerConfigBuildInfo>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">

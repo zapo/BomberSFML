@@ -19,7 +19,7 @@ ShootEventHandler::~ShootEventHandler() {
 
 void ShootEventHandler::handle(sf::Event &event) {
 
-	if(event.Type == sf::Event::KeyPressed && handledWindow->GetInput().IsKeyDown(sf::Key::Space)) {
+	if(handledWindow->GetInput().IsKeyDown(sf::Key::Space)) {
 
 		handledCharacter->shoot();
 

@@ -40,7 +40,7 @@ void MoveEventHandler::handle(sf::Event &event) {
 
 				bool rightHit = false , leftHit = false , upHit = false, downHit = false;
 
-				float frametime = this->handledWindow->GetFrameTime() * 100;
+				float frametime = handledWindow->GetFrameTime();
 
 				if(handledWindow->GetInput().IsKeyDown(sf::Key::Right)){
 					left += (speed * frametime);
@@ -94,15 +94,25 @@ void MoveEventHandler::handle(sf::Event &event) {
 
 			} else {
 
-				handledWindow->drawableObjectsMutex.Lock();
-					shape->setCurrentAction(Character::IDLEING);
-				handledWindow->drawableObjectsMutex.Unlock();
+				bool noMove = true;
+				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(sf::Key::Right));
+				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(sf::Key::Left));
+				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(sf::Key::Up));
+				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(sf::Key::Down));
 
-				connection->connectionMutex.Lock();
+				if(noMove) {
 
-				connection->setPosition(*shape);
+					handledWindow->drawableObjectsMutex.Lock();
+						shape->setCurrentAction(Character::IDLEING);
+					handledWindow->drawableObjectsMutex.Unlock();
 
-				connection->connectionMutex.Unlock();
+					connection->connectionMutex.Lock();
+
+					connection->setPosition(*shape);
+
+					connection->connectionMutex.Unlock();
+
+				}
 
 			}
 

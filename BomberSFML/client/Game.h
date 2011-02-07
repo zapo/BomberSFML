@@ -9,13 +9,12 @@
 #define GAME_H_
 
 #include <map>
-#include <SFML/System.hpp>
 
 class Window;
 class Connection;
 class Character;
 
-class Game : public sf::Thread {
+class Game {
 public:
 	Game(Window &window, Connection &connection);
 	virtual ~Game();
@@ -24,16 +23,20 @@ public:
 	void addCharacter(long id, Character&);
 	void deleteCharacter(long id);
 
+	void setIsRunning(bool);
+
 	void setMainCharacter(Character&);
 	Character& getMainCharacter();
 
-	virtual void Run();
+	void run();
 
 	Window& getWindow();
 	Connection& getConnection();
 	void loadRessources();
 
 private:
+
+	bool isRunning;
 
 	Window *window;
 	Connection *connection;

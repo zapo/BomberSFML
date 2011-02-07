@@ -145,7 +145,8 @@ Window.o: ../../client/Window.cpp /usr/include/c++/4.4/list \
  /usr/include/SFML/Graphics/View.hpp /usr/include/SFML/Graphics/Shape.hpp \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/String.hpp ../../client/EventHandler.h \
- /usr/include/c++/4.4/iostream
+ /usr/include/c++/4.4/iostream /usr/include/c++/4.4/sstream \
+ /usr/include/c++/4.4/bits/sstream.tcc
 
 /usr/include/c++/4.4/list:
 
@@ -582,3 +583,7 @@ Window.o: ../../client/Window.cpp /usr/include/c++/4.4/list \
 ../../client/EventHandler.h:
 
 /usr/include/c++/4.4/iostream:
+
+/usr/include/c++/4.4/sstream:
+
+/usr/include/c++/4.4/bits/sstream.tcc:

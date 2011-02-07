@@ -276,7 +276,8 @@ BomberSFML.o: ../../client/BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
  ../../client/Anim.h ../../client/Game.h ../../client/Window.h \
  /usr/include/c++/4.4/list /usr/include/c++/4.4/bits/stl_list.h \
- /usr/include/c++/4.4/bits/list.tcc ../../client/ShootEventHandler.h
+ /usr/include/c++/4.4/bits/list.tcc ../../client/ShootEventHandler.h \
+ /usr/include/c++/4.4/sstream /usr/include/c++/4.4/bits/sstream.tcc
 
 /usr/include/c++/4.4/cstdlib:
 
@@ -1013,3 +1014,7 @@ BomberSFML.o: ../../client/BomberSFML.cpp /usr/include/c++/4.4/cstdlib \
 /usr/include/c++/4.4/bits/list.tcc:
 
 ../../client/ShootEventHandler.h:
+
+/usr/include/c++/4.4/sstream:
+
+/usr/include/c++/4.4/bits/sstream.tcc:
