@@ -1,0 +1,5 @@
+.DS_Store
+*~
+BomberSFML/build/
+BomberSFML-network/Debug/
+BomberSFML-network/Release/
