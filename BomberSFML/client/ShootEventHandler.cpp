@@ -8,9 +8,11 @@
 #include "ShootEventHandler.h"
 #include "Window.h"
 #include "Character.h"
+#include "Connection.h"
 
-ShootEventHandler::ShootEventHandler(Character &character) :
-	handledCharacter(&character) {
+ShootEventHandler::ShootEventHandler(Character &character, Connection &connection) :
+	handledCharacter(&character),
+	connection(&connection) {
 
 }
 
@@ -20,10 +22,27 @@ ShootEventHandler::~ShootEventHandler() {
 
 void ShootEventHandler::handle(sf::Event &event) {
 
-	if (handledWindow->GetInput().IsKeyDown(sf::Key::Space)) {
+	if( event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Space) {
 
 		handledCharacter->shoot();
 
+		connection->connectionMutex.Lock();
+
+		connection->setPosition(*handledCharacter);
+
+		connection->connectionMutex.Unlock();
+
+	} else if(event.Type == sf::Event::KeyReleased && event.Key.Code == sf::Key::Space) {
+
+		handledCharacter->setCurrentAction(Character::IDLEING);
+
+		connection->connectionMutex.Lock();
+
+		connection->setPosition(*handledCharacter);
+
+		connection->connectionMutex.Unlock();
+
 	}
+
 
 }

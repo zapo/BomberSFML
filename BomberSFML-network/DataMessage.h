@@ -24,23 +24,23 @@ public:
 	}
 
 	DataMessage(T &data) :
-		data(&data) {
+		data(data) {
 
 	}
 
-	T& getData() {
-		return *data;
+	T getData() {
+		return data;
 	}
 
 	void setData(T &data) {
-		this->data = &data;
+		this->data = data;
 	}
 
 	~DataMessage() {
 	}
 
 private:
-	T *data;
+	T data;
 };
 
 }
@@ -66,16 +66,16 @@ sf::Packet& operator>>(sf::Packet &p, DataMessage<T> &message) {
 
 	std::string s_data;
 
-	T *data = new T();
+	T data;
 
 	p >> s_data;
 
 	std::istringstream text_stream(s_data);
 
 	boost::archive::text_iarchive archive(text_stream);
-	archive >> *data;
+	archive >> data;
 
-	message.setData(*data);
+	message.setData(data);
 
 	return p;
 

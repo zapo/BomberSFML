@@ -254,7 +254,27 @@ ShootEventHandler.o: ../../client/ShootEventHandler.cpp \
  /usr/include/boost/type_traits/broken_compiler_spec.hpp \
  /usr/include/boost/type_traits/detail/type_trait_def.hpp \
  /usr/include/boost/type_traits/detail/type_trait_undef.hpp \
- /usr/include/c++/4.4/iostream ../../client/Anim.h
+ /usr/include/c++/4.4/iostream ../../client/Anim.h \
+ ../../client/Connection.h /usr/include/SFML/Network.hpp \
+ /usr/include/SFML/Network/Ftp.hpp \
+ /usr/include/SFML/Network/SocketTCP.hpp \
+ /usr/include/SFML/Network/SocketHelper.hpp \
+ /usr/include/SFML/Network/Unix/SocketHelper.hpp \
+ /usr/include/sys/socket.h /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm-generic/socket.h \
+ /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/socket2.h /usr/include/netinet/in.h \
+ /usr/include/bits/in.h /usr/include/netinet/tcp.h \
+ /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/netdb.h \
+ /usr/include/SFML/Network/Http.hpp \
+ /usr/include/SFML/Network/IPAddress.hpp \
+ /usr/include/SFML/Network/Packet.hpp \
+ /usr/include/SFML/Network/Selector.hpp \
+ /usr/include/SFML/Network/SocketUDP.hpp \
+ /usr/include/SFML/Network/SelectorBase.hpp \
+ /usr/include/SFML/Network/Selector.inl
 
 ../../client/ShootEventHandler.h:
 
@@ -923,3 +943,65 @@ ShootEventHandler.o: ../../client/ShootEventHandler.cpp \
 /usr/include/c++/4.4/iostream:
 
 ../../client/Anim.h:
+
+../../client/Connection.h:
+
+/usr/include/SFML/Network.hpp:
+
+/usr/include/SFML/Network/Ftp.hpp:
+
+/usr/include/SFML/Network/SocketTCP.hpp:
+
+/usr/include/SFML/Network/SocketHelper.hpp:
+
+/usr/include/SFML/Network/Unix/SocketHelper.hpp:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/socket2.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/netinet/tcp.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/netdb.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/bits/siginfo.h:
+
+/usr/include/bits/netdb.h:
+
+/usr/include/SFML/Network/Http.hpp:
+
+/usr/include/SFML/Network/IPAddress.hpp:
+
+/usr/include/SFML/Network/Packet.hpp:
+
+/usr/include/SFML/Network/Selector.hpp:
+
+/usr/include/SFML/Network/SocketUDP.hpp:
+
+/usr/include/SFML/Network/SelectorBase.hpp:
+
+/usr/include/SFML/Network/Selector.inl:

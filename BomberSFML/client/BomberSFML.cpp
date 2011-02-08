@@ -24,7 +24,7 @@ sf::Image Character::tankImage;
 
 int main(int argc, char** argv) {
 
-	long id = 45;
+	long id = 51;
 
 	ostringstream title;
 	title << "BombrerSFML with id " << id;
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 
 	window->addEventHandler(new ClosingEventHandler());
 	window->addEventHandler(new MoveEventHandler(*me, *connection));
-	window->addEventHandler(new ShootEventHandler(*me));
+	window->addEventHandler(new ShootEventHandler(*me, *connection));
 
 	window->setPrintFramerate(true, 1);
 

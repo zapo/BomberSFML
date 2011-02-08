@@ -11,15 +11,17 @@
 #include "EventHandler.h"
 
 class Character;
+class Connection;
 
 class ShootEventHandler: public EventHandler {
 public:
-	ShootEventHandler(Character &);
+	ShootEventHandler(Character &, Connection&);
 	virtual ~ShootEventHandler();
 	void handle(sf::Event &event);
 
 private:
 	Character* handledCharacter;
+	Connection* connection;
 };
 
 #endif /* SHOOTEVENTHANDLER_H_ */

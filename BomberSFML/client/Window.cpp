@@ -14,9 +14,11 @@
 using namespace std;
 
 Window::Window(int width, int height, int colors, string title) :
+
 	sf::RenderWindow(sf::VideoMode(width, height, colors), title),
 			sf::Thread(), title(title), printFramerate(false),
 			framerateRefresh(1) {
+
 	this->SetActive(false);
 }
 
