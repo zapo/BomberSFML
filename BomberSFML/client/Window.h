@@ -26,11 +26,11 @@ public:
 	list<EventHandler*> getEventHandlers();
 	void addEventHandler(EventHandler*);
 
-	void removeDrawableObject(sf::Drawable*);
+	void removeDrawableObject(sf::Drawable*, bool free = true);
 	void addDrawableObject(sf::Drawable*);
 	list<sf::Drawable*> getDrawableObjects();
 
-	void setPrintFramerate(bool print);
+	void setPrintFramerate(bool print, float refresh = 1.f);
 
 	sf::Mutex drawableObjectsMutex;
 
@@ -38,6 +38,7 @@ private:
 
 	virtual void Run();
 
+	float framerateRefresh;
 	bool printFramerate;
 
 	sf::String framerate;

@@ -14,7 +14,12 @@
 using namespace std;
 
 
-Window::Window(int width, int height, int colors, string title) : sf::RenderWindow(sf::VideoMode(width, height, colors),  title), sf::Thread(), title(title), printFramerate(false){
+Window::Window(int width, int height, int colors, string title) :
+		sf::RenderWindow(sf::VideoMode(width, height, colors),  title),
+		sf::Thread(), title(title),
+		printFramerate(false),
+		framerateRefresh(1)
+{
 	this->SetActive(false);
 }
 
@@ -23,13 +28,20 @@ Window::Window(const Window& orig) {
 
 Window::~Window() {
 
+	drawableObjects.remove((sf::Drawable*) &framerate);
+
 	for(ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
-		delete *ido;
+
+		if(*ido != NULL) {
+			delete *ido;
+		}
 	}
 	drawableObjects.clear();
 
 	for(iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
-		delete *iho;
+		if(*iho != NULL) {
+			delete *iho;
+		}
 	}
 	eventHandlers.clear();
 
@@ -37,6 +49,8 @@ Window::~Window() {
 
 void Window::Run() {
 
+	sf::Clock framerateClock;
+	framerateClock.Reset();
 
 	while (this->IsOpened()) {
 
@@ -74,7 +88,7 @@ void Window::Run() {
 
 		drawableObjectsMutex.Unlock();
 
-		if(printFramerate) {
+		if(printFramerate && framerateClock.GetElapsedTime() >= framerateRefresh) {
 
 			ostringstream text;
 
@@ -84,7 +98,7 @@ void Window::Run() {
 			framerate.SetSize(20);
 			framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20 ));
 
-			this->Draw(framerate);
+			framerateClock.Reset();
 
 		}
 
@@ -117,12 +131,15 @@ void Window::addEventHandler(EventHandler *handler) {
 
 }
 
-void Window::removeDrawableObject(sf::Drawable* object) {
+void Window::removeDrawableObject(sf::Drawable* object, bool free) {
 
 	drawableObjectsMutex.Lock();
 
 	drawableObjects.remove(object);
-	delete object;
+
+	if(free) {
+		delete object;
+	}
 
 	drawableObjectsMutex.Unlock();
 }
@@ -138,13 +155,23 @@ void Window::addDrawableObject(sf::Drawable* object) {
 }
 list<sf::Drawable*> Window::getDrawableObjects() {
 
-	return this->drawableObjects;
+	return drawableObjects;
 
 }
 
-void Window::setPrintFramerate(bool print) {
+void Window::setPrintFramerate(bool print, float refresh) {
+
+	if(print) {
+
+		addDrawableObject(&framerate);
+
+	} else {
+		removeDrawableObject(&framerate, false);
+	}
+
 
 	printFramerate = print;
+	framerateRefresh = refresh;
 
 }
 

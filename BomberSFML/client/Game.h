@@ -23,8 +23,6 @@ public:
 	void addCharacter(long id, Character&);
 	void deleteCharacter(long id);
 
-	void setIsRunning(bool);
-
 	void setMainCharacter(Character&);
 	Character& getMainCharacter();
 
@@ -35,8 +33,6 @@ public:
 	void loadRessources();
 
 private:
-
-	bool isRunning;
 
 	Window *window;
 	Connection *connection;

@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 	window->addEventHandler(new MoveEventHandler(*me, *connection));
 	window->addEventHandler(new ShootEventHandler(*me));
 
-	window->setPrintFramerate(true);
+	window->setPrintFramerate(true, 1);
 
 	if(!connection->connect()) {
 
@@ -59,13 +59,7 @@ int main(int argc, char** argv) {
 
 	}
 
-	window->Launch();
 	game->run();
-
-
-	window->Wait();
-	game->setIsRunning(false);
-
 	delete game;
 
 	return EXIT_SUCCESS;

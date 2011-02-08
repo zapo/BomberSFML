@@ -13,7 +13,7 @@
 #include <iostream>
 
 Game::Game(Window &window, Connection &connection) :
-	window(&window), connection(&connection), isRunning(false) {
+	window(&window), connection(&connection) {
 
 }
 
@@ -79,19 +79,16 @@ Connection& Game::getConnection() {
 	return *connection;
 }
 
-void Game::setIsRunning(bool running) {
-	isRunning = running;
-}
-
 void Game::run() {
 
-	isRunning = true;
+	window->Launch();
 
 	if (connection->auth()) {
 
 		std::cout << "Authenticated !" << std::endl;
 
-		while (isRunning) {
+		while (window->IsOpened()) {
+
 
 			sf::Sleep(0.050);
 
@@ -137,5 +134,8 @@ void Game::run() {
 		}
 
 	}
+
+	window->Wait();
+
 
 }
