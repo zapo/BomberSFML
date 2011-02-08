@@ -12,9 +12,12 @@
 
 class Anim {
 public:
-	Anim() : currentFrame(0) {}
+	Anim() :
+		currentFrame(0) {
+	}
 
-	void addFrame(const sf::Image& image, const sf::IntRect &subrect, bool flipx = false, bool flipy = false) {
+	void addFrame(const sf::Image& image, const sf::IntRect &subrect,
+			bool flipx = false, bool flipy = false) {
 
 		sf::Sprite frame = sf::Sprite(image);
 		frame.SetSubRect(subrect);
@@ -29,15 +32,14 @@ public:
 		frames.push_back(frame);
 	}
 
-
 	const sf::Sprite getCurrentFrame() const {
 
-		if(frames.size() > currentFrame) {
+		if (frames.size() > currentFrame) {
 
 			return frames[currentFrame];
 
 		} else {
-			if(frames.size() > 0) {
+			if (frames.size() > 0) {
 				return frames[0];
 			} else {
 				return sf::Sprite();
@@ -47,7 +49,7 @@ public:
 
 	void update() {
 
-		if(currentFrame < (frames.size() - 1)) {
+		if (currentFrame < (frames.size() - 1)) {
 			currentFrame++;
 		} else {
 			currentFrame = 0;

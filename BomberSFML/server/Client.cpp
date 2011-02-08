@@ -24,23 +24,28 @@ extern sf::Mutex clientsMutex;
 namespace boost {
 
 namespace serialization {
-	template <class Archive>
-	void serialize(Archive &ar, sf::Vector2<float> &vector, const unsigned int version) {
+template<class Archive>
+void serialize(Archive &ar, sf::Vector2<float> &vector,
+		const unsigned int version) {
 
-		ar & vector.x;
-		ar & vector.y;
+	ar & vector.x;
+	ar & vector.y;
 
-	}
+}
 }
 
 }
 
-Client::Client(sf::SocketTCP &socket, sf::IPAddress &ipaddress, Channel &channel, sf::Uint32 id) : id(id), channel(&channel), socket(socket), ipaddress(ipaddress), sf::Thread() {
+Client::Client(sf::SocketTCP &socket, sf::IPAddress &ipaddress,
+		Channel &channel, sf::Uint32 id) :
+	id(id), channel(&channel), socket(socket), ipaddress(ipaddress),
+			sf::Thread() {
 
-	sf::Randomizer::SetSeed(time(NULL));
+	sf::Randomizer::SetSeed( time(NULL));
 
 	character = new Character(id);
-	character->SetPosition(sf::Vector2f(sf::Randomizer::Random(0, 800), sf::Randomizer::Random(0, 600)));
+	character->SetPosition(sf::Vector2f(sf::Randomizer::Random(0, 800),
+			sf::Randomizer::Random(0, 600)));
 	character->setOrientation(Character::DOWN);
 }
 
@@ -62,19 +67,17 @@ void Client::Run() {
 
 	sf::Packet request, response;
 
-
-	while(socket.Receive(request) == sf::Socket::Done) {
+	while (socket.Receive(request) == sf::Socket::Done) {
 
 		Message requestMessage;
 
 		request >> requestMessage;
 
-		if(requestMessage.getId() == id) {
+		if (requestMessage.getId() == id) {
 
-			switch(requestMessage.getType()) {
+			switch (requestMessage.getType()) {
 
-			case MessageInfo::GET_PLAYERS :
-			{
+			case MessageInfo::GET_PLAYERS: {
 
 				map<long, Character> players = channel->getPlayers();
 
@@ -82,21 +85,19 @@ void Client::Run() {
 
 				response << datamessage;
 
-				if(socket.Send(response) != sf::Socket::Done) {
-							//throw new exception or so
+				if (socket.Send(response) != sf::Socket::Done) {
+					//throw new exception or so
 				}
 
 				break;
 			}
 
-
-			case MessageInfo::MOVE_TO :
-			{
+			case MessageInfo::MOVE_TO: {
 
 				Message conf(id, MessageInfo::NOK);
 				DataMessage<Character> moveToData;
 
-				if(request >> moveToData) {
+				if (request >> moveToData) {
 
 					Character copy = moveToData.getData();
 
@@ -109,9 +110,10 @@ void Client::Run() {
 
 					bool fit = true;
 
-					for(pit = players.begin(); pit != players.end(); pit++) {
+					for (pit = players.begin(); pit != players.end(); pit++) {
 
-						if(pit->second.getId() == copy.getId()) continue;
+						if (pit->second.getId() == copy.getId())
+							continue;
 
 					}
 
@@ -123,22 +125,23 @@ void Client::Run() {
 
 				response << conf;
 
-				if(socket.Send(response) == sf::Socket::Done) {
+				if (socket.Send(response) == sf::Socket::Done) {
 
 				}
 				break;
 			}
 
-			case MessageInfo::CLOSE :
-			{
+			case MessageInfo::CLOSE: {
 
-				MessageInfo::Type type = (channel->remove(id)) ? MessageInfo::OK : MessageInfo::NOK;
+				MessageInfo::Type type =
+						(channel->remove(id)) ? MessageInfo::OK
+								: MessageInfo::NOK;
 
 				Message conf(id, type);
 
 				response << conf;
 
-				if(!socket.Send(response) == sf::Socket::Done) {
+				if (!socket.Send(response) == sf::Socket::Done) {
 					//exception
 				}
 

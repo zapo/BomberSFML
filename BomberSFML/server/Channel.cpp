@@ -23,7 +23,7 @@ void Channel::add(Client &client) {
 
 	clientsMutex.Lock();
 
-	if(clients.find(client.getId()) == clients.end()) {
+	if (clients.find(client.getId()) == clients.end()) {
 		clients[client.getId()] = &client;
 	}
 
@@ -37,15 +37,14 @@ bool Channel::remove(long id) {
 
 	bool removed = false;
 
-	if(clients.find(id) != clients.end()) {
+	if (clients.find(id) != clients.end()) {
 
-		delete(clients[id]);
+		delete (clients[id]);
 
-		if(clients.erase(id) > 0) {
+		if (clients.erase(id) > 0) {
 			removed = true;
 		}
 	}
-
 
 	clientsMutex.Unlock();
 
@@ -61,7 +60,7 @@ std::map<long, Client*>& Channel::getClients() {
 
 	clientsMutex.Unlock();
 
-	return _clients ;
+	return _clients;
 
 }
 

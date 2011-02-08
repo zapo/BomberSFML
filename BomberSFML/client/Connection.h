@@ -15,7 +15,8 @@ class Character;
 
 class Connection {
 public:
-	Connection(sf::SocketTCP *socket, unsigned int port, sf::IPAddress const& address, long id);
+	Connection(sf::SocketTCP *socket, unsigned int port,
+			sf::IPAddress const& address, long id);
 
 	bool isValid();
 	virtual ~Connection();
@@ -29,7 +30,6 @@ public:
 
 	sf::Mutex connectionMutex;
 
-
 private:
 
 	sf::SocketTCP *socket;
@@ -37,10 +37,6 @@ private:
 	unsigned int port;
 	long id;
 
-
-
-
 };
-
 
 #endif /* CONNECTION_H_ */

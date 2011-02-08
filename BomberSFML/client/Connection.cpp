@@ -18,14 +18,14 @@ using namespace Bomber;
 namespace boost {
 
 namespace serialization {
-	template <class Archive>
-	void serialize(Archive &ar, sf::Vector2<float> &vector, const unsigned int version) {
+template<class Archive>
+void serialize(Archive &ar, sf::Vector2<float> &vector,
+		const unsigned int version) {
 
-		ar & vector.x;
-		ar & vector.y;
+	ar & vector.x;
+	ar & vector.y;
 
-	}
-
+}
 
 }
 
@@ -41,12 +41,12 @@ bool Connection::setPosition(Character &character) {
 
 	request << moveTo << moveToData;
 
-	if(socket->Send(request) == sf::Socket::Done) {
+	if (socket->Send(request) == sf::Socket::Done) {
 
-		if(socket->Receive(response) == sf::Socket::Done) {
+		if (socket->Receive(response) == sf::Socket::Done) {
 			response >> confirmation;
 
-			accepted = (confirmation.getType() == MessageInfo::OK) ;
+			accepted = (confirmation.getType() == MessageInfo::OK);
 		}
 
 	}
@@ -55,8 +55,9 @@ bool Connection::setPosition(Character &character) {
 
 }
 
-Connection::Connection(sf::SocketTCP *socket, unsigned int port, sf::IPAddress const& address, long id) :
-		 host(address), port(port), socket(socket), id(id){
+Connection::Connection(sf::SocketTCP *socket, unsigned int port,
+		sf::IPAddress const& address, long id) :
+	host(address), port(port), socket(socket), id(id) {
 
 }
 
@@ -69,29 +70,30 @@ bool Connection::close() {
 	bool closed = false;
 	Message closeMessage(id, MessageInfo::CLOSE), confMessage;
 
-	closePacket << closeMessage ;
+	closePacket << closeMessage;
 
-	if(socket->Send(closePacket) == sf::Socket::Done) {
+	if (socket->Send(closePacket) == sf::Socket::Done) {
 
-		if(socket->Receive(confPacket) == sf::Socket::Done) {
+		if (socket->Receive(confPacket) == sf::Socket::Done) {
 
-			confPacket >> confMessage ;
+			confPacket >> confMessage;
 
 			closed = (confMessage.getType() == MessageInfo::OK);
 		}
 
 	}
 
-	std::cout << ((closed) ? "Connection successfully closed with server" : "A problem occurred while closing connection to server ") << std::endl;
+	std::cout << ((closed) ? "Connection successfully closed with server"
+			: "A problem occurred while closing connection to server ")
+			<< std::endl;
 
 	return closed;
-
 
 }
 
 Connection::~Connection() {
 
-	if(!close()) {
+	if (!close()) {
 
 		//throw new exception
 
@@ -107,13 +109,13 @@ bool Connection::auth() {
 	Message authmessage(id), authconf;
 	authpacket << authmessage;
 
-	if(socket->Send(authpacket) == sf::Socket::Done) {
+	if (socket->Send(authpacket) == sf::Socket::Done) {
 
-		if(socket->Receive(conf) == sf::Socket::Done) {
+		if (socket->Receive(conf) == sf::Socket::Done) {
 
 			conf >> authconf;
 
-			authenticated = (authconf.getType() == MessageInfo::OK) ;
+			authenticated = (authconf.getType() == MessageInfo::OK);
 
 		}
 	}
@@ -132,10 +134,9 @@ map<long, Character> Connection::getPlayers() {
 
 	request << positionRequest;
 
-	if(socket->Send(request) == sf::Socket::Done) {
+	if (socket->Send(request) == sf::Socket::Done) {
 
-
-		if(socket->Receive(response) == sf::Socket::Done) {
+		if (socket->Receive(response) == sf::Socket::Done) {
 
 			response >> positionResponse;
 
@@ -153,11 +154,11 @@ bool Connection::connect() {
 	cout << "Trying to connect to server " << host << " ..." << endl;
 	cout.flush();
 
-	return (socket->Connect(port, host) == sf::Socket::Done && (cout << "Done" << endl));
+	return (socket->Connect(port, host) == sf::Socket::Done && (cout << "Done"
+			<< endl));
 }
 
 bool Connection::isValid() {
 	return socket->IsValid();
 }
-
 

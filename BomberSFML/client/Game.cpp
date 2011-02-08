@@ -44,15 +44,13 @@ void Game::addCharacter(long id, Character &character) {
 
 		characters[id] = &character;
 
-
 		window->addDrawableObject((sf::Drawable*) &character);
-		std::cout << "Character " << id << " added to game"
-				<< std::endl;
+		std::cout << "Character " << id << " added to game" << std::endl;
 	}
 }
 
 void Game::deleteCharacter(long id) {
-	if(hasCharacter(id)) {
+	if (hasCharacter(id)) {
 
 		std::cout << "Deleting character " << id << std::endl;
 		window->removeDrawableObject(characters[id]);
@@ -61,7 +59,6 @@ void Game::deleteCharacter(long id) {
 
 	}
 }
-
 
 bool Game::hasCharacter(long id) {
 
@@ -89,7 +86,6 @@ void Game::run() {
 
 		while (window->IsOpened()) {
 
-
 			sf::Sleep(0.050);
 
 			connection->connectionMutex.Lock();
@@ -100,31 +96,26 @@ void Game::run() {
 
 			map<long, Character>::iterator pit;
 
-
 			for (pit = positions.begin(); pit != positions.end(); pit++) {
 
 				if (hasCharacter(pit->first)) {
 
 					*characters[pit->first] = pit->second;
 
-					Character *current = characters[pit->first];
-
-
 				} else {
 
 					Character *c = new Character(pit->second);
 					addCharacter(pit->first, *c);
-
 				}
 
 			}
 
-			if(characters.size() > positions.size()) {
+			if (characters.size() > positions.size()) {
 				map<long, Character*>::iterator ppit;
 
-				for(ppit = characters.begin(); ppit != characters.end(); ppit++) {
+				for (ppit = characters.begin(); ppit != characters.end(); ppit++) {
 
-					if(positions.find(ppit->first) == positions.end()) {
+					if (positions.find(ppit->first) == positions.end()) {
 						deleteCharacter(ppit->first);
 					}
 
@@ -136,6 +127,5 @@ void Game::run() {
 	}
 
 	window->Wait();
-
 
 }

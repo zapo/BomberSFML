@@ -20,10 +20,8 @@ public:
 	Client(sf::SocketTCP&, sf::IPAddress&, Channel& channel, sf::Uint32 id);
 	long getId();
 
-
 	virtual ~Client();
 	Character& getPlayer();
-
 
 private:
 	virtual void Run();

@@ -10,16 +10,16 @@
 
 #include "EventHandler.h"
 
-class ClosingEventHandler : public EventHandler {
+class ClosingEventHandler: public EventHandler {
 
-    public:
+public:
 
-        ClosingEventHandler();
-        ClosingEventHandler(const ClosingEventHandler& orig);
-        virtual ~ClosingEventHandler();
+	ClosingEventHandler();
+	ClosingEventHandler(const ClosingEventHandler& orig);
+	virtual ~ClosingEventHandler();
 
-        void handle(sf::Event &event);
-    private:
+	void handle(sf::Event &event);
+private:
 
 };
 

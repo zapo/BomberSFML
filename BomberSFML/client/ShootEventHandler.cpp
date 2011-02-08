@@ -9,7 +9,8 @@
 #include "Window.h"
 #include "Character.h"
 
-ShootEventHandler::ShootEventHandler(Character &character) : handledCharacter(&character) {
+ShootEventHandler::ShootEventHandler(Character &character) :
+	handledCharacter(&character) {
 
 }
 
@@ -19,7 +20,7 @@ ShootEventHandler::~ShootEventHandler() {
 
 void ShootEventHandler::handle(sf::Event &event) {
 
-	if(handledWindow->GetInput().IsKeyDown(sf::Key::Space)) {
+	if (handledWindow->GetInput().IsKeyDown(sf::Key::Space)) {
 
 		handledCharacter->shoot();
 

@@ -15,7 +15,7 @@
 
 namespace Bomber {
 
-template <typename T>
+template<typename T>
 class DataMessage {
 public:
 
@@ -23,7 +23,8 @@ public:
 
 	}
 
-	DataMessage(T &data) : data(&data) {
+	DataMessage(T &data) :
+		data(&data) {
 
 	}
 
@@ -44,10 +45,9 @@ private:
 
 }
 
-
 using namespace Bomber;
 
-template <typename T>
+template<typename T>
 sf::Packet& operator<<(sf::Packet &p, DataMessage<T> &message) {
 
 	std::ostringstream text_stream;
@@ -61,9 +61,8 @@ sf::Packet& operator<<(sf::Packet &p, DataMessage<T> &message) {
 	return p;
 }
 
-template <typename T>
+template<typename T>
 sf::Packet& operator>>(sf::Packet &p, DataMessage<T> &message) {
-
 
 	std::string s_data;
 
@@ -81,8 +80,5 @@ sf::Packet& operator>>(sf::Packet &p, DataMessage<T> &message) {
 	return p;
 
 }
-
-
-
 
 #endif /* DATAMESSAGE_H_ */

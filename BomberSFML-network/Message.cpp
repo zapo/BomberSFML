@@ -1,10 +1,9 @@
-
 #include "Message.h"
 
 namespace Bomber {
 
 Message::Message(long id, MessageInfo::Type type) :
-	id(id), type(type){
+	id(id), type(type) {
 }
 
 MessageInfo::Type Message::getType() {
@@ -25,7 +24,6 @@ void Message::setType(MessageInfo::Type type) {
 
 Message::~Message() {
 }
-
 
 }
 
@@ -54,10 +52,9 @@ sf::Packet& operator>>(sf::Packet &p, Message &message) {
 
 }
 
-
 sf::Packet& operator<<(sf::Packet &p, MessageInfo::Type &type) {
 
-	p << (sf::Uint32)type;
+	p << (sf::Uint32) type;
 
 	return p;
 

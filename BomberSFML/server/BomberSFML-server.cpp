@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : BomberSFML-server.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
@@ -19,7 +11,6 @@
 
 using namespace std;
 
-
 sf::Image Character::tankImage;
 
 int main() {
@@ -30,33 +21,34 @@ int main() {
 
 	sf::SocketTCP listener;
 
-	if(listener.Listen(listenPort)) {
+	if (listener.Listen(listenPort)) {
 
 		Channel channel;
 
-		while(running) {
-
+		while (running) {
 
 			sf::SocketTCP clientSocket;
 			sf::IPAddress clientAddress;
 
 			cout << "Waiting for connections on " << listenPort << endl;
 
-			if(listener.Accept(clientSocket, &clientAddress) == sf::Socket::Done) {
+			if (listener.Accept(clientSocket, &clientAddress)
+					== sf::Socket::Done) {
 
 				cout << "Incoming connection, getting client id..." << endl;
 
 				sf::Packet idpacket, confirmation;
 
-				if(clientSocket.Receive(idpacket) == sf::Socket::Done) {
+				if (clientSocket.Receive(idpacket) == sf::Socket::Done) {
 
 					Bomber::Message authmessage;
 
 					idpacket >> authmessage;
 
-					Bomber::Message confMessage(authmessage.getId(), Bomber::MessageInfo::OK);
+					Bomber::Message confMessage(authmessage.getId(),
+							Bomber::MessageInfo::OK);
 
-					if(authmessage.getId() != 0) { //need tests that assert channel doesnt already have this clientid
+					if (authmessage.getId() != 0) { //need tests that assert channel doesnt already have this clientid
 
 						std::cout << "Authentified !" << std::endl;
 						confMessage.setType(Bomber::MessageInfo::OK);
@@ -70,12 +62,13 @@ int main() {
 
 					confirmation << confMessage;
 
-					if(clientSocket.Send(confirmation) == sf::Socket::Done && confMessage.getType() == Bomber::MessageInfo::OK) {
+					if (clientSocket.Send(confirmation) == sf::Socket::Done
+							&& confMessage.getType() == Bomber::MessageInfo::OK) {
 
-
-
-						std::cout << "Adding client " << authmessage.getId() << " to channel " << &channel << std::endl;
-						Client *c = new Client(clientSocket, clientAddress, channel, authmessage.getId());
+						std::cout << "Adding client " << authmessage.getId()
+								<< " to channel " << &channel << std::endl;
+						Client *c = new Client(clientSocket, clientAddress,
+								channel, authmessage.getId());
 						channel.add(*c);
 
 						c->Launch();
@@ -89,7 +82,6 @@ int main() {
 		}
 
 	}
-
 
 	return EXIT_SUCCESS;
 }

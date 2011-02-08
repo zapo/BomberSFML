@@ -13,13 +13,10 @@
 
 using namespace std;
 
-
 Window::Window(int width, int height, int colors, string title) :
-		sf::RenderWindow(sf::VideoMode(width, height, colors),  title),
-		sf::Thread(), title(title),
-		printFramerate(false),
-		framerateRefresh(1)
-{
+	sf::RenderWindow(sf::VideoMode(width, height, colors), title),
+			sf::Thread(), title(title), printFramerate(false),
+			framerateRefresh(1) {
 	this->SetActive(false);
 }
 
@@ -30,16 +27,16 @@ Window::~Window() {
 
 	drawableObjects.remove((sf::Drawable*) &framerate);
 
-	for(ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
+	for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
-		if(*ido != NULL) {
+		if (*ido != NULL) {
 			delete *ido;
 		}
 	}
 	drawableObjects.clear();
 
-	for(iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
-		if(*iho != NULL) {
+	for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
+		if (*iho != NULL) {
 			delete *iho;
 		}
 	}
@@ -60,11 +57,11 @@ void Window::Run() {
 
 			eventHandlersMutex.Lock();
 
-			for(iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
+			for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
 
 				EventHandler *eh = *(iho);
 
-				if(eh != NULL) {
+				if (eh != NULL) {
 					eh->handle(event);
 				}
 			}
@@ -77,31 +74,31 @@ void Window::Run() {
 
 		drawableObjectsMutex.Lock();
 
-		for(ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
+		for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
 			sf::Drawable *dro = *(ido);
 
-			if(dro != NULL) {
+			if (dro != NULL) {
 				this->Draw(*dro);
 			}
 		}
 
 		drawableObjectsMutex.Unlock();
 
-		if(printFramerate && framerateClock.GetElapsedTime() >= framerateRefresh) {
+		if (printFramerate && framerateClock.GetElapsedTime()
+				>= framerateRefresh) {
 
 			ostringstream text;
 
-			text << (int)(1.f / GetFrameTime()) << " fps";
+			text << (int) (1.f / GetFrameTime()) << " fps";
 
 			framerate.SetText(text.str());
 			framerate.SetSize(20);
-			framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20 ));
+			framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20));
 
 			framerateClock.Reset();
 
 		}
-
 
 		// Display window contents on screen
 		this->Display();
@@ -113,7 +110,7 @@ void Window::addEventHandler(EventHandler *handler) {
 
 	eventHandlersMutex.Lock();
 
-	if(handler != NULL) {
+	if (handler != NULL) {
 
 		this->eventHandlers.push_back(handler);
 
@@ -125,7 +122,7 @@ void Window::addEventHandler(EventHandler *handler) {
 
 }
 
- list<EventHandler*> Window::getEventHandlers() {
+list<EventHandler*> Window::getEventHandlers() {
 
 	return this->eventHandlers;
 
@@ -137,13 +134,12 @@ void Window::removeDrawableObject(sf::Drawable* object, bool free) {
 
 	drawableObjects.remove(object);
 
-	if(free) {
+	if (free) {
 		delete object;
 	}
 
 	drawableObjectsMutex.Unlock();
 }
-
 
 void Window::addDrawableObject(sf::Drawable* object) {
 
@@ -161,7 +157,7 @@ list<sf::Drawable*> Window::getDrawableObjects() {
 
 void Window::setPrintFramerate(bool print, float refresh) {
 
-	if(print) {
+	if (print) {
 
 		addDrawableObject(&framerate);
 
@@ -169,13 +165,8 @@ void Window::setPrintFramerate(bool print, float refresh) {
 		removeDrawableObject(&framerate, false);
 	}
 
-
 	printFramerate = print;
 	framerateRefresh = refresh;
 
 }
-
-
-
-
 

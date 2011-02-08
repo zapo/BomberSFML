@@ -7,10 +7,8 @@
 
 #include "Bullet.h"
 
-
-Bullet::Bullet() : sf::Drawable(){
-
-
+Bullet::Bullet() :
+	sf::Drawable() {
 
 }
 

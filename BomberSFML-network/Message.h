@@ -15,20 +15,15 @@
 namespace Bomber {
 
 class MessageInfo {
-public :
+public:
 
 	enum Type {
-		NONE,
-		MOVE_TO,
-		GET_PLAYERS,
-		OK,
-		NOK,
-		CLOSE
+		NONE, MOVE_TO, GET_PLAYERS, OK, NOK, CLOSE
 	};
 
 	static Type toType(int _type) {
 
-		switch(_type) {
+		switch (_type) {
 
 		case MOVE_TO:
 			return MOVE_TO;
@@ -69,10 +64,6 @@ private:
 	sf::Uint32 id;
 	MessageInfo::Type type;
 };
-
-
-
-
 
 }
 

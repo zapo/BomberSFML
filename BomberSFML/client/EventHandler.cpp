@@ -26,5 +26,3 @@ void EventHandler::setHandledWindow(Window* window) {
 	this->handledWindow = window;
 }
 
-
-

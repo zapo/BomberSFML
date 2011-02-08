@@ -16,11 +16,11 @@ class EventHandler;
 
 using namespace std;
 
-class Window : public sf::RenderWindow, public sf::Thread {
+class Window: public sf::RenderWindow, public sf::Thread {
 
 public:
 
-	Window(int,int,int,string);
+	Window(int, int, int, string);
 	Window(const Window& orig);
 	virtual ~Window();
 	list<EventHandler*> getEventHandlers();
@@ -46,7 +46,6 @@ private:
 	sf::Mutex eventHandlersMutex;
 	string title;
 
-
 	list<EventHandler*> eventHandlers;
 	list<sf::Drawable*> drawableObjects;
 
@@ -54,8 +53,6 @@ private:
 	list<EventHandler*>::iterator iho;
 
 };
-
-
 
 #endif	/* WINDOW_H */
 

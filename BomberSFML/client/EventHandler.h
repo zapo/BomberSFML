@@ -29,6 +29,5 @@ protected:
 
 };
 
-
 #endif	/* EVENTHANDLER_H */
 

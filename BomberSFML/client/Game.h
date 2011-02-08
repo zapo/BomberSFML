@@ -40,7 +40,6 @@ private:
 
 	std::map<long, Character*> characters;
 
-
 };
 
 #endif /* GAME_H_ */
