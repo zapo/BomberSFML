@@ -44,9 +44,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_client_OBJECTS = BomberSFML.$(OBJEXT) ClosingEventHandler.$(OBJEXT) \
-	EventHandler.$(OBJEXT) MoveEventHandler.$(OBJEXT) \
-	Window.$(OBJEXT) Connection.$(OBJEXT) Game.$(OBJEXT) \
+am_client_OBJECTS = BomberSFML.$(OBJEXT) Bullet.$(OBJEXT) \
+	ClosingEventHandler.$(OBJEXT) EventHandler.$(OBJEXT) \
+	MoveEventHandler.$(OBJEXT) Window.$(OBJEXT) \
+	Connection.$(OBJEXT) Game.$(OBJEXT) \
 	ShootEventHandler.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -156,6 +157,8 @@ top_builddir = ..
 top_srcdir = ../..
 client_SOURCES = \
     BomberSFML.cpp \
+    Bullet.cpp \
+    Bullet.h \
     ClosingEventHandler.cpp \
     ClosingEventHandler.h \
     EventHandler.cpp \
@@ -257,6 +260,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/BomberSFML.Po
+include ./$(DEPDIR)/Bullet.Po
 include ./$(DEPDIR)/ClosingEventHandler.Po
 include ./$(DEPDIR)/Connection.Po
 include ./$(DEPDIR)/EventHandler.Po

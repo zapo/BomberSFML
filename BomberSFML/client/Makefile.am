@@ -2,6 +2,8 @@ bin_PROGRAMS=client
 
 client_SOURCES=\
     BomberSFML.cpp \
+    Bullet.cpp \
+    Bullet.h \
     ClosingEventHandler.cpp \
     ClosingEventHandler.h \
     EventHandler.cpp \

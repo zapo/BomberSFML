@@ -34,7 +34,7 @@ private:
 
 	sf::SocketTCP *socket;
 	sf::IPAddress host;
-	unsigned int port;
+	unsigned short port;
 	long id;
 
 };
