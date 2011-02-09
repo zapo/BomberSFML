@@ -86,7 +86,7 @@ void Game::run() {
 
 		while (window->IsOpened()) {
 
-			sf::Sleep(0.050);
+			sf::Sleep(0.01);
 
 			connection->connectionMutex.Lock();
 

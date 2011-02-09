@@ -17,7 +17,7 @@ int main() {
 
 	bool running = true;
 
-	unsigned short listenPort = 7777;
+	unsigned short listenPort = 7000;
 
 
 	sf::SocketUDP listener;
@@ -66,7 +66,7 @@ int main() {
 
 				do {
 
-					randomport = sf::Randomizer::Random(1024, 40000);
+					randomport = sf::Randomizer::Random(7001, 7100);
 
 				} while(!clientSocket->Bind(randomport));
 

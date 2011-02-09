@@ -24,7 +24,7 @@ sf::Image Character::tankImage;
 
 int main(int argc, char** argv) {
 
-	long id = 51;
+	long id = 54;
 	sf::IPAddress host = sf::IPAddress::LocalHost;
 
 	ostringstream title;
@@ -32,8 +32,7 @@ int main(int argc, char** argv) {
 
 	Window *window = new Window(800, 600, 32, title.str());
 
-	Connection *connection = new Connection(7777, 7779,
-			host, id);
+	Connection *connection = new Connection(7000, host, id);
 
 	Game *game = new Game(*window, *connection);
 

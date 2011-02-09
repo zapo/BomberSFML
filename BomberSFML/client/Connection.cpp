@@ -31,13 +31,14 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
-Connection::Connection(unsigned short authPort, unsigned short receivePort,
-		sf::IPAddress & address, long id) :
+Connection::Connection(unsigned short authPort, sf::IPAddress & address, long id) :
 	host(address), authPort(authPort), receivePort(receivePort), id(id) {
 
-	server.Bind(receivePort);
+	do {
 
+	receivePort = sf::Randomizer::Random(7101, 7201);
 
+	} while(!server.Bind(receivePort));
 }
 
 bool Connection::setPosition(Character &character) {

@@ -118,11 +118,12 @@ public:
 	Character& operator=(const Character &character) {
 
 		this->id = character.id;
-		this->SetPosition(character.GetPosition());
+
 		this->orientation = character.orientation;
 
 		this->currentAction = character.currentAction;
 
+		this->SetPosition(character.GetPosition());
 
 		//only update our animation if we have more than one frame
 
@@ -134,11 +135,6 @@ public:
 
 	virtual ~Character() {
 
-
-
-	}
-	void shoot() {
-		currentAction = Character::SHOOTING;
 	}
 
 	void move(const sf::Vector2f & position) {

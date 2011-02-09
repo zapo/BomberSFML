@@ -15,8 +15,7 @@ class Character;
 
 class Connection {
 public:
-	Connection(unsigned short, unsigned short,
-			sf::IPAddress & address, long id);
+	Connection(unsigned short, sf::IPAddress & address, long id);
 
 	bool isValid();
 	virtual ~Connection();

@@ -81,19 +81,20 @@ void MoveEventHandler::handle(sf::Event &event) {
 
 				if (oldLeft != left || oldTop != top) {
 
+
+					Character temp;
+					temp = *shape;
+
+					temp.move(sf::Vector2f(left, top));
+
 					connection->connectionMutex.Lock();
 
-					bool setted = connection->setPosition(*shape);
+					bool setted = connection->setPosition(temp);
 
 					connection->connectionMutex.Unlock();
 
 					handledWindow->drawableObjectsMutex.Lock();
 
-					if (!setted) {
-						shape->move(sf::Vector2f(oldLeft, oldTop));
-					}
-
-					shape->move(sf::Vector2f(left, top));
 
 					handledWindow->drawableObjectsMutex.Unlock();
 

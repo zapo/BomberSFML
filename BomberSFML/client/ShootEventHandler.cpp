@@ -24,7 +24,7 @@ void ShootEventHandler::handle(sf::Event &event) {
 
 	if( event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Space) {
 
-		handledCharacter->shoot();
+		handledCharacter->setCurrentAction(Character::SHOOTING);
 
 		connection->connectionMutex.Lock();
 
