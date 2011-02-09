@@ -17,63 +17,60 @@ int main() {
 
 	bool running = true;
 
-	unsigned short listenPort = 8889;
+	unsigned short listenPort = 8890;
+	unsigned short dataPort = 8889;
 
-	sf::SocketTCP listener;
+	sf::SocketUDP listener;
 
-	if (listener.Listen(listenPort)) {
+	if (listener.Bind(listenPort)) {
 
 		Channel channel;
 
 		while (running) {
 
-			sf::SocketTCP clientSocket;
 			sf::IPAddress clientAddress;
 
-			cout << "Waiting for connections on " << listenPort << endl;
+			cout << "Waiting for authentication messages on " << listenPort
+					<< endl;
 
-			if (listener.Accept(clientSocket, &clientAddress)
+			sf::Packet idpacket, confirmation;
+
+			if (listener.Receive(idpacket, clientAddress, listenPort)
 					== sf::Socket::Done) {
+
+				Bomber::Message authmessage;
+				idpacket >> authmessage;
 
 				cout << "Incoming connection, getting client id..." << endl;
 
-				sf::Packet idpacket, confirmation;
+				Bomber::Message confMessage(authmessage.getId(),
+						Bomber::MessageInfo::OK);
 
-				if (clientSocket.Receive(idpacket) == sf::Socket::Done) {
+				if (authmessage.getId() > 0) { //need tests that assert channel doesnt already have this clientid
 
-					Bomber::Message authmessage;
+					std::cout << "Authenticated !" << std::endl;
+					confMessage.setType(Bomber::MessageInfo::OK);
 
-					idpacket >> authmessage;
+				} else {
 
-					Bomber::Message confMessage(authmessage.getId(),
-							Bomber::MessageInfo::OK);
+					std::cout << "NOT authenticated sorry !" << std::endl;
+					confMessage.setType(Bomber::MessageInfo::NOK);
 
-					if (authmessage.getId() != 0) { //need tests that assert channel doesnt already have this clientid
+				}
 
-						std::cout << "Authentified !" << std::endl;
-						confMessage.setType(Bomber::MessageInfo::OK);
+				confirmation << confMessage;
 
-					} else {
+				if (listener.Send(confirmation, clientAddress, listenPort)
+						== sf::Socket::Done && confMessage.getType()
+						== Bomber::MessageInfo::OK) {
 
-						std::cout << "NOT authentified sorry !" << std::endl;
-						confMessage.setType(Bomber::MessageInfo::NOK);
+					std::cout << "Adding client " << authmessage.getId()
+							<< " to channel " << &channel << std::endl;
+					Client *c = new Client(dataPort, clientAddress, channel,
+							authmessage.getId());
+					channel.add(*c);
 
-					}
-
-					confirmation << confMessage;
-
-					if (clientSocket.Send(confirmation) == sf::Socket::Done
-							&& confMessage.getType() == Bomber::MessageInfo::OK) {
-
-						std::cout << "Adding client " << authmessage.getId()
-								<< " to channel " << &channel << std::endl;
-						Client *c = new Client(clientSocket, clientAddress,
-								channel, authmessage.getId());
-						channel.add(*c);
-
-						c->Launch();
-
-					}
+					c->Launch();
 
 				}
 
@@ -85,3 +82,5 @@ int main() {
 
 	return EXIT_SUCCESS;
 }
+
+

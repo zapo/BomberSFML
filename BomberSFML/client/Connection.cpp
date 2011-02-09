@@ -41,9 +41,9 @@ bool Connection::setPosition(Character &character) {
 
 	request << moveTo << moveToData;
 
-	if (socket->Send(request) == sf::Socket::Done) {
+	if (socket.Send(request, host, port) == sf::Socket::Done) {
 
-		if (socket->Receive(response) == sf::Socket::Done) {
+		if (socket.Receive(response, host, port) == sf::Socket::Done) {
 			response >> confirmation;
 
 			accepted = (confirmation.getType() == MessageInfo::OK);
@@ -55,9 +55,11 @@ bool Connection::setPosition(Character &character) {
 
 }
 
-Connection::Connection(sf::SocketTCP *socket, unsigned int port,
-		sf::IPAddress const& address, long id) :
-	host(address), port(port), socket(socket), id(id) {
+Connection::Connection(unsigned short port,
+		sf::IPAddress & address, long id) :
+	host(address), port(port), id(id) {
+
+	socket.Bind(port);
 
 }
 
@@ -72,9 +74,9 @@ bool Connection::close() {
 
 	closePacket << closeMessage;
 
-	if (socket->Send(closePacket) == sf::Socket::Done) {
+	if (socket.Send(closePacket, host, port) == sf::Socket::Done) {
 
-		if (socket->Receive(confPacket) == sf::Socket::Done) {
+		if (socket.Receive(confPacket, host, port) == sf::Socket::Done) {
 
 			confPacket >> confMessage;
 
@@ -103,15 +105,25 @@ Connection::~Connection() {
 
 bool Connection::auth() {
 
+	sf::SocketUDP authsocket;
+
+	unsigned short port = 8890;
+
+	std::cout << "authentication..." << std::endl;
+
+	if(!authsocket.Bind(port)) {
+		return false;
+	}
+
 	bool authenticated = false;
 
 	sf::Packet authpacket, conf;
 	Message authmessage(id), authconf;
 	authpacket << authmessage;
 
-	if (socket->Send(authpacket) == sf::Socket::Done) {
+	if (socket.Send(authpacket, host, port) == sf::Socket::Done) {
 
-		if (socket->Receive(conf) == sf::Socket::Done) {
+		if (authsocket.Receive(conf, host, port) == sf::Socket::Done) {
 
 			conf >> authconf;
 
@@ -119,6 +131,8 @@ bool Connection::auth() {
 
 		}
 	}
+
+	authsocket.Close();
 
 	return authenticated;
 
@@ -134,9 +148,9 @@ map<long, Character> Connection::getPlayers() {
 
 	request << positionRequest;
 
-	if (socket->Send(request) == sf::Socket::Done) {
+	if (socket.Send(request, host, port) == sf::Socket::Done) {
 
-		if (socket->Receive(response) == sf::Socket::Done) {
+		if (socket.Receive(response, host, port) == sf::Socket::Done) {
 
 			response >> positionResponse;
 
@@ -149,16 +163,7 @@ map<long, Character> Connection::getPlayers() {
 
 }
 
-bool Connection::connect() {
-
-	cout << "Trying to connect to server " << host << " ..." << endl;
-	cout.flush();
-
-	return (socket->Connect(port, host) == sf::Socket::Done && (cout << "Done"
-			<< endl));
-}
-
 bool Connection::isValid() {
-	return socket->IsValid();
+	return socket.IsValid();
 }
 

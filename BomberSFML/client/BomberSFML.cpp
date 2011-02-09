@@ -25,14 +25,15 @@ sf::Image Character::tankImage;
 int main(int argc, char** argv) {
 
 	long id = 51;
+	sf::IPAddress host = sf::IPAddress::LocalHost;
 
 	ostringstream title;
 	title << "BombrerSFML with id " << id;
 
 	Window *window = new Window(800, 600, 32, title.str());
 
-	Connection *connection = new Connection(new sf::SocketTCP, 8889,
-			sf::IPAddress::LocalHost, id);
+	Connection *connection = new Connection(8889,
+			host, id);
 
 	Game *game = new Game(*window, *connection);
 
@@ -48,18 +49,6 @@ int main(int argc, char** argv) {
 	window->addEventHandler(new ShootEventHandler(*me, *connection));
 
 	window->setPrintFramerate(true, 1);
-
-	if (!connection->connect()) {
-
-		std::cout
-				<< "A problem occurred while connecting to host, terminating..."
-				<< std::endl;
-		std::cout.flush();
-
-		delete game;
-		exit(2);
-
-	}
 
 	game->run();
 	delete game;

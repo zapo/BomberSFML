@@ -15,12 +15,11 @@ class Character;
 
 class Connection {
 public:
-	Connection(sf::SocketTCP *socket, unsigned int port,
-			sf::IPAddress const& address, long id);
+	Connection(unsigned short port,
+			sf::IPAddress & address, long id);
 
 	bool isValid();
 	virtual ~Connection();
-	bool connect();
 
 	std::map<long, Character> getPlayers();
 
@@ -32,7 +31,7 @@ public:
 
 private:
 
-	sf::SocketTCP *socket;
+	sf::SocketUDP socket;
 	sf::IPAddress host;
 	unsigned short port;
 	long id;

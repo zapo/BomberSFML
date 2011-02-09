@@ -17,7 +17,7 @@ class Character;
 
 class Client: public sf::Thread {
 public:
-	Client(sf::SocketTCP&, sf::IPAddress&, Channel& channel, sf::Uint32 id);
+	Client(unsigned short port, sf::IPAddress&, Channel& channel, sf::Uint32 id);
 	long getId();
 
 	virtual ~Client();
@@ -27,9 +27,11 @@ private:
 	virtual void Run();
 
 	Character *character;
-	sf::SocketTCP socket;
+	sf::SocketUDP socket;
 	sf::IPAddress ipaddress;
 	Channel* channel;
+
+	unsigned short port;
 
 	long id;
 };

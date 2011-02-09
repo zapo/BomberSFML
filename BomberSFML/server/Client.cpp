@@ -36,9 +36,9 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
-Client::Client(sf::SocketTCP &socket, sf::IPAddress &ipaddress,
+Client::Client(unsigned short port, sf::IPAddress &ipaddress,
 		Channel &channel, sf::Uint32 id) :
-	id(id), channel(&channel), socket(socket), ipaddress(ipaddress),
+	id(id), port(port), channel(&channel), ipaddress(ipaddress),
 			sf::Thread() {
 
 	sf::Randomizer::SetSeed( time(NULL));
@@ -67,7 +67,7 @@ void Client::Run() {
 
 	sf::Packet request, response;
 
-	while (socket.Receive(request) == sf::Socket::Done) {
+	while (socket.Receive(request, ipaddress, port) == sf::Socket::Done) {
 
 		Message requestMessage;
 
@@ -85,7 +85,7 @@ void Client::Run() {
 
 				response << datamessage;
 
-				if (socket.Send(response) != sf::Socket::Done) {
+				if (socket.Send(response, ipaddress, port) != sf::Socket::Done) {
 					//throw new exception or so
 				}
 
@@ -125,7 +125,7 @@ void Client::Run() {
 
 				response << conf;
 
-				if (socket.Send(response) == sf::Socket::Done) {
+				if (socket.Send(response, ipaddress, port) == sf::Socket::Done) {
 
 				}
 				break;
@@ -141,7 +141,7 @@ void Client::Run() {
 
 				response << conf;
 
-				if (!socket.Send(response) == sf::Socket::Done) {
+				if (!socket.Send(response, ipaddress, port) == sf::Socket::Done) {
 					//exception
 				}
 
