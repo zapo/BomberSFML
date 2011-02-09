@@ -31,6 +31,15 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
+Connection::Connection(unsigned short authPort, unsigned short receivePort,
+		sf::IPAddress & address, long id) :
+	host(address), authPort(authPort), receivePort(receivePort), id(id) {
+
+	server.Bind(receivePort);
+
+
+}
+
 bool Connection::setPosition(Character &character) {
 
 	bool accepted = false;
@@ -41,9 +50,9 @@ bool Connection::setPosition(Character &character) {
 
 	request << moveTo << moveToData;
 
-	if (socket.Send(request, host, port) == sf::Socket::Done) {
+	if (server.Send(request, host, sendPort) == sf::Socket::Done) {
 
-		if (socket.Receive(response, host, port) == sf::Socket::Done) {
+		if (server.Receive(response, host, sendPort) == sf::Socket::Done) {
 			response >> confirmation;
 
 			accepted = (confirmation.getType() == MessageInfo::OK);
@@ -52,14 +61,6 @@ bool Connection::setPosition(Character &character) {
 	}
 
 	return accepted;
-
-}
-
-Connection::Connection(unsigned short port,
-		sf::IPAddress & address, long id) :
-	host(address), port(port), id(id) {
-
-	socket.Bind(port);
 
 }
 
@@ -74,9 +75,9 @@ bool Connection::close() {
 
 	closePacket << closeMessage;
 
-	if (socket.Send(closePacket, host, port) == sf::Socket::Done) {
+	if (server.Send(closePacket, host, sendPort) == sf::Socket::Done) {
 
-		if (socket.Receive(confPacket, host, port) == sf::Socket::Done) {
+		if (server.Receive(confPacket, host, sendPort) == sf::Socket::Done) {
 
 			confPacket >> confMessage;
 
@@ -105,25 +106,16 @@ Connection::~Connection() {
 
 bool Connection::auth() {
 
-	sf::SocketUDP authsocket;
-
-	unsigned short port = 8890;
-
-	std::cout << "authentication..." << std::endl;
-
-	if(!authsocket.Bind(port)) {
-		return false;
-	}
-
 	bool authenticated = false;
 
 	sf::Packet authpacket, conf;
 	Message authmessage(id), authconf;
 	authpacket << authmessage;
 
-	if (socket.Send(authpacket, host, port) == sf::Socket::Done) {
 
-		if (authsocket.Receive(conf, host, port) == sf::Socket::Done) {
+	if (server.Send(authpacket, host, authPort) == sf::Socket::Done) {
+
+		if (server.Receive(conf, host, sendPort) == sf::Socket::Done) {
 
 			conf >> authconf;
 
@@ -131,8 +123,6 @@ bool Connection::auth() {
 
 		}
 	}
-
-	authsocket.Close();
 
 	return authenticated;
 
@@ -148,9 +138,9 @@ map<long, Character> Connection::getPlayers() {
 
 	request << positionRequest;
 
-	if (socket.Send(request, host, port) == sf::Socket::Done) {
+	if (server.Send(request, host, sendPort) == sf::Socket::Done) {
 
-		if (socket.Receive(response, host, port) == sf::Socket::Done) {
+		if (server.Receive(response, host, sendPort) == sf::Socket::Done) {
 
 			response >> positionResponse;
 
@@ -164,6 +154,6 @@ map<long, Character> Connection::getPlayers() {
 }
 
 bool Connection::isValid() {
-	return socket.IsValid();
+	return server.IsValid();
 }
 

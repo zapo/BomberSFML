@@ -15,7 +15,7 @@ class Character;
 
 class Connection {
 public:
-	Connection(unsigned short port,
+	Connection(unsigned short, unsigned short,
 			sf::IPAddress & address, long id);
 
 	bool isValid();
@@ -31,9 +31,13 @@ public:
 
 private:
 
-	sf::SocketUDP socket;
+	sf::SocketUDP server;
+
 	sf::IPAddress host;
-	unsigned short port;
+
+	unsigned short authPort;
+	unsigned short receivePort;
+	unsigned short sendPort;
 	long id;
 
 };

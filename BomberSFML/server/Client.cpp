@@ -36,10 +36,11 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
-Client::Client(unsigned short port, sf::IPAddress &ipaddress,
+Client::Client(unsigned int sendPort, unsigned int receivePort, sf::SocketUDP &socket, sf::IPAddress &ipaddress,
 		Channel &channel, sf::Uint32 id) :
-	id(id), port(port), channel(&channel), ipaddress(ipaddress),
+	id(id), sendPort(sendPort), receivePort(receivePort), channel(&channel), ipaddress(ipaddress), socket(&socket),
 			sf::Thread() {
+
 
 	sf::Randomizer::SetSeed( time(NULL));
 
@@ -63,11 +64,9 @@ long Client::getId() {
 
 void Client::Run() {
 
-	cout << "New client on address " << ipaddress << endl;
-
 	sf::Packet request, response;
 
-	while (socket.Receive(request, ipaddress, port) == sf::Socket::Done) {
+	while (socket->Receive(request, ipaddress, receivePort) == sf::Socket::Done) {
 
 		Message requestMessage;
 
@@ -85,7 +84,7 @@ void Client::Run() {
 
 				response << datamessage;
 
-				if (socket.Send(response, ipaddress, port) != sf::Socket::Done) {
+				if (socket->Send(response, ipaddress, sendPort) != sf::Socket::Done) {
 					//throw new exception or so
 				}
 
@@ -125,7 +124,7 @@ void Client::Run() {
 
 				response << conf;
 
-				if (socket.Send(response, ipaddress, port) == sf::Socket::Done) {
+				if (socket->Send(response, ipaddress, sendPort) == sf::Socket::Done) {
 
 				}
 				break;
@@ -141,7 +140,7 @@ void Client::Run() {
 
 				response << conf;
 
-				if (!socket.Send(response, ipaddress, port) == sf::Socket::Done) {
+				if (!socket->Send(response, ipaddress, sendPort) == sf::Socket::Done) {
 					//exception
 				}
 

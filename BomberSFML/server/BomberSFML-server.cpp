@@ -17,8 +17,8 @@ int main() {
 
 	bool running = true;
 
-	unsigned short listenPort = 8890;
-	unsigned short dataPort = 8889;
+	unsigned short listenPort = 7777;
+
 
 	sf::SocketUDP listener;
 
@@ -35,13 +35,13 @@ int main() {
 
 			sf::Packet idpacket, confirmation;
 
-			if (listener.Receive(idpacket, clientAddress, listenPort)
-					== sf::Socket::Done) {
+			unsigned short clientPort;
+			if (listener.Receive(idpacket, clientAddress, clientPort) == sf::Socket::Done) {
 
 				Bomber::Message authmessage;
 				idpacket >> authmessage;
 
-				cout << "Incoming connection, getting client id..." << endl;
+				cout << "Incoming connection from " << clientAddress << ", getting client id..." << endl;
 
 				Bomber::Message confMessage(authmessage.getId(),
 						Bomber::MessageInfo::OK);
@@ -60,14 +60,31 @@ int main() {
 
 				confirmation << confMessage;
 
-				if (listener.Send(confirmation, clientAddress, listenPort)
-						== sf::Socket::Done && confMessage.getType()
-						== Bomber::MessageInfo::OK) {
+				sf::SocketUDP* clientSocket = new sf::SocketUDP();
 
-					std::cout << "Adding client " << authmessage.getId()
-							<< " to channel " << &channel << std::endl;
-					Client *c = new Client(dataPort, clientAddress, channel,
-							authmessage.getId());
+				int randomport = 0;
+
+				do {
+
+					randomport = sf::Randomizer::Random(1024, 40000);
+
+				} while(!clientSocket->Bind(randomport));
+
+				if (clientSocket->Send(confirmation, clientAddress, clientPort) == sf::Socket::Done && confMessage.getType() == Bomber::MessageInfo::OK) {
+
+					// TODO check if same user don't exist in client list with same port & address
+
+					std::cout
+
+					<< "Adding client " 		<< authmessage.getId()
+					<< " connected with port " 	<< clientPort
+					<< " to channel "  			<< &channel
+					<< " on " 					<< randomport
+					<< std::endl;
+
+
+					Client *c = new Client(clientPort, randomport, *clientSocket, clientAddress, channel, authmessage.getId());
+
 					channel.add(*c);
 
 					c->Launch();

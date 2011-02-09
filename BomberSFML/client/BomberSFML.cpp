@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
 	Window *window = new Window(800, 600, 32, title.str());
 
-	Connection *connection = new Connection(8889,
+	Connection *connection = new Connection(7777, 7779,
 			host, id);
 
 	Game *game = new Game(*window, *connection);
