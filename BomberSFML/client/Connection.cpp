@@ -26,7 +26,6 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 	ar & vector.y;
 
 }
-
 }
 
 }

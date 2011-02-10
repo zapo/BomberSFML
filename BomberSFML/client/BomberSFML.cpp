@@ -24,7 +24,7 @@ sf::Image Character::tankImage;
 
 int main(int argc, char** argv) {
 
-	long id = 54;
+	long id = 55;
 	sf::IPAddress host = sf::IPAddress::LocalHost;
 
 	ostringstream title;
