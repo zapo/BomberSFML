@@ -48,7 +48,7 @@ am_client_OBJECTS = BomberSFML.$(OBJEXT) Bullet.$(OBJEXT) \
 	ClosingEventHandler.$(OBJEXT) EventHandler.$(OBJEXT) \
 	MoveEventHandler.$(OBJEXT) Window.$(OBJEXT) \
 	Connection.$(OBJEXT) Game.$(OBJEXT) \
-	ShootEventHandler.$(OBJEXT)
+	ShootEventHandler.$(OBJEXT) MouseEventHandler.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
 client_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -174,6 +174,8 @@ client_SOURCES = \
     Game.cpp \
     ShootEventHandler.cpp \
     ShootEventHandler.h \
+    MouseEventHandler.h \
+    MouseEventHandler.cpp \
     Anim.h
 
 AM_CPPFLAGS = $(SFML_CFLAGS) -I../../../BomberSFML-network/
@@ -265,6 +267,7 @@ include ./$(DEPDIR)/ClosingEventHandler.Po
 include ./$(DEPDIR)/Connection.Po
 include ./$(DEPDIR)/EventHandler.Po
 include ./$(DEPDIR)/Game.Po
+include ./$(DEPDIR)/MouseEventHandler.Po
 include ./$(DEPDIR)/MoveEventHandler.Po
 include ./$(DEPDIR)/ShootEventHandler.Po
 include ./$(DEPDIR)/Window.Po

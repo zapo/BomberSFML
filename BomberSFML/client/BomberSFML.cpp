@@ -9,6 +9,7 @@
 #include <iostream>
 #include "ClosingEventHandler.h"
 #include "MoveEventHandler.h"
+#include "MouseEventHandler.h"
 #include "Connection.h"
 #include "Character.h"
 #include "Game.h"
@@ -30,7 +31,7 @@ int main(int argc, char** argv) {
 	ostringstream title;
 	title << "BombrerSFML with id " << id;
 
-	Window *window = new Window(800, 600, 32, title.str());
+	Window *window = new Window(1024, 768, 32, title.str());
 
 	Connection *connection = new Connection(7000, host, id);
 
@@ -46,8 +47,9 @@ int main(int argc, char** argv) {
 	window->addEventHandler(new ClosingEventHandler());
 	window->addEventHandler(new MoveEventHandler(*me, *connection));
 	window->addEventHandler(new ShootEventHandler(*me, *connection));
+	window->addEventHandler(new MouseEventHandler());
 
-	window->setPrintFramerate(true, 1);
+	window->setIsFrameratePrinted(true, 1);
 
 	game->run();
 	delete game;

@@ -15,6 +15,10 @@
 Game::Game(Window &window, Connection &connection) :
 	window(&window), connection(&connection) {
 
+
+
+
+
 }
 
 Game::~Game() {
@@ -44,7 +48,7 @@ void Game::addCharacter(long id, Character &character) {
 
 		characters[id] = &character;
 
-		window->addDrawableObject((sf::Drawable*) &character);
+		window->addDrawableObject(&character, 2);
 		std::cout << "Character " << id << " added to game" << std::endl;
 	}
 }
@@ -53,7 +57,7 @@ void Game::deleteCharacter(long id) {
 	if (hasCharacter(id)) {
 
 		std::cout << "Deleting character " << id << std::endl;
-		window->removeDrawableObject(characters[id]);
+		window->removeDrawableObject(characters[id], 2);
 
 		characters.erase(id);
 
@@ -78,7 +82,18 @@ Connection& Game::getConnection() {
 
 void Game::run() {
 
+	sf::Image mapImage;
+	sf::Sprite mapSprite;
+
+	mapImage.LoadFromFile("build/client/resources/map.png");
+	mapSprite.SetImage(mapImage);
+	mapSprite.Resize(sf::Vector2f(1024*2, 768*2));
+
+	window->addDrawableObject(&mapSprite, 1);
+
 	window->Launch();
+
+
 
 	if (connection->auth()) {
 
@@ -90,11 +105,11 @@ void Game::run() {
 
 			connection->connectionMutex.Lock();
 
-			map<long, Character> positions = connection->getPlayers();
+			std::map<long, Character> positions = connection->getPlayers();
 
 			connection->connectionMutex.Unlock();
 
-			map<long, Character>::iterator pit;
+			std::map<long, Character>::iterator pit;
 
 			for (pit = positions.begin(); pit != positions.end(); pit++) {
 
@@ -111,7 +126,7 @@ void Game::run() {
 			}
 
 			if (characters.size() > positions.size()) {
-				map<long, Character*>::iterator ppit;
+				std::map<long, Character*>::iterator ppit;
 
 				for (ppit = characters.begin(); ppit != characters.end(); ppit++) {
 
@@ -121,6 +136,27 @@ void Game::run() {
 
 				}
 			}
+
+
+			sf::Vector2f viewCenter = mainCharacter->GetPosition();
+
+			if(mainCharacter->GetPosition().x <= window->GetWidth() / 2) {
+				viewCenter.x = window->GetWidth() / 2;
+			}
+
+			if(mainCharacter->GetPosition().x >= (mapSprite.GetSize().x - window->GetWidth() / 2)) {
+				viewCenter.x = (mapSprite.GetSize().x - window->GetWidth() / 2);
+			}
+
+			if(mainCharacter->GetPosition().y <= window->GetHeight() / 2) {
+				viewCenter.y = window->GetHeight() / 2;
+			}
+
+			if(mainCharacter->GetPosition().y >= (mapSprite.GetSize().y - window->GetHeight() / 2)) {
+				viewCenter.y = (mapSprite.GetSize().y - window->GetHeight() / 2);
+			}
+
+			window->GetDefaultView().SetCenter(viewCenter);
 
 		}
 

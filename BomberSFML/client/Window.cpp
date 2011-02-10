@@ -16,7 +16,9 @@ using namespace std;
 Window::Window(int width, int height, int colors, string title) :
 
 	sf::RenderWindow(sf::VideoMode(width, height, colors), title),
-			sf::Thread(), title(title), printFramerate(false),
+			sf::Thread(),
+			title(title),
+			isFrameratePrinted(false),
 			framerateRefresh(1) {
 
 	this->SetActive(false);
@@ -27,13 +29,16 @@ Window::Window(const Window& orig) {
 
 Window::~Window() {
 
-	drawableObjects.remove((sf::Drawable*) &framerate);
+	this->removeDrawableObject((sf::Drawable*) &framerate, 999, false);
+
+	list<sf::Drawable*>::iterator idoo;
 
 	for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
-		if (*ido != NULL) {
-			delete *ido;
+		for(idoo = ido->second.begin(); idoo != ido->second.end(); idoo++) {
+			delete *idoo;
 		}
+		ido->second.clear();
 	}
 	drawableObjects.clear();
 
@@ -48,7 +53,6 @@ Window::~Window() {
 
 void Window::Run() {
 
-	sf::Clock framerateClock;
 	framerateClock.Reset();
 
 	while (this->IsOpened()) {
@@ -76,34 +80,43 @@ void Window::Run() {
 
 		drawableObjectsMutex.Lock();
 
+		list<sf::Drawable*>::iterator idoo;
+
 		for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
-			sf::Drawable *dro = *(ido);
+			for(idoo = ido->second.begin(); idoo != ido->second.end(); idoo++) {
 
-			if (dro != NULL) {
-				this->Draw(*dro);
+				sf::Drawable *dro = *(idoo);
+
+				if (dro != NULL) {
+					this->Draw(*dro);
+				}
 			}
 		}
 
 		drawableObjectsMutex.Unlock();
 
-		if (printFramerate && framerateClock.GetElapsedTime()
-				>= framerateRefresh) {
+		updateFramerate();
 
-			ostringstream text;
-
-			text << (int) (1.f / GetFrameTime()) << " fps";
-
-			framerate.SetText(text.str());
-			framerate.SetSize(20);
-			framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20));
-
-			framerateClock.Reset();
-
-		}
-
-		// Display window contents on screen
 		this->Display();
+	}
+
+}
+
+void Window::updateFramerate() {
+
+	if (isFrameratePrinted && framerateClock.GetElapsedTime() >= framerateRefresh) {
+
+		ostringstream text;
+
+		text << (int) (1.f / GetFrameTime()) << " fps";
+
+		framerate.SetText(text.str());
+		framerate.SetSize(20);
+		framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20));
+
+		framerateClock.Reset();
+
 	}
 
 }
@@ -130,11 +143,15 @@ list<EventHandler*> Window::getEventHandlers() {
 
 }
 
-void Window::removeDrawableObject(sf::Drawable* object, bool free) {
+void Window::removeDrawableObject(sf::Drawable* object, unsigned int layer, bool free) {
 
 	drawableObjectsMutex.Lock();
 
-	drawableObjects.remove(object);
+	if(drawableObjects.find(layer) != drawableObjects.end()) {
+
+		drawableObjects[layer].remove(object);
+
+	}
 
 	if (free) {
 		delete object;
@@ -143,31 +160,31 @@ void Window::removeDrawableObject(sf::Drawable* object, bool free) {
 	drawableObjectsMutex.Unlock();
 }
 
-void Window::addDrawableObject(sf::Drawable* object) {
+void Window::addDrawableObject(sf::Drawable* object, unsigned int layer) {
 
 	drawableObjectsMutex.Lock();
 
-	this->drawableObjects.push_back(object);
+	this->drawableObjects[layer].push_back(object);
 
 	drawableObjectsMutex.Unlock();
 }
-list<sf::Drawable*> Window::getDrawableObjects() {
+map<unsigned int, list<sf::Drawable*> > Window::getDrawableObjects() const {
 
 	return drawableObjects;
 
 }
 
-void Window::setPrintFramerate(bool print, float refresh) {
+void Window::setIsFrameratePrinted(bool print, float refresh) {
 
 	if (print) {
 
-		addDrawableObject(&framerate);
+		addDrawableObject(&framerate, 999);
 
 	} else {
 		removeDrawableObject(&framerate, false);
 	}
 
-	printFramerate = print;
+	isFrameratePrinted = print;
 	framerateRefresh = refresh;
 
 }

@@ -93,11 +93,6 @@ void MoveEventHandler::handle(sf::Event &event) {
 
 					connection->connectionMutex.Unlock();
 
-					handledWindow->drawableObjectsMutex.Lock();
-
-
-					handledWindow->drawableObjectsMutex.Unlock();
-
 				}
 
 			} else {

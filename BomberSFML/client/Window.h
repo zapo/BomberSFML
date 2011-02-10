@@ -26,11 +26,13 @@ public:
 	list<EventHandler*> getEventHandlers();
 	void addEventHandler(EventHandler*);
 
-	void removeDrawableObject(sf::Drawable*, bool free = true);
-	void addDrawableObject(sf::Drawable*);
-	list<sf::Drawable*> getDrawableObjects();
+	void removeDrawableObject(sf::Drawable*, unsigned int, bool free = true);
+	void addDrawableObject(sf::Drawable*, unsigned int);
+	std::map<unsigned int, list<sf::Drawable*> > getDrawableObjects() const;
 
-	void setPrintFramerate(bool print, float refresh = 1.f);
+	void setIsFrameratePrinted(bool print, float refresh = 1.f);
+
+	void updateFramerate();
 
 	sf::Mutex drawableObjectsMutex;
 
@@ -39,17 +41,18 @@ private:
 	virtual void Run();
 
 	float framerateRefresh;
-	bool printFramerate;
+	bool isFrameratePrinted;
 
 	sf::String framerate;
+	sf::Clock framerateClock;
 
 	sf::Mutex eventHandlersMutex;
 	string title;
 
 	list<EventHandler*> eventHandlers;
-	list<sf::Drawable*> drawableObjects;
+	std::map<unsigned int, std::list<sf::Drawable*> > drawableObjects;
 
-	list<sf::Drawable*>::iterator ido;
+	map<unsigned int, list<sf::Drawable*> >::iterator ido;
 	list<EventHandler*>::iterator iho;
 
 };

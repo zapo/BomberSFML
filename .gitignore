@@ -1,5 +1,6 @@
 .DS_Store
 *~
-BomberSFML/build/
+*.o
+*.Po
 BomberSFML-network/Debug/
 BomberSFML-network/Release/

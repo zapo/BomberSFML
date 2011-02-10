@@ -32,6 +32,7 @@ public:
 	Connection& getConnection();
 	void loadRessources();
 
+
 private:
 
 	Window *window;

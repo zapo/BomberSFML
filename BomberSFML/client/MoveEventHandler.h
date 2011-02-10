@@ -26,7 +26,6 @@ private:
 	Character* shape;
 	Connection *connection;
 	static const float speed = 300;
-	Window *window;
 };
 
 #endif /* MOVEEVENTHANDLER_H_ */

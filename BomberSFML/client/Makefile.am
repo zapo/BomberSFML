@@ -19,6 +19,8 @@ client_SOURCES=\
     Game.cpp \
     ShootEventHandler.cpp \
     ShootEventHandler.h \
+    MouseEventHandler.h \
+    MouseEventHandler.cpp \
     Anim.h
 
 AM_CPPFLAGS=$(SFML_CFLAGS) -I../../../BomberSFML-network/
