@@ -15,10 +15,6 @@
 Game::Game(Window &window, Connection &connection) :
 	window(&window), connection(&connection) {
 
-
-
-
-
 }
 
 Game::~Game() {
@@ -111,11 +107,17 @@ void Game::run() {
 
 			std::map<long, Character>::iterator pit;
 
+
+
 			for (pit = positions.begin(); pit != positions.end(); pit++) {
 
 				if (hasCharacter(pit->first)) {
 
+					window->drawableObjectsMutex.Lock();
+
 					*characters[pit->first] = pit->second;
+
+					window->drawableObjectsMutex.Unlock();
 
 				} else {
 

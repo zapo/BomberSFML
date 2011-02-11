@@ -21,6 +21,7 @@ Window::Window(int width, int height, int colors, string title) :
 			isFrameratePrinted(false),
 			framerateRefresh(1) {
 
+
 	this->SetActive(false);
 }
 
@@ -113,11 +114,12 @@ void Window::updateFramerate() {
 
 		framerate.SetText(text.str());
 		framerate.SetSize(20);
-		framerate.SetPosition(sf::Vector2f((GetWidth() - 100), 20));
 
 		framerateClock.Reset();
 
 	}
+
+	framerate.SetPosition(this->ConvertCoords(1024 - 100, 100));
 
 }
 

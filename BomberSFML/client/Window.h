@@ -49,6 +49,8 @@ private:
 	sf::Mutex eventHandlersMutex;
 	string title;
 
+	sf::View interface;
+
 	list<EventHandler*> eventHandlers;
 	std::map<unsigned int, std::list<sf::Drawable*> > drawableObjects;
 
