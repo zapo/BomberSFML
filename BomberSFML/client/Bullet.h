@@ -11,6 +11,8 @@
 #include <SFML/Graphics.hpp>
 #include "Character.h"
 
+using namespace std;
+
 class Bullet: public sf::Drawable {
 public:
 
@@ -22,6 +24,7 @@ public:
 	virtual ~Bullet();
 
 	static bool init_static();
+	bool init_dynamic();
 
 private:
 
@@ -30,8 +33,8 @@ private:
 	Type type;
 	static sf::Image bulletImage;
 
-	std::map<Type, sf::Sprite> spriteMap;
-	std::map<Type, sf::Sprite> * const pSpriteMap;
+	map<Character::Orientation, map<Type, Anim> > anim;
+	map<Character::Orientation, map<Type, Anim> > * const panim;
 };
 
 #endif /* BULLET_H_ */

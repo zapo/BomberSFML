@@ -13,7 +13,8 @@
 class Anim {
 public:
 	Anim() :
-		currentFrame(0) {
+		currentFrame(0),
+		updateFrequency(0.1f) {
 	}
 
 	void addFrame(const sf::Image& image, const sf::IntRect &subrect,
@@ -49,10 +50,14 @@ public:
 
 	void update() {
 
-		if (currentFrame < (frames.size() - 1)) {
-			currentFrame++;
-		} else {
-			currentFrame = 0;
+		if(lastUpdate.GetElapsedTime() >= updateFrequency) {
+			if (currentFrame < (frames.size() - 1)) {
+				currentFrame++;
+			} else {
+				currentFrame = 0;
+			}
+
+			lastUpdate.Reset();
 		}
 	}
 
@@ -67,6 +72,8 @@ public:
 private:
 	std::vector<sf::Sprite> frames;
 	int currentFrame;
+	float updateFrequency;
+	sf::Clock lastUpdate;
 };
 
 #endif /* ANIM_H_ */
