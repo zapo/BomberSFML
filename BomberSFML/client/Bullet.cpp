@@ -6,13 +6,23 @@
  */
 
 #include "Bullet.h"
+#include "Character.h"
 
 sf::Image Bullet::bulletImage;
 
-Bullet::Bullet(Type type) :
+Bullet::Bullet(Type type, Character *owner) :
 	sf::Drawable(),
+	owner(owner),
 	type(type),
 	panim(&anim) {
+
+}
+
+Bullet& Bullet::operator=(Bullet& bullet) {
+
+	this->init_dynamic();
+	this->type = bullet.type;
+	this->owner = bullet.owner;
 
 }
 
@@ -37,5 +47,6 @@ bool Bullet::init_dynamic() {
 
 void Bullet::Render(sf::RenderTarget &target) const {
 
+	target.Draw((*panim)[owner->getOrientation()][type].getCurrentFrame());
 
 }

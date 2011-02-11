@@ -30,7 +30,7 @@ public:
 	void addDrawableObject(sf::Drawable*, unsigned int);
 	std::map<unsigned int, list<sf::Drawable*> > getDrawableObjects() const;
 
-	void setIsFrameratePrinted(bool print, float refresh = 1.f);
+	void setIsFrameratePrinted(bool print, sf::Vector2f position, float refresh = 1.f);
 
 	void updateFramerate();
 

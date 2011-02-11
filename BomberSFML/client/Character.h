@@ -14,6 +14,7 @@
 #include <iostream>
 #include <map>
 #include "Anim.h"
+#include "Bullet.h"
 
 class Character : public sf::Drawable {
 public:
@@ -25,10 +26,6 @@ public:
 	enum Action {
 		MOVING, IDLEING, SHOOTING
 	};
-
-	std::map<Action, std::map<Orientation, Anim> > * const getAnims() const {
-		return panims;
-	}
 
 	void init_dynamic() {
 
@@ -102,15 +99,33 @@ public:
 		anims[SHOOTING][LEFT].addFrame(tankImage, sf::IntRect(651, 314, 727, 392));
 		anims[SHOOTING][LEFT].addFrame(tankImage, sf::IntRect(734, 314, 814, 392));
 
+		for(int i = 0; i < 100; i++) {
+
+			bullets.push_back(Bullet(Bullet::SMALL, this));
+
+		}
+
 	}
 
 	Character(long id = 0, Orientation orientation = DOWN, Action currentAction = IDLEING) :
-		sf::Drawable(), id(id), orientation(orientation), currentAction(currentAction), panims(&anims) {
+		sf::Drawable(),
+		id(id),
+		orientation(orientation),
+		currentAction(currentAction),
+		panims(&anims),
+		pLoadedBullet(loadedBullet),
+		loadedBullet(&(bullets.back())){
 
 	}
 
 	Character(const Character &character) :
-		sf::Drawable(), id(character.id), orientation(character.orientation), currentAction(character.currentAction), panims(&anims) {
+		sf::Drawable(),
+		id(character.id),
+		orientation(character.orientation),
+		currentAction(character.currentAction),
+		panims(&anims),
+		pLoadedBullet(loadedBullet){
+
 		this->SetPosition(character.GetPosition());
 
 	}
@@ -210,10 +225,11 @@ private:
 
 	virtual void Render(sf::RenderTarget &target) const {
 
-		std::map<Action, std::map<Orientation, Anim> > * const anims = getAnims();
+		if(panims != NULL) {
+			target.Draw((*panims)[currentAction][orientation].getCurrentFrame());
 
-		if(anims != NULL) {
-			target.Draw((*anims)[currentAction][orientation].getCurrentFrame());
+			if(currentAction == SHOOTING) {
+			}
 
 		}
 
@@ -237,7 +253,10 @@ private:
 
 	std::map<Action, std::map<Orientation, Anim> > anims;
 
+	std::vector<Bullet> bullets;
 
+	Bullet * loadedBullet;
+	Bullet * const pLoadedBullet;
 
 
 };

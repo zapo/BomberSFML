@@ -9,9 +9,10 @@
 #define BULLET_H_
 
 #include <SFML/Graphics.hpp>
-#include "Character.h"
+#include <map>
 
-using namespace std;
+class Anim;
+class Character;
 
 class Bullet: public sf::Drawable {
 public:
@@ -20,7 +21,9 @@ public:
 		SMALL
 	};
 
-	Bullet(Type type);
+	Bullet& operator=(Bullet& bullet);
+
+	Bullet(Type type = SMALL, Character *owner = NULL);
 	virtual ~Bullet();
 
 	static bool init_static();
@@ -33,8 +36,10 @@ private:
 	Type type;
 	static sf::Image bulletImage;
 
-	map<Character::Orientation, map<Type, Anim> > anim;
-	map<Character::Orientation, map<Type, Anim> > * const panim;
+	std::map<int, std::map<Type, Anim> > anim;
+	std::map<int, std::map<Type, Anim> > * const panim;
+
+	Character *owner;
 };
 
 #endif /* BULLET_H_ */

@@ -17,6 +17,12 @@
 #include "ShootEventHandler.h"
 #include <sstream>
 
+#define __SCREEN_WIDH 			1024
+#define __SCREEN_HEIGHT 		768
+#define __COLOR 				32
+
+#define __USERID				2
+
 /*
  * 
  */
@@ -25,13 +31,13 @@ sf::Image Character::tankImage;
 
 int main(int argc, char** argv) {
 
-	long id = 60;
+	long id = __USERID;
 	sf::IPAddress host = sf::IPAddress::LocalHost;
 
 	ostringstream title;
 	title << "BombrerSFML with id " << id;
 
-	Window *window = new Window(1024, 768, 32, title.str());
+	Window *window = new Window(__SCREEN_WIDH, __SCREEN_HEIGHT, __COLOR, title.str());
 
 	Connection *connection = new Connection(7000, host, id);
 
@@ -49,7 +55,7 @@ int main(int argc, char** argv) {
 	window->addEventHandler(new ShootEventHandler(*me, *connection));
 	window->addEventHandler(new MouseEventHandler());
 
-	window->setIsFrameratePrinted(true, 1);
+	window->setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.06);
 
 	game->run();
 	delete game;

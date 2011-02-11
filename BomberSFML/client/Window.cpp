@@ -23,6 +23,8 @@ Window::Window(int width, int height, int colors, string title) :
 
 
 	this->SetActive(false);
+	interface.SetCenter(sf::Vector2f(width/2, height/2));
+	interface.SetHalfSize(sf::Vector2f(width/2, height/2));
 }
 
 Window::Window(const Window& orig) {
@@ -79,6 +81,8 @@ void Window::Run() {
 
 		this->Clear();
 
+		this->SetView(this->GetDefaultView());
+
 		drawableObjectsMutex.Lock();
 
 		list<sf::Drawable*>::iterator idoo;
@@ -97,7 +101,12 @@ void Window::Run() {
 
 		drawableObjectsMutex.Unlock();
 
-		updateFramerate();
+		this->SetView(interface);
+
+		if(isFrameratePrinted) {
+			updateFramerate();
+			this->Draw(framerate);
+		}
 
 		this->Display();
 	}
@@ -106,7 +115,7 @@ void Window::Run() {
 
 void Window::updateFramerate() {
 
-	if (isFrameratePrinted && framerateClock.GetElapsedTime() >= framerateRefresh) {
+	if (framerateClock.GetElapsedTime() >= framerateRefresh) {
 
 		ostringstream text;
 
@@ -119,7 +128,7 @@ void Window::updateFramerate() {
 
 	}
 
-	framerate.SetPosition(this->ConvertCoords(1024 - 100, 100));
+
 
 }
 
@@ -176,16 +185,9 @@ map<unsigned int, list<sf::Drawable*> > Window::getDrawableObjects() const {
 
 }
 
-void Window::setIsFrameratePrinted(bool print, float refresh) {
+void Window::setIsFrameratePrinted(bool print, sf::Vector2f position, float refresh) {
 
-	if (print) {
-
-		addDrawableObject(&framerate, 999);
-
-	} else {
-		removeDrawableObject(&framerate, false);
-	}
-
+	framerate.SetPosition(position);
 	isFrameratePrinted = print;
 	framerateRefresh = refresh;
 
