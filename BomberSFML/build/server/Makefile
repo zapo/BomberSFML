@@ -44,8 +44,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_server_OBJECTS = BomberSFML-server.$(OBJEXT) Client.$(OBJEXT) \
-	Channel.$(OBJEXT)
+am_server_OBJECTS = BomberSFML-server.$(OBJEXT) Character.$(OBJEXT) \
+	Client.$(OBJEXT) Channel.$(OBJEXT)
 server_OBJECTS = $(am_server_OBJECTS)
 am__DEPENDENCIES_1 =
 server_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -154,6 +154,8 @@ top_builddir = ..
 top_srcdir = ../..
 server_SOURCES = \
     BomberSFML-server.cpp \
+    ../client/Character.cpp \
+    ../client/Character.h \
     Client.h \
     Client.cpp \
     Channel.cpp \
@@ -244,6 +246,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/BomberSFML-server.Po
 include ./$(DEPDIR)/Channel.Po
+include ./$(DEPDIR)/Character.Po
 include ./$(DEPDIR)/Client.Po
 
 .cpp.o:
@@ -259,6 +262,20 @@ include ./$(DEPDIR)/Client.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+Character.o: ../client/Character.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Character.o -MD -MP -MF $(DEPDIR)/Character.Tpo -c -o Character.o `test -f '../client/Character.cpp' || echo '$(srcdir)/'`../client/Character.cpp
+	$(am__mv) $(DEPDIR)/Character.Tpo $(DEPDIR)/Character.Po
+#	source='../client/Character.cpp' object='Character.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Character.o `test -f '../client/Character.cpp' || echo '$(srcdir)/'`../client/Character.cpp
+
+Character.obj: ../client/Character.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Character.obj -MD -MP -MF $(DEPDIR)/Character.Tpo -c -o Character.obj `if test -f '../client/Character.cpp'; then $(CYGPATH_W) '../client/Character.cpp'; else $(CYGPATH_W) '$(srcdir)/../client/Character.cpp'; fi`
+	$(am__mv) $(DEPDIR)/Character.Tpo $(DEPDIR)/Character.Po
+#	source='../client/Character.cpp' object='Character.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Character.obj `if test -f '../client/Character.cpp'; then $(CYGPATH_W) '../client/Character.cpp'; else $(CYGPATH_W) '$(srcdir)/../client/Character.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

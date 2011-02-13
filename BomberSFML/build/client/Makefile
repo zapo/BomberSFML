@@ -47,7 +47,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_client_OBJECTS = BomberSFML.$(OBJEXT) Bullet.$(OBJEXT) \
 	ClosingEventHandler.$(OBJEXT) EventHandler.$(OBJEXT) \
 	MoveEventHandler.$(OBJEXT) Window.$(OBJEXT) \
-	Connection.$(OBJEXT) Game.$(OBJEXT) \
+	Connection.$(OBJEXT) Character.$(OBJEXT) Game.$(OBJEXT) \
 	ShootEventHandler.$(OBJEXT) MouseEventHandler.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -170,6 +170,7 @@ client_SOURCES = \
     Connection.h \
     Connection.cpp \
     Character.h \
+    Character.cpp \
     Game.h \
     Game.cpp \
     ShootEventHandler.cpp \
@@ -263,6 +264,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/BomberSFML.Po
 include ./$(DEPDIR)/Bullet.Po
+include ./$(DEPDIR)/Character.Po
 include ./$(DEPDIR)/ClosingEventHandler.Po
 include ./$(DEPDIR)/Connection.Po
 include ./$(DEPDIR)/EventHandler.Po

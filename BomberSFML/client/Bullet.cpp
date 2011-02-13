@@ -6,15 +6,15 @@
  */
 
 #include "Bullet.h"
-#include "Character.h"
+//#include "Character.h"
 
 sf::Image Bullet::bulletImage;
 
-Bullet::Bullet(Type type, Character *owner) :
+Bullet::Bullet(Type type/*, int orientation*/) :
 	sf::Drawable(),
-	owner(owner),
-	type(type),
-	panim(&anim) {
+	//orientation(orientation),
+	type(type)/*,
+	panim(&anim)*/ {
 
 }
 
@@ -22,7 +22,7 @@ Bullet& Bullet::operator=(Bullet& bullet) {
 
 	this->init_dynamic();
 	this->type = bullet.type;
-	this->owner = bullet.owner;
+	//this->orientation = bullet.orientation;
 
 }
 
@@ -40,13 +40,13 @@ bool Bullet::init_static() {
 
 bool Bullet::init_dynamic() {
 
-	anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(983, 42, 1027, 76));
-	anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(954, 82, 962, 114));
-	anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(936, 84, 948, 116));
+	//anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(983, 42, 1027, 76));
+	//anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(954, 82, 962, 114));
+	//anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(936, 84, 948, 116));
 }
 
 void Bullet::Render(sf::RenderTarget &target) const {
 
-	target.Draw((*panim)[owner->getOrientation()][type].getCurrentFrame());
+	//target.Draw((*panim)[orientation][type].getCurrentFrame());
 
 }

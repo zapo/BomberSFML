@@ -15,6 +15,7 @@ client_SOURCES=\
     Connection.h \
     Connection.cpp \
     Character.h \
+    Character.cpp \
     Game.h \
     Game.cpp \
     ShootEventHandler.cpp \

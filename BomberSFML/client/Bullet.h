@@ -11,8 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
-class Anim;
-class Character;
+//class Anim;
 
 class Bullet: public sf::Drawable {
 public:
@@ -23,7 +22,7 @@ public:
 
 	Bullet& operator=(Bullet& bullet);
 
-	Bullet(Type type = SMALL, Character *owner = NULL);
+	Bullet(Type type = SMALL/*, Character::Orientation orientation*/);
 	virtual ~Bullet();
 
 	static bool init_static();
@@ -36,10 +35,10 @@ private:
 	Type type;
 	static sf::Image bulletImage;
 
-	std::map<int, std::map<Type, Anim> > anim;
-	std::map<int, std::map<Type, Anim> > * const panim;
+	//std::map<int, std::map<Type, Anim> > anim;
+	//std::map<int, std::map<Type, Anim> > * const panim;
 
-	Character *owner;
+	//Character::Orientation orientation;
 };
 
 #endif /* BULLET_H_ */
