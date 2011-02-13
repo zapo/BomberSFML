@@ -20,17 +20,17 @@ class Window: public sf::RenderWindow, public sf::Thread {
 
 public:
 
-	Window(int, int, int, string);
+	Window(const int, const int, const int, const string);
 	Window(const Window& orig);
 	virtual ~Window();
-	list<EventHandler*> getEventHandlers() const;
+	list<const EventHandler*> getEventHandlers() const;
 	void addEventHandler(EventHandler&);
 
 	void removeDrawableObject(sf::Drawable&, unsigned int, bool free = true);
-	void addDrawableObject(sf::Drawable&, unsigned int);
-	std::map<unsigned int, list<sf::Drawable*> > getDrawableObjects() const;
+	void addDrawableObject(const sf::Drawable&, unsigned int);
+	std::map<unsigned int, list<const sf::Drawable*> > getDrawableObjects() const;
 
-	void setIsFrameratePrinted(bool print, sf::Vector2f position, float refresh = 1.f);
+	void setIsFrameratePrinted(bool print, const sf::Vector2f position, float refresh = 1.f);
 
 	void updateFramerate();
 
@@ -47,15 +47,15 @@ private:
 	sf::Clock framerateClock;
 
 	sf::Mutex eventHandlersMutex;
-	string title;
+	const string title;
 
 	sf::View interface;
 
-	list<EventHandler*> eventHandlers;
-	std::map<unsigned int, std::list<sf::Drawable*> > drawableObjects;
+	list<const EventHandler*> eventHandlers;
+	std::map<unsigned int, std::list<const sf::Drawable*> > drawableObjects;
 
-	map<unsigned int, list<sf::Drawable*> >::iterator ido;
-	list<EventHandler*>::iterator iho;
+	map<unsigned int, list<const sf::Drawable*> >::iterator ido;
+	list<const EventHandler*>::iterator iho;
 
 };
 

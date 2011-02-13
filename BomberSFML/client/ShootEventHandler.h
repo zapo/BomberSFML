@@ -17,7 +17,7 @@ class ShootEventHandler: public EventHandler {
 public:
 	ShootEventHandler(Character &, Connection&);
 	virtual ~ShootEventHandler();
-	void handle(sf::Event &event);
+	void handle(const sf::Event &event) const;
 
 private:
 	Character* handledCharacter;

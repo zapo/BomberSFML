@@ -19,7 +19,7 @@ Channel::~Channel() {
 	// TODO Auto-generated destructor stub
 }
 
-void Channel::add(Client &client) {
+void Channel::add(const Client &client) {
 
 	clientsMutex.Lock();
 
@@ -52,11 +52,11 @@ bool Channel::remove(long id) {
 
 }
 
-std::map<long, Client*>& Channel::getClients() {
+std::map<long, const Client*>& Channel::getClients() {
 
 	clientsMutex.Lock();
 
-	std::map<long, Client*>& _clients = clients;
+	std::map<long, const Client*>& _clients = clients;
 
 	clientsMutex.Unlock();
 

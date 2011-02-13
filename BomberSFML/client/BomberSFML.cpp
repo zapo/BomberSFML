@@ -27,8 +27,6 @@
  * 
  */
 
-sf::Image Character::tankImage;
-
 int main(int argc, char** argv) {
 
 	long id = __USERID;

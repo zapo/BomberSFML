@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Window::Window(int width, int height, int colors, string title) :
+Window::Window(const int width, const int height, const int colors, const string title) :
 
 	sf::RenderWindow(sf::VideoMode(width, height, colors), title),
 			sf::Thread(),
@@ -34,7 +34,7 @@ Window::~Window() {
 
 	this->removeDrawableObject(framerate, 999, false);
 
-	list<sf::Drawable*>::iterator idoo;
+	list<const sf::Drawable*>::iterator idoo;
 
 	for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
@@ -68,7 +68,7 @@ void Window::Run() {
 
 			for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
 
-				EventHandler *eh = *(iho);
+				const EventHandler *eh = *(iho);
 
 				if (eh != NULL) {
 					eh->handle(event);
@@ -85,13 +85,13 @@ void Window::Run() {
 
 		drawableObjectsMutex.Lock();
 
-		list<sf::Drawable*>::iterator idoo;
+		list<const sf::Drawable*>::iterator idoo;
 
 		for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
 			for(idoo = ido->second.begin(); idoo != ido->second.end(); idoo++) {
 
-				sf::Drawable *dro = *(idoo);
+				const sf::Drawable *dro = *(idoo);
 
 				if (dro != NULL) {
 					this->Draw(*dro);
@@ -137,12 +137,12 @@ void Window::addEventHandler(EventHandler &handler) {
 	eventHandlersMutex.Lock();
 
 	this->eventHandlers.push_back(&handler);
-	handler.setHandledWindow(this);
+	handler.setHandledWindow(*this);
 
 	eventHandlersMutex.Unlock();
 }
 
-list<EventHandler*> Window::getEventHandlers() const {
+list<const EventHandler*> Window::getEventHandlers() const {
 
 	return this->eventHandlers;
 
@@ -165,7 +165,7 @@ void Window::removeDrawableObject(sf::Drawable& object, unsigned int layer, bool
 	drawableObjectsMutex.Unlock();
 }
 
-void Window::addDrawableObject(sf::Drawable& object, unsigned int layer) {
+void Window::addDrawableObject(const sf::Drawable& object, unsigned int layer) {
 
 	drawableObjectsMutex.Lock();
 
@@ -173,7 +173,7 @@ void Window::addDrawableObject(sf::Drawable& object, unsigned int layer) {
 
 	drawableObjectsMutex.Unlock();
 }
-map<unsigned int, list<sf::Drawable*> > Window::getDrawableObjects() const {
+map<unsigned int, list<const sf::Drawable*> > Window::getDrawableObjects() const {
 
 	return drawableObjects;
 

@@ -20,7 +20,7 @@ ShootEventHandler::~ShootEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void ShootEventHandler::handle(sf::Event &event) {
+void ShootEventHandler::handle(const sf::Event &event) const {
 
 	if( event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Space) {
 

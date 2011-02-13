@@ -10,7 +10,7 @@
 
 sf::Image Bullet::bulletImage;
 
-Bullet::Bullet(Type type/*, int orientation*/) :
+Bullet::Bullet(const Type type/*, int orientation*/) :
 	sf::Drawable(),
 	//orientation(orientation),
 	type(type)/*,

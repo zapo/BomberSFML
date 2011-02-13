@@ -36,7 +36,7 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
-Client::Client(unsigned int sendPort, unsigned int receivePort, sf::SocketUDP &socket, sf::IPAddress &ipaddress,
+Client::Client(const unsigned int sendPort, const unsigned int receivePort, sf::SocketUDP &socket, sf::IPAddress &ipaddress,
 		Channel &channel, sf::Uint32 id) :
 	id(id), sendPort(sendPort), receivePort(receivePort), channel(&channel), ipaddress(ipaddress), socket(&socket),
 			sf::Thread() {
@@ -54,11 +54,11 @@ Client::~Client() {
 	delete character;
 }
 
-Character& Client::getPlayer() {
+Character& Client::getPlayer() const {
 	return *character;
 }
 
-long Client::getId() {
+long Client::getId() const {
 	return id;
 }
 

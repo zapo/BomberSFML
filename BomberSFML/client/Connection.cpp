@@ -30,7 +30,7 @@ void serialize(Archive &ar, sf::Vector2<float> &vector,
 
 }
 
-Connection::Connection(unsigned short authPort, sf::IPAddress & address, long id) :
+Connection::Connection(const unsigned short authPort, const sf::IPAddress & address, const long id) :
 	host(address), authPort(authPort), receivePort(receivePort), id(id) {
 
 	do {
@@ -40,7 +40,7 @@ Connection::Connection(unsigned short authPort, sf::IPAddress & address, long id
 	} while(!server.Bind(receivePort));
 }
 
-bool Connection::setPosition(Character &character) {
+bool Connection::setPosition(const Character &character) {
 
 	bool accepted = false;
 	sf::Packet request, response;

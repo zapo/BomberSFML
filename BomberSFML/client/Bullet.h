@@ -22,7 +22,7 @@ public:
 
 	Bullet& operator=(Bullet& bullet);
 
-	Bullet(Type type = SMALL/*, Character::Orientation orientation*/);
+	Bullet(const Type type = SMALL/*, Character::Orientation orientation*/);
 	virtual ~Bullet();
 
 	static bool init_static();

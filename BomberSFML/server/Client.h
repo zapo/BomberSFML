@@ -17,11 +17,11 @@ class Character;
 
 class Client: public sf::Thread {
 public:
-	Client(unsigned int, unsigned int, sf::SocketUDP&, sf::IPAddress&, Channel& channel, sf::Uint32 id);
-	long getId();
+	Client(const unsigned int, const unsigned int, sf::SocketUDP&, sf::IPAddress&, Channel& channel, sf::Uint32 id);
+	long getId() const;
 
 	virtual ~Client();
-	Character& getPlayer();
+	Character& getPlayer() const;
 
 private:
 	virtual void Run();

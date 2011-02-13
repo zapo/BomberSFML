@@ -18,16 +18,16 @@ class Channel {
 public:
 	Channel();
 	virtual ~Channel();
-	void add(Client &client);
+	void add(const Client &client);
 	bool remove(long id);
 
-	std::map<long, Client*>& getClients();
+	std::map<long, const Client*>& getClients();
 	std::map<long, Character> getPlayers();
 
 private:
 
-	std::map<long, Client*> clients;
-	std::map<long, Client*>::iterator cit;
+	std::map<long, const Client*> clients;
+	std::map<long, const Client*>::iterator cit;
 
 	sf::Mutex clientsMutex;
 

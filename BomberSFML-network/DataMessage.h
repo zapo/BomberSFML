@@ -23,12 +23,12 @@ public:
 
 	}
 
-	DataMessage(T &data) :
+	DataMessage(const T &data) :
 		data(data) {
 
 	}
 
-	T getData() {
+	T getData() const {
 		return data;
 	}
 
@@ -48,7 +48,7 @@ private:
 using namespace Bomber;
 
 template<typename T>
-sf::Packet& operator<<(sf::Packet &p, DataMessage<T> &message) {
+sf::Packet& operator<<(sf::Packet &p, const DataMessage<T> &message) {
 
 	std::ostringstream text_stream;
 	boost::archive::text_oarchive archive(text_stream);

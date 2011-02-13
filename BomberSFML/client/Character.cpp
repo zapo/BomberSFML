@@ -7,7 +7,9 @@
 
 #include "Character.h"
 
-Character::Character(long id, Orientation orientation, Action currentAction) :
+sf::Image Character::tankImage;
+
+Character::Character(const long id, const Orientation orientation, const Action currentAction) :
 	sf::Drawable(),
 	id(id),
 	orientation(orientation),
@@ -59,7 +61,7 @@ long Character::getId() const {
 Character::Orientation Character::getOrientation() const {
 	return orientation;
 }
-void Character::setOrientation(Orientation orientation) {
+void Character::setOrientation(const Orientation orientation) {
 	this->orientation = orientation;
 }
 
@@ -67,7 +69,7 @@ Character::Action Character::getCurrentAction() const {
 	return currentAction;
 }
 
-void Character::setCurrentAction(Action action) {
+void Character::setCurrentAction(const Action action) {
 	currentAction = action;
 }
 

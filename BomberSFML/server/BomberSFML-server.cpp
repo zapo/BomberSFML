@@ -11,8 +11,6 @@
 
 using namespace std;
 
-sf::Image Character::tankImage;
-
 int main() {
 
 	bool running = true;

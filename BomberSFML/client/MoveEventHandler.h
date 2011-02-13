@@ -20,7 +20,7 @@ class MoveEventHandler : public EventHandler {
 public:
 	MoveEventHandler(Character&, Connection &connection);
 	virtual ~MoveEventHandler();
-	void handle(sf::Event &event);
+	void handle(const sf::Event &event) const;
 
 private:
 	Character* shape;

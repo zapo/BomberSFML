@@ -17,7 +17,7 @@ MouseEventHandler::~MouseEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void MouseEventHandler::handle(sf::Event &event) {
+void MouseEventHandler::handle(const sf::Event &event) const {
 
 	if(event.Type == sf::Event::MouseWheelMoved) {
 

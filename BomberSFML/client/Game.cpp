@@ -28,11 +28,11 @@ void Game::loadRessources() {
 	Character::init_static();
 }
 
-Character& Game::getMainCharacter() const {
+const Character& Game::getMainCharacter() const {
 	return *mainCharacter;
 }
 
-void Game::setMainCharacter(Character &mainCharacter) {
+void Game::setMainCharacter(const Character &mainCharacter) {
 	this->mainCharacter = &mainCharacter;
 }
 

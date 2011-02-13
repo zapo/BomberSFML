@@ -15,14 +15,14 @@ class Character;
 
 class Connection {
 public:
-	Connection(unsigned short, sf::IPAddress & address, long id);
+	Connection(const unsigned short, const sf::IPAddress & address, const long id);
 
 	bool isValid() const;
 	virtual ~Connection();
 
 	std::map<long, Character> getPlayers() ;
 
-	bool setPosition(Character &character);
+	bool setPosition(const Character &character);
 	bool close();
 	bool auth();
 
@@ -33,10 +33,10 @@ private:
 	sf::SocketUDP server;
 	sf::IPAddress host;
 
-	unsigned short authPort;
+	const unsigned short authPort;
 	unsigned short receivePort;
 	unsigned short sendPort;
-	long id;
+	const long id;
 
 };
 

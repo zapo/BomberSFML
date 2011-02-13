@@ -19,13 +19,13 @@ public:
 	EventHandler();
 	EventHandler(const EventHandler& orig);
 	virtual ~EventHandler();
-	virtual void handle(sf::Event &event) = 0;
-	Window* getHandledWindow() const;
-	void setHandledWindow(Window*);
+	virtual void handle(const sf::Event &event) const = 0 ;
+	const Window& getHandledWindow() const;
+	void setHandledWindow(Window&);
 
 protected:
 
-	Window *handledWindow;
+	Window * handledWindow;
 
 };
 

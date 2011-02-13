@@ -18,11 +18,11 @@ EventHandler::EventHandler(const EventHandler& orig) {
 EventHandler::~EventHandler() {
 }
 
-Window* EventHandler::getHandledWindow() const {
-	return this->handledWindow;
+const Window& EventHandler::getHandledWindow() const {
+	return *handledWindow;
 }
 
-void EventHandler::setHandledWindow(Window* window) {
-	this->handledWindow = window;
+void EventHandler::setHandledWindow(Window& window) {
+	handledWindow = &window;
 }
 

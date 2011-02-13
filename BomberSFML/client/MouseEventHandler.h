@@ -14,7 +14,7 @@ class MouseEventHandler: public EventHandler {
 public:
 	MouseEventHandler();
 	virtual ~MouseEventHandler();
-	void handle(sf::Event &event);
+	void handle(const sf::Event &event) const;
 };
 
 #endif /* MOUSEEVENTHANDLER_H_ */

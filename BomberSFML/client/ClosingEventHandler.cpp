@@ -20,7 +20,7 @@ ClosingEventHandler::ClosingEventHandler(const ClosingEventHandler& orig) {
 ClosingEventHandler::~ClosingEventHandler() {
 }
 
-void ClosingEventHandler::handle(sf::Event &event) {
+void ClosingEventHandler::handle(const sf::Event &event) const {
 
 	if (event.Type == sf::Event::Closed) {
 		this->handledWindow->Close();

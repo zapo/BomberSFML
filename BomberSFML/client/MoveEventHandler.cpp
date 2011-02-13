@@ -19,7 +19,7 @@ MoveEventHandler::~MoveEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void MoveEventHandler::handle(sf::Event &event) {
+void MoveEventHandler::handle(const sf::Event &event) const {
 
 	if (event.Type == sf::Event::KeyPressed || event.Type
 			== sf::Event::KeyReleased) {

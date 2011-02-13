@@ -29,7 +29,7 @@ public:
 
 	void init_dynamic();
 
-	Character(long id = 0, Orientation orientation = DOWN, Action currentAction = IDLEING);
+	Character(const long id = 0, const Orientation orientation = DOWN, const Action currentAction = IDLEING);
 	Character(const Character &character);
 	Character& operator=(const Character &character);
 	virtual ~Character();
@@ -41,10 +41,10 @@ public:
 	static bool init_static();
 
 	Character::Orientation getOrientation() const;
-	void setOrientation(Orientation orientation);
+	void setOrientation(const Orientation orientation);
 
 	Action getCurrentAction() const;
-	void setCurrentAction(Action action);
+	void setCurrentAction(const Action action);
 
 private:
 

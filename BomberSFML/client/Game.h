@@ -16,15 +16,15 @@ class Character;
 
 class Game {
 public:
-	Game(Window &window, Connection &connection);
+	Game( Window &window, Connection &connection);
 	virtual ~Game();
 
-	bool hasCharacter(long id) const;
-	void addCharacter(long id, Character&);
-	void deleteCharacter(long id);
+	bool hasCharacter(const long id) const;
+	void addCharacter(const long id, Character&);
+	void deleteCharacter(const long id);
 
-	void setMainCharacter(Character&);
-	Character& getMainCharacter() const;
+	void setMainCharacter(const Character&);
+	const Character& getMainCharacter() const;
 
 	void run();
 
@@ -37,7 +37,7 @@ private:
 
 	Window *window;
 	Connection *connection;
-	Character* mainCharacter;
+	const Character* mainCharacter;
 
 	std::map<long, Character*> characters;
 

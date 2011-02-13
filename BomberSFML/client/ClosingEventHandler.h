@@ -18,7 +18,7 @@ public:
 	ClosingEventHandler(const ClosingEventHandler& orig);
 	virtual ~ClosingEventHandler();
 
-	void handle(sf::Event &event);
+	void handle(const sf::Event &event) const;
 private:
 
 };
