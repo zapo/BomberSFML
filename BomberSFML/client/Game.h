@@ -19,17 +19,17 @@ public:
 	Game(Window &window, Connection &connection);
 	virtual ~Game();
 
-	bool hasCharacter(long id);
+	bool hasCharacter(long id) const;
 	void addCharacter(long id, Character&);
 	void deleteCharacter(long id);
 
 	void setMainCharacter(Character&);
-	Character& getMainCharacter();
+	Character& getMainCharacter() const;
 
 	void run();
 
-	Window& getWindow();
-	Connection& getConnection();
+	Window& getWindow() const;
+	Connection& getConnection() const;
 	void loadRessources();
 
 

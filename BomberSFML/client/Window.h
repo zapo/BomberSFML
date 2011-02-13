@@ -23,11 +23,11 @@ public:
 	Window(int, int, int, string);
 	Window(const Window& orig);
 	virtual ~Window();
-	list<EventHandler*> getEventHandlers();
-	void addEventHandler(EventHandler*);
+	list<EventHandler*> getEventHandlers() const;
+	void addEventHandler(EventHandler&);
 
-	void removeDrawableObject(sf::Drawable*, unsigned int, bool free = true);
-	void addDrawableObject(sf::Drawable*, unsigned int);
+	void removeDrawableObject(sf::Drawable&, unsigned int, bool free = true);
+	void addDrawableObject(sf::Drawable&, unsigned int);
 	std::map<unsigned int, list<sf::Drawable*> > getDrawableObjects() const;
 
 	void setIsFrameratePrinted(bool print, sf::Vector2f position, float refresh = 1.f);

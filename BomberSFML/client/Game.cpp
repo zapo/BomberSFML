@@ -28,7 +28,7 @@ void Game::loadRessources() {
 	Character::init_static();
 }
 
-Character& Game::getMainCharacter() {
+Character& Game::getMainCharacter() const {
 	return *mainCharacter;
 }
 
@@ -44,7 +44,7 @@ void Game::addCharacter(long id, Character &character) {
 
 		characters[id] = &character;
 
-		window->addDrawableObject(&character, 2);
+		window->addDrawableObject(character, 2);
 		std::cout << "Character " << id << " added to game" << std::endl;
 	}
 }
@@ -53,14 +53,14 @@ void Game::deleteCharacter(long id) {
 	if (hasCharacter(id)) {
 
 		std::cout << "Deleting character " << id << std::endl;
-		window->removeDrawableObject(characters[id], 2);
+		window->removeDrawableObject(*(characters[id]), 2);
 
 		characters.erase(id);
 
 	}
 }
 
-bool Game::hasCharacter(long id) {
+bool Game::hasCharacter(long id) const {
 
 	bool haschar = (characters.find(id) != characters.end());
 
@@ -68,11 +68,11 @@ bool Game::hasCharacter(long id) {
 
 }
 
-Window& Game::getWindow() {
+Window& Game::getWindow() const {
 	return *window;
 }
 
-Connection& Game::getConnection() {
+Connection& Game::getConnection() const {
 	return *connection;
 }
 
@@ -85,7 +85,7 @@ void Game::run() {
 	mapSprite.SetImage(mapImage);
 	mapSprite.Resize(sf::Vector2f(1024*2, 768*2));
 
-	window->addDrawableObject(&mapSprite, 1);
+	window->addDrawableObject(mapSprite, 1);
 
 	window->Launch();
 

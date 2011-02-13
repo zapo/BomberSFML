@@ -17,10 +17,10 @@ class Connection {
 public:
 	Connection(unsigned short, sf::IPAddress & address, long id);
 
-	bool isValid();
+	bool isValid() const;
 	virtual ~Connection();
 
-	std::map<long, Character> getPlayers();
+	std::map<long, Character> getPlayers() ;
 
 	bool setPosition(Character &character);
 	bool close();
@@ -31,7 +31,6 @@ public:
 private:
 
 	sf::SocketUDP server;
-
 	sf::IPAddress host;
 
 	unsigned short authPort;

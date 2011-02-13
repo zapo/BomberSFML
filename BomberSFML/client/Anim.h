@@ -62,7 +62,6 @@ public:
 	}
 
 	virtual ~Anim() {
-
 	}
 
 	std::vector<sf::Sprite> getFrames() const {

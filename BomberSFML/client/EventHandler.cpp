@@ -18,7 +18,7 @@ EventHandler::EventHandler(const EventHandler& orig) {
 EventHandler::~EventHandler() {
 }
 
-Window* EventHandler::getHandledWindow() {
+Window* EventHandler::getHandledWindow() const {
 	return this->handledWindow;
 }
 

@@ -153,7 +153,7 @@ map<long, Character> Connection::getPlayers() {
 
 }
 
-bool Connection::isValid() {
+bool Connection::isValid() const{
 	return server.IsValid();
 }
 

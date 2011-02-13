@@ -20,7 +20,7 @@ public:
 	EventHandler(const EventHandler& orig);
 	virtual ~EventHandler();
 	virtual void handle(sf::Event &event) = 0;
-	Window* getHandledWindow();
+	Window* getHandledWindow() const;
 	void setHandledWindow(Window*);
 
 protected:

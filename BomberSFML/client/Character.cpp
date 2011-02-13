@@ -7,6 +7,83 @@
 
 #include "Character.h"
 
+Character::Character(long id, Orientation orientation, Action currentAction) :
+	sf::Drawable(),
+	id(id),
+	orientation(orientation),
+	currentAction(currentAction),
+	panims(&anims),
+	pLoadedBullet(loadedBullet),
+	loadedBullet(&(bullets.back())) {
+
+}
+
+Character::Character(const Character &character) :
+	sf::Drawable(),
+	id(character.id),
+	orientation(character.orientation),
+	currentAction(character.currentAction),
+	panims(&anims),
+	pLoadedBullet(loadedBullet) {
+
+	this->SetPosition(character.GetPosition());
+
+}
+
+Character& Character::operator=(const Character &character) {
+
+	this->id = character.id;
+	this->orientation = character.orientation;
+	this->currentAction = character.currentAction;
+	this->SetPosition(character.GetPosition());
+
+	//only update our animation if we have more than one frame
+
+	if(anims[currentAction][orientation].getFrames().size() > 1) {
+		anims[currentAction][orientation].update();
+	}
+}
+
+Character::~Character() {
+}
+
+void Character::move(const sf::Vector2f & position) {
+	this->SetPosition(position);
+	currentAction = Character::MOVING;
+}
+
+long Character::getId() const {
+	return id;
+}
+
+Character::Orientation Character::getOrientation() const {
+	return orientation;
+}
+void Character::setOrientation(Orientation orientation) {
+	this->orientation = orientation;
+}
+
+Character::Action Character::getCurrentAction() const {
+	return currentAction;
+}
+
+void Character::setCurrentAction(Action action) {
+	currentAction = action;
+}
+
+void Character::Render(sf::RenderTarget &target) const {
+
+	if(panims != NULL) {
+		target.Draw((*panims)[currentAction][orientation].getCurrentFrame());
+
+		if(currentAction == SHOOTING) {
+
+			//target.Draw(Bullet(Bullet::SMALL, orientation));
+
+		}
+	}
+}
+
 void Character::init_dynamic() {
 
 	anims[IDLEING][DOWN].addFrame(tankImage, sf::IntRect(106, 39, 175, 120));
@@ -99,91 +176,12 @@ void Character::init_dynamic() {
 	}
 }
 
-Character::Character(long id, Orientation orientation, Action currentAction) :
-	sf::Drawable(),
-	id(id),
-	orientation(orientation),
-	currentAction(currentAction),
-	panims(&anims),
-	pLoadedBullet(loadedBullet),
-	loadedBullet(&(bullets.back())) {
-
-}
-
-Character::Character(const Character &character) :
-	sf::Drawable(),
-	id(character.id),
-	orientation(character.orientation),
-	currentAction(character.currentAction),
-	panims(&anims),
-	pLoadedBullet(loadedBullet) {
-
-	this->SetPosition(character.GetPosition());
-
-}
-
-Character& Character::operator=(const Character &character) {
-
-	this->id = character.id;
-	this->orientation = character.orientation;
-	this->currentAction = character.currentAction;
-	this->SetPosition(character.GetPosition());
-
-	//only update our animation if we have more than one frame
-
-	if(anims[currentAction][orientation].getFrames().size() > 1) {
-		anims[currentAction][orientation].update();
-	}
-}
-
-Character::~Character() {
-}
-
-void Character::move(const sf::Vector2f & position) {
-	this->SetPosition(position);
-	currentAction = Character::MOVING;
-}
-
-long Character::getId() const {
-	return id;
-}
-
 bool Character::init_static() {
 
 	bool loaded = tankImage.LoadFromFile("build/client/resources/tank.png");
 	tankImage.CreateMaskFromColor(sf::Color(32, 212, 2));
 
 	return loaded;
-}
-
-Character::Orientation Character::getOrientation() const {
-	return orientation;
-}
-void Character::setOrientation(Orientation orientation) {
-	this->orientation = orientation;
-}
-
-Character::Action Character::getCurrentAction() const {
-	return currentAction;
-}
-
-void Character::setCurrentAction(Action action) {
-	currentAction = action;
-}
-
-void Character::Render(sf::RenderTarget &target) const {
-
-	if(panims != NULL) {
-		target.Draw((*panims)[currentAction][orientation].getCurrentFrame());
-
-		if(currentAction == SHOOTING) {
-
-			//target.Draw(Bullet(Bullet::SMALL, orientation));
-
-		}
-
-	}
-
 }
 
 

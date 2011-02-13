@@ -50,10 +50,10 @@ int main(int argc, char** argv) {
 	game->addCharacter(id, *me);
 	game->setMainCharacter(*me);
 
-	window->addEventHandler(new ClosingEventHandler());
-	window->addEventHandler(new MoveEventHandler(*me, *connection));
-	window->addEventHandler(new ShootEventHandler(*me, *connection));
-	window->addEventHandler(new MouseEventHandler());
+	window->addEventHandler(*(new ClosingEventHandler()));
+	window->addEventHandler(*(new MoveEventHandler(*me, *connection)));
+	window->addEventHandler(*(new ShootEventHandler(*me, *connection)));
+	window->addEventHandler(*(new MouseEventHandler()));
 
 	window->setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.06);
 

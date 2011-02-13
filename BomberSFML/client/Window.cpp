@@ -32,7 +32,7 @@ Window::Window(const Window& orig) {
 
 Window::~Window() {
 
-	this->removeDrawableObject((sf::Drawable*) &framerate, 999, false);
+	this->removeDrawableObject(framerate, 999, false);
 
 	list<sf::Drawable*>::iterator idoo;
 
@@ -132,50 +132,44 @@ void Window::updateFramerate() {
 
 }
 
-void Window::addEventHandler(EventHandler *handler) {
+void Window::addEventHandler(EventHandler &handler) {
 
 	eventHandlersMutex.Lock();
 
-	if (handler != NULL) {
-
-		this->eventHandlers.push_back(handler);
-
-		handler->setHandledWindow(this);
-
-	}
+	this->eventHandlers.push_back(&handler);
+	handler.setHandledWindow(this);
 
 	eventHandlersMutex.Unlock();
-
 }
 
-list<EventHandler*> Window::getEventHandlers() {
+list<EventHandler*> Window::getEventHandlers() const {
 
 	return this->eventHandlers;
 
 }
 
-void Window::removeDrawableObject(sf::Drawable* object, unsigned int layer, bool free) {
+void Window::removeDrawableObject(sf::Drawable& object, unsigned int layer, bool free) {
 
 	drawableObjectsMutex.Lock();
 
 	if(drawableObjects.find(layer) != drawableObjects.end()) {
 
-		drawableObjects[layer].remove(object);
+		drawableObjects[layer].remove(&object);
 
 	}
 
 	if (free) {
-		delete object;
+		delete &object;
 	}
 
 	drawableObjectsMutex.Unlock();
 }
 
-void Window::addDrawableObject(sf::Drawable* object, unsigned int layer) {
+void Window::addDrawableObject(sf::Drawable& object, unsigned int layer) {
 
 	drawableObjectsMutex.Lock();
 
-	this->drawableObjects[layer].push_back(object);
+	this->drawableObjects[layer].push_back(&object);
 
 	drawableObjectsMutex.Unlock();
 }
