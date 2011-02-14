@@ -38,18 +38,15 @@ Window::~Window() {
 
 	for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
 
-		for(idoo = ido->second.begin(); idoo != ido->second.end(); idoo++) {
-			delete *idoo;
-		}
 		ido->second.clear();
 	}
 	drawableObjects.clear();
 
-	for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
+	/*for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
 		if (*iho != NULL) {
 			delete *iho;
 		}
-	}
+	}*/
 	eventHandlers.clear();
 
 }
