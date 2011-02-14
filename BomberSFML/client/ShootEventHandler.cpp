@@ -6,14 +6,11 @@
  */
 
 #include "ShootEventHandler.h"
-#include "Window.h"
+#include "Game.h"
 #include "Character.h"
 #include "Connection.h"
 
-ShootEventHandler::ShootEventHandler(Character &character, Connection &connection) :
-	handledCharacter(&character),
-	connection(&connection) {
-
+ShootEventHandler::ShootEventHandler() {
 }
 
 ShootEventHandler::~ShootEventHandler() {
@@ -22,25 +19,28 @@ ShootEventHandler::~ShootEventHandler() {
 
 void ShootEventHandler::handle(const sf::Event &event) const {
 
+	Character & character = game->getMainCharacter();
+	Connection & connection = game->getConnection();
+
 	if( event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Space) {
 
-		handledCharacter->setCurrentAction(Character::SHOOTING);
+		character.setCurrentAction(Character::SHOOTING);
 
-		connection->connectionMutex.Lock();
+		connection.connectionMutex.Lock();
 
-		connection->setPosition(*handledCharacter);
+		connection.setPosition(character);
 
-		connection->connectionMutex.Unlock();
+		connection.connectionMutex.Unlock();
 
 	} else if(event.Type == sf::Event::KeyReleased && event.Key.Code == sf::Key::Space) {
 
-		handledCharacter->setCurrentAction(Character::IDLEING);
+		character.setCurrentAction(Character::IDLEING);
 
-		connection->connectionMutex.Lock();
+		connection.connectionMutex.Lock();
 
-		connection->setPosition(*handledCharacter);
+		connection.setPosition(character);
 
-		connection->connectionMutex.Unlock();
+		connection.connectionMutex.Unlock();
 
 	}
 

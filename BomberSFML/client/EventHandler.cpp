@@ -6,10 +6,10 @@
  */
 
 #include "EventHandler.h"
-#include "Window.h"
+#include "Game.h"
 
 EventHandler::EventHandler() {
-	handledWindow = NULL;
+	game = NULL;
 }
 
 EventHandler::EventHandler(const EventHandler& orig) {
@@ -18,11 +18,11 @@ EventHandler::EventHandler(const EventHandler& orig) {
 EventHandler::~EventHandler() {
 }
 
-const Window& EventHandler::getHandledWindow() const {
-	return *handledWindow;
+Game& EventHandler::getGame() const {
+	return *game;
 }
 
-void EventHandler::setHandledWindow(Window& window) {
-	handledWindow = &window;
+void EventHandler::setGame(Game& game) {
+	this->game = &game;
 }
 

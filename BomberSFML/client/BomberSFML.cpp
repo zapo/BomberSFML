@@ -23,9 +23,6 @@
 
 #define __USERID				2
 
-/*
- * 
- */
 
 int main(int argc, char** argv) {
 
@@ -35,28 +32,33 @@ int main(int argc, char** argv) {
 	ostringstream title;
 	title << "BombrerSFML with id " << id;
 
-	Window *window = new Window(__SCREEN_WIDH, __SCREEN_HEIGHT, __COLOR, title.str());
+	Window window(__SCREEN_WIDH, __SCREEN_HEIGHT, __COLOR, title.str());
 
-	Connection *connection = new Connection(7000, host, id);
+	Connection connection(7000, host, id);
 
-	Game *game = new Game(*window, *connection);
+	Game game(window, connection);
 
-	game->loadRessources();
+	game.loadRessources();
 
-	Character *me = new Character(id);
+	Character me(id);
 
-	game->addCharacter(id, *me);
-	game->setMainCharacter(*me);
+	game.addCharacter(id, me);
+	game.setMainCharacter(me);
 
-	window->addEventHandler(*(new ClosingEventHandler()));
-	window->addEventHandler(*(new MoveEventHandler(*me, *connection)));
-	window->addEventHandler(*(new ShootEventHandler(*me, *connection)));
-	window->addEventHandler(*(new MouseEventHandler()));
+	ClosingEventHandler ceh = ClosingEventHandler();
+	MouseEventHandler meh = MouseEventHandler();
+	MoveEventHandler moeh = MoveEventHandler();
+	ShootEventHandler seh = ShootEventHandler();
 
-	window->setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.06);
+	game.addEventHandler(ceh);
+	game.addEventHandler(meh);
+	game.addEventHandler(moeh);
+	game.addEventHandler(seh);
 
-	game->run();
-	delete game;
+	window.setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.06);
+
+	game.run();
+
 
 	return EXIT_SUCCESS;
 }

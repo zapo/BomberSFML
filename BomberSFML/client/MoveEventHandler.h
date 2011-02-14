@@ -18,13 +18,11 @@ class Character;
 
 class MoveEventHandler : public EventHandler {
 public:
-	MoveEventHandler(Character&, Connection &connection);
+	MoveEventHandler();
 	virtual ~MoveEventHandler();
 	void handle(const sf::Event &event) const;
 
 private:
-	Character* shape;
-	Connection *connection;
 	static const float speed = 300;
 };
 

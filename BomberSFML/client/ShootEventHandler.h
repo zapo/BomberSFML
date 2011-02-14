@@ -15,13 +15,11 @@ class Connection;
 
 class ShootEventHandler: public EventHandler {
 public:
-	ShootEventHandler(Character &, Connection&);
+	ShootEventHandler();
 	virtual ~ShootEventHandler();
 	void handle(const sf::Event &event) const;
 
 private:
-	Character* handledCharacter;
-	Connection* connection;
 };
 
 #endif /* SHOOTEVENTHANDLER_H_ */

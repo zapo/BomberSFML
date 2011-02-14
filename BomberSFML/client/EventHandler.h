@@ -10,7 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class Window;
+class Game;
 
 class EventHandler {
 
@@ -20,12 +20,12 @@ public:
 	EventHandler(const EventHandler& orig);
 	virtual ~EventHandler();
 	virtual void handle(const sf::Event &event) const = 0 ;
-	const Window& getHandledWindow() const;
-	void setHandledWindow(Window&);
+	Game& getGame() const;
+	void setGame(Game&);
 
 protected:
 
-	Window * handledWindow;
+	Game * game;
 
 };
 

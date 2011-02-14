@@ -6,6 +6,7 @@
  */
 
 #include "ClosingEventHandler.h"
+#include "Game.h"
 #include "Window.h"
 #include <SFML/Graphics.hpp>
 
@@ -23,11 +24,11 @@ ClosingEventHandler::~ClosingEventHandler() {
 void ClosingEventHandler::handle(const sf::Event &event) const {
 
 	if (event.Type == sf::Event::Closed) {
-		this->handledWindow->Close();
+		this->game->getWindow().Close();
 	}
 
 	if (event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Q) {
-		this->handledWindow->Close();
+		this->game->getWindow().Close();
 	}
 
 }

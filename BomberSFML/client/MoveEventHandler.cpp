@@ -6,13 +6,14 @@
  */
 
 #include "MoveEventHandler.h"
+#include "Game.h"
+#include "Character.h"
 #include "Connection.h"
 #include "Window.h"
-#include "Character.h"
 #include <iostream>
 
-MoveEventHandler::MoveEventHandler(Character &shape, Connection &connection) :
-	EventHandler(), shape(&shape), connection(&connection) {
+MoveEventHandler::MoveEventHandler() :
+	EventHandler() {
 }
 
 MoveEventHandler::~MoveEventHandler() {
@@ -20,6 +21,10 @@ MoveEventHandler::~MoveEventHandler() {
 }
 
 void MoveEventHandler::handle(const sf::Event &event) const {
+
+	Window& window = game->getWindow();
+	Connection& connection = game->getConnection();
+	Character& character = game->getMainCharacter();
 
 	if (event.Type == sf::Event::KeyPressed || event.Type
 			== sf::Event::KeyReleased) {
@@ -34,8 +39,8 @@ void MoveEventHandler::handle(const sf::Event &event) const {
 		{
 			if (event.Type == sf::Event::KeyPressed) {
 
-				float left = shape->GetPosition().x;
-				float top = shape->GetPosition().y;
+				float left = character.GetPosition().x;
+				float top = character.GetPosition().y;
 
 				float oldLeft = left;
 				float oldTop = top;
@@ -43,81 +48,81 @@ void MoveEventHandler::handle(const sf::Event &event) const {
 				bool rightHit = false, leftHit = false, upHit = false, downHit =
 						false;
 
-				float frametime = handledWindow->GetFrameTime();
+				float frametime = window.GetFrameTime();
 
-				if (handledWindow->GetInput().IsKeyDown(sf::Key::Right)) {
+				if (window.GetInput().IsKeyDown(sf::Key::Right)) {
 					left += (speed * frametime);
-					shape->setOrientation(Character::RIGHT);
+					character.setOrientation(Character::RIGHT);
 					rightHit = true;
 
 				}
 
-				if (handledWindow->GetInput().IsKeyDown(sf::Key::Left)) {
+				if (window.GetInput().IsKeyDown(sf::Key::Left)) {
 					left -= (speed * frametime);
-					shape->setOrientation(Character::LEFT);
+					character.setOrientation(Character::LEFT);
 					leftHit = true;
 				}
 
-				if (handledWindow->GetInput().IsKeyDown(sf::Key::Up)) {
+				if (window.GetInput().IsKeyDown(sf::Key::Up)) {
 					top -= (speed * frametime);
-					shape->setOrientation(Character::UP);
+					character.setOrientation(Character::UP);
 					upHit = true;
 				}
 
-				if (handledWindow->GetInput().IsKeyDown(sf::Key::Down)) {
+				if (window.GetInput().IsKeyDown(sf::Key::Down)) {
 					top += (speed * frametime);
-					shape->setOrientation(Character::DOWN);
+					character.setOrientation(Character::DOWN);
 					downHit = true;
 				}
 
 				if (downHit && leftHit)
-					shape->setOrientation(Character::LEFTDOWN);
+					character.setOrientation(Character::LEFTDOWN);
 				if (downHit && rightHit)
-					shape->setOrientation(Character::RIGHTDOWN);
+					character.setOrientation(Character::RIGHTDOWN);
 				if (upHit && leftHit)
-					shape->setOrientation(Character::LEFTUP);
+					character.setOrientation(Character::LEFTUP);
 				if (upHit && rightHit)
-					shape->setOrientation(Character::RIGHTUP);
+					character.setOrientation(Character::RIGHTUP);
 
 				if (oldLeft != left || oldTop != top) {
 
 
 					Character temp;
-					temp = *shape;
+					temp = character;
 
 					temp.move(sf::Vector2f(left, top));
 
-					connection->connectionMutex.Lock();
+					connection.connectionMutex.Lock();
 
-					bool setted = connection->setPosition(temp);
+					bool setted = connection.setPosition(temp);
 
-					connection->connectionMutex.Unlock();
+					connection.connectionMutex.Unlock();
 
 				}
 
 			} else {
 
 				bool noMove = true;
-				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(
+				noMove = noMove && (!window.GetInput().IsKeyDown(
 						sf::Key::Right));
-				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(
+				noMove = noMove && (!window.GetInput().IsKeyDown(
 						sf::Key::Left));
-				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(
+				noMove = noMove && (!window.GetInput().IsKeyDown(
 						sf::Key::Up));
-				noMove = noMove && (!handledWindow->GetInput().IsKeyDown(
+				noMove = noMove && (!window.GetInput().IsKeyDown(
 						sf::Key::Down));
 
 				if (noMove) {
 
-					handledWindow->drawableObjectsMutex.Lock();
-					shape->setCurrentAction(Character::IDLEING);
-					handledWindow->drawableObjectsMutex.Unlock();
+					window.drawableObjectsMutex.Lock();
+					character.setCurrentAction(Character::IDLEING);
+					window.drawableObjectsMutex.Unlock();
 
-					connection->connectionMutex.Lock();
+					connection.connectionMutex.Lock();
 
-					connection->setPosition(*shape);
+					connection.setPosition(character);
 
-					connection->connectionMutex.Unlock();
+					connection.connectionMutex.Unlock();
 
 				}
 

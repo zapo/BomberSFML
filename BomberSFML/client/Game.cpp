@@ -9,6 +9,7 @@
 #include "Window.h"
 #include "Connection.h"
 #include "Character.h"
+#include "EventHandler.h"
 
 #include <iostream>
 
@@ -28,11 +29,11 @@ void Game::loadRessources() {
 	Character::init_static();
 }
 
-const Character& Game::getMainCharacter() const {
+Character& Game::getMainCharacter() const {
 	return *mainCharacter;
 }
 
-void Game::setMainCharacter(const Character &mainCharacter) {
+void Game::setMainCharacter(Character &mainCharacter) {
 	this->mainCharacter = &mainCharacter;
 }
 
@@ -65,6 +66,15 @@ bool Game::hasCharacter(long id) const {
 	bool haschar = (characters.find(id) != characters.end());
 
 	return haschar;
+
+}
+
+void Game::addEventHandler(EventHandler & eventHandler) {
+
+	if(window != NULL) {
+		eventHandler.setGame(*this);
+		window->addEventHandler(eventHandler);
+	}
 
 }
 

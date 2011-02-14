@@ -13,6 +13,7 @@
 class Window;
 class Connection;
 class Character;
+class EventHandler;
 
 class Game {
 public:
@@ -21,10 +22,11 @@ public:
 
 	bool hasCharacter(const long id) const;
 	void addCharacter(const long id, Character&);
+	void addEventHandler(EventHandler & eventHandler);
 	void deleteCharacter(const long id);
 
-	void setMainCharacter(const Character&);
-	const Character& getMainCharacter() const;
+	void setMainCharacter(Character&);
+    Character& getMainCharacter() const;
 
 	void run();
 
@@ -37,7 +39,7 @@ private:
 
 	Window *window;
 	Connection *connection;
-	const Character* mainCharacter;
+    Character* mainCharacter;
 
 	std::map<long, Character*> characters;
 

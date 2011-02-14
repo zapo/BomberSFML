@@ -137,7 +137,6 @@ void Window::addEventHandler(EventHandler &handler) {
 	eventHandlersMutex.Lock();
 
 	this->eventHandlers.push_back(&handler);
-	handler.setHandledWindow(*this);
 
 	eventHandlersMutex.Unlock();
 }

@@ -7,6 +7,8 @@
 
 #include "MouseEventHandler.h"
 #include "Window.h"
+#include "Game.h"
+#include <iostream>
 
 MouseEventHandler::MouseEventHandler() {
 	// TODO Auto-generated constructor stub
@@ -19,14 +21,35 @@ MouseEventHandler::~MouseEventHandler() {
 
 void MouseEventHandler::handle(const sf::Event &event) const {
 
+	Window &window = game->getWindow();
+
 	if(event.Type == sf::Event::MouseWheelMoved) {
 
-		sf::Vector2f halfSize = handledWindow->GetDefaultView().GetHalfSize() ;
+		sf::Vector2f halfSize = window.GetDefaultView().GetHalfSize() ;
 
-		halfSize.x += event.MouseWheel.Delta * 4;
-		halfSize.y += event.MouseWheel.Delta * 4;
+		float factor = 95.f/100.f;
 
-		handledWindow->GetDefaultView().SetHalfSize(halfSize);
+		if(event.MouseWheel.Delta < 0) {
+			factor = 1/factor;
+		}
+
+		std::cout << factor << std::endl;
+
+
+		halfSize.x *= factor;
+		halfSize.y *= factor;
+
+
+		std::cout << halfSize.x << " " << halfSize.y << std::endl;
+
+		if(halfSize.x > window.GetWidth() / 2 || halfSize.y > window.GetHeight() / 2) {
+
+			halfSize.x = window.GetWidth() / 2;
+			halfSize.y = window.GetHeight() / 2;
+
+		}
+
+		window.GetDefaultView().SetHalfSize(halfSize);
 
 	}
 
