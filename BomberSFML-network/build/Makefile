@@ -81,10 +81,6 @@ libBomberSFML_network_la_DEPENDENCIES =
 am_libBomberSFML_network_la_OBJECTS = Message.lo
 libBomberSFML_network_la_OBJECTS =  \
 	$(am_libBomberSFML_network_la_OBJECTS)
-libBomberSFML_network_la_LINK = $(LIBTOOL) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(libBomberSFML_network_la_LDFLAGS) \
-	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I. -I$(srcdir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -247,7 +243,6 @@ libBomberSFML_network_la_SOURCES = \
     src/DataMessage.h
 
 libBomberSFML_network_la_LIBADD = -lsfml-network
-libBomberSFML_network_la_LDFLAGS = -version-info 0:0:1
 include_HEADERS = src/Message.h src/DataMessage.h
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -337,7 +332,7 @@ clean-libLTLIBRARIES:
 	  rm -f "$${dir}/so_locations"; \
 	done
 libBomberSFML-network.la: $(libBomberSFML_network_la_OBJECTS) $(libBomberSFML_network_la_DEPENDENCIES) 
-	$(libBomberSFML_network_la_LINK) -rpath $(libdir) $(libBomberSFML_network_la_OBJECTS) $(libBomberSFML_network_la_LIBADD) $(LIBS)
+	$(CXXLINK) -rpath $(libdir) $(libBomberSFML_network_la_OBJECTS) $(libBomberSFML_network_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

@@ -139,8 +139,10 @@ map<long, Character> Connection::getPlayers() {
 	request << positionRequest;
 
 	if (server.Send(request, host, sendPort) == sf::Socket::Done) {
+		latencyClock.Reset();
 
 		if (server.Receive(response, host, sendPort) == sf::Socket::Done) {
+			latency = latencyClock.GetElapsedTime();
 
 			response >> positionResponse;
 
@@ -155,5 +157,9 @@ map<long, Character> Connection::getPlayers() {
 
 bool Connection::isValid() const{
 	return server.IsValid();
+}
+
+float Connection::getLatency() const {
+	return latency;
 }
 

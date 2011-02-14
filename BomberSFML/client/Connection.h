@@ -26,6 +26,8 @@ public:
 	bool close();
 	bool auth();
 
+	float getLatency() const;
+
 	sf::Mutex connectionMutex;
 
 private:
@@ -37,6 +39,9 @@ private:
 	unsigned short receivePort;
 	unsigned short sendPort;
 	const long id;
+
+	sf::Clock latencyClock;
+	float latency;
 
 };
 

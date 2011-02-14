@@ -19,10 +19,6 @@ Game::Game(Window &window, Connection &connection) :
 }
 
 Game::~Game() {
-
-	delete connection;
-	delete window;
-
 }
 
 void Game::loadRessources() {

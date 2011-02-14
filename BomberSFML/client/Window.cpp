@@ -127,9 +127,6 @@ void Window::updateFramerate() {
 		framerateClock.Reset();
 
 	}
-
-
-
 }
 
 void Window::addEventHandler(EventHandler &handler) {
