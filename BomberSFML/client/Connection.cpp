@@ -7,8 +7,8 @@
 
 #include "Connection.h"
 #include "Character.h"
-#include "../../BomberSFML-network/DataMessage.h"
-#include "../../BomberSFML-network/Message.h"
+#include "../../BomberSFML-network/src/DataMessage.h"
+#include "../../BomberSFML-network/src/Message.h"
 #include <iostream>
 #include <map>
 

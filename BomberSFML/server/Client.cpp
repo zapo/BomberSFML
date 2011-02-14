@@ -13,8 +13,8 @@
 #include <map>
 #include <ctime>
 #include <SFML/Network.hpp>
-#include "../../BomberSFML-network/DataMessage.h"
-#include "../../BomberSFML-network/Message.h"
+#include "../../BomberSFML-network/src/DataMessage.h"
+#include "../../BomberSFML-network/src/Message.h"
 
 using namespace Bomber;
 using namespace std;

@@ -5,7 +5,7 @@
 #include "Channel.h"
 #include "Client.h"
 #include "../client/Character.h"
-#include "../../BomberSFML-network/Message.h"
+#include "../../BomberSFML-network/src/Message.h"
 #include <SFML/System/Mutex.hpp>
 #include <vector>
 

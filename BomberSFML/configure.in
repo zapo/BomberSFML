@@ -8,6 +8,8 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CXX
 
+AM_PROG_LIBTOOL
+
 # Get sfml libs
 AC_ARG_WITH([sfml-include-path],
   [AS_HELP_STRING([--with-sfml-include-path],
@@ -16,6 +18,7 @@ AC_ARG_WITH([sfml-include-path],
   [SFML_CFLAGS='-I/usr/include/SFML'])
 AC_SUBST([SFML_CFLAGS])
 
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_ARG_WITH([sfml-lib-path],
   [AS_HELP_STRING([--with-sfml-lib-path], [location of the SFML libraries])],

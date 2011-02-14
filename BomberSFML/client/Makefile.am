@@ -24,6 +24,6 @@ client_SOURCES=\
     MouseEventHandler.cpp \
     Anim.h
 
-AM_CPPFLAGS=$(SFML_CFLAGS) -I../../../BomberSFML-network/
+AM_CPPFLAGS = $(SFML_CFLAGS) -I../../../BomberSFML-network/src/
 
-client_LDADD=$(SFML_LIBS) -L../../../BomberSFML-network/Debug -lBomberSFML-network -lboost_serialization
+client_LDADD = $(SFML_LIBS) ../../../BomberSFML-network/build/libBomberSFML-network.la -lboost_serialization
