@@ -19,7 +19,7 @@ MouseEventHandler::~MouseEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void MouseEventHandler::handle(const sf::Event &event) const {
+void MouseEventHandler::handle(const sf::Event &event) {
 
 	Window &window = game->getWindow();
 
@@ -39,8 +39,6 @@ void MouseEventHandler::handle(const sf::Event &event) const {
 		halfSize.x *= factor;
 		halfSize.y *= factor;
 
-
-		std::cout << halfSize.x << " " << halfSize.y << std::endl;
 
 		if(halfSize.x > window.GetWidth() / 2 || halfSize.y > window.GetHeight() / 2) {
 

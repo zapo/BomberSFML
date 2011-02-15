@@ -21,7 +21,7 @@ ClosingEventHandler::ClosingEventHandler(const ClosingEventHandler& orig) {
 ClosingEventHandler::~ClosingEventHandler() {
 }
 
-void ClosingEventHandler::handle(const sf::Event &event) const {
+void ClosingEventHandler::handle(const sf::Event &event) {
 
 	if (event.Type == sf::Event::Closed) {
 		this->game->getWindow().Close();

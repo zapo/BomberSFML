@@ -17,7 +17,7 @@ ShootEventHandler::~ShootEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void ShootEventHandler::handle(const sf::Event &event) const {
+void ShootEventHandler::handle(const sf::Event &event) {
 
 	Character & character = game->getMainCharacter();
 	Connection & connection = game->getConnection();

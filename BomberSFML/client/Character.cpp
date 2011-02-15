@@ -80,7 +80,7 @@ void Character::Render(sf::RenderTarget &target) const {
 
 		if(currentAction == SHOOTING) {
 
-			//target.Draw(Bullet(Bullet::SMALL, orientation));
+			//target.Draw(Bullet(Bullet::SMALL));
 
 		}
 	}
@@ -182,6 +182,7 @@ bool Character::init_static() {
 
 	bool loaded = tankImage.LoadFromFile("build/client/resources/tank.png");
 	tankImage.CreateMaskFromColor(sf::Color(32, 212, 2));
+	tankImage.CreateMaskFromColor(sf::Color(0, 0, 0), 128);
 
 	return loaded;
 }

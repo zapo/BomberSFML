@@ -95,8 +95,6 @@ void Game::run() {
 
 	window->Launch();
 
-
-
 	if (connection->auth()) {
 
 		std::cout << "Authenticated !" << std::endl;
@@ -112,7 +110,6 @@ void Game::run() {
 			connection->connectionMutex.Unlock();
 
 			std::map<long, Character>::iterator pit;
-
 
 
 			for (pit = positions.begin(); pit != positions.end(); pit++) {
@@ -167,6 +164,8 @@ void Game::run() {
 			window->GetDefaultView().SetCenter(viewCenter);
 
 		}
+
+
 
 	}
 

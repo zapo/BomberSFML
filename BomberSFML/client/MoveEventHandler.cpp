@@ -20,7 +20,7 @@ MoveEventHandler::~MoveEventHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void MoveEventHandler::handle(const sf::Event &event) const {
+void MoveEventHandler::handle(const sf::Event &event) {
 
 	Window& window = game->getWindow();
 	Connection& connection = game->getConnection();

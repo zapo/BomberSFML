@@ -23,7 +23,7 @@ public:
 	Window(const int, const int, const int, const string);
 	Window(const Window& orig);
 	virtual ~Window();
-	list<const EventHandler*> getEventHandlers() const;
+	list<EventHandler*> getEventHandlers() const;
 	void addEventHandler(EventHandler&);
 
 	void removeDrawableObject(sf::Drawable&, unsigned int, bool free = true);
@@ -51,11 +51,11 @@ private:
 
 	sf::View interface;
 
-	list<const EventHandler*> eventHandlers;
+	list<EventHandler*> eventHandlers;
 	std::map<unsigned int, std::list<const sf::Drawable*> > drawableObjects;
 
 	map<unsigned int, list<const sf::Drawable*> >::iterator ido;
-	list<const EventHandler*>::iterator iho;
+	list<EventHandler*>::iterator iho;
 
 };
 

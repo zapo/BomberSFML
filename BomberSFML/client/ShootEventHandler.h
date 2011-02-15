@@ -9,15 +9,14 @@
 #define SHOOTEVENTHANDLER_H_
 
 #include "EventHandler.h"
-
-class Character;
+#include "Character.h"
 class Connection;
 
 class ShootEventHandler: public EventHandler {
 public:
 	ShootEventHandler();
 	virtual ~ShootEventHandler();
-	void handle(const sf::Event &event) const;
+	void handle(const sf::Event &event);
 
 private:
 };

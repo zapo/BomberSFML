@@ -65,7 +65,7 @@ void Window::Run() {
 
 			for (iho = eventHandlers.begin(); iho != eventHandlers.end(); iho++) {
 
-				const EventHandler *eh = *(iho);
+				EventHandler *eh = *(iho);
 
 				if (eh != NULL) {
 					eh->handle(event);
@@ -135,7 +135,7 @@ void Window::addEventHandler(EventHandler &handler) {
 	eventHandlersMutex.Unlock();
 }
 
-list<const EventHandler*> Window::getEventHandlers() const {
+list<EventHandler*> Window::getEventHandlers() const {
 
 	return this->eventHandlers;
 

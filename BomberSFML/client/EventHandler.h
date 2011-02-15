@@ -19,7 +19,7 @@ public:
 	EventHandler();
 	EventHandler(const EventHandler& orig);
 	virtual ~EventHandler();
-	virtual void handle(const sf::Event &event) const = 0 ;
+	virtual void handle(const sf::Event &event) = 0 ;
 	Game& getGame() const;
 	void setGame(Game&);
 

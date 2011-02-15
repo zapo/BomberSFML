@@ -20,7 +20,7 @@ class MoveEventHandler : public EventHandler {
 public:
 	MoveEventHandler();
 	virtual ~MoveEventHandler();
-	void handle(const sf::Event &event) const;
+	void handle(const sf::Event &event);
 
 private:
 	static const float speed = 300;
