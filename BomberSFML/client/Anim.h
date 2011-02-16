@@ -17,7 +17,7 @@ public:
 		updateFrequency(0.1f) {
 	}
 
-	void addFrame(const sf::Image& image, const sf::IntRect &subrect,
+	void addFrame(const sf::Image & image, const sf::IntRect & subrect,
 			bool flipx = false, bool flipy = false) {
 
 		sf::Sprite frame = sf::Sprite(image);
@@ -29,7 +29,7 @@ public:
 		frames.push_back(frame);
 	}
 
-	void addFrame(const sf::Sprite& frame) {
+	void addFrame(const sf::Sprite & frame) {
 		frames.push_back(frame);
 	}
 

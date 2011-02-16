@@ -13,15 +13,17 @@
 using namespace std;
 
 ClosingEventHandler::ClosingEventHandler() {
+	eventTypes.push_back(sf::Event::KeyPressed);
+	eventTypes.push_back(sf::Event::Closed);
 }
 
-ClosingEventHandler::ClosingEventHandler(const ClosingEventHandler& orig) {
+ClosingEventHandler::ClosingEventHandler(const ClosingEventHandler & orig) {
 }
 
 ClosingEventHandler::~ClosingEventHandler() {
 }
 
-void ClosingEventHandler::handle(const sf::Event &event) {
+void ClosingEventHandler::handle(const sf::Event & event) {
 
 	if (event.Type == sf::Event::Closed) {
 		this->game->getWindow().Close();

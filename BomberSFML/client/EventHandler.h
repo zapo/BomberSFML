@@ -9,6 +9,7 @@
 #define	EVENTHANDLER_H
 
 #include <SFML/Graphics.hpp>
+#include <list>
 
 class Game;
 
@@ -20,11 +21,13 @@ public:
 	EventHandler(const EventHandler& orig);
 	virtual ~EventHandler();
 	virtual void handle(const sf::Event &event) = 0 ;
+	bool canHandle(sf::Event::EventType type);
 	Game& getGame() const;
 	void setGame(Game&);
 
 protected:
 
+	std::list<sf::Event::EventType> eventTypes;
 	Game * game;
 
 };

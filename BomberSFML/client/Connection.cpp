@@ -19,7 +19,7 @@ namespace boost {
 
 namespace serialization {
 template<class Archive>
-void serialize(Archive &ar, sf::Vector2<float> &vector,
+void serialize(Archive & ar, sf::Vector2<float> & vector,
 		const unsigned int version) {
 
 	ar & vector.x;
@@ -40,7 +40,7 @@ Connection::Connection(const unsigned short authPort, const sf::IPAddress & addr
 	} while(!server.Bind(receivePort));
 }
 
-bool Connection::setPosition(const Character &character) {
+bool Connection::setPosition(const Character & character) {
 
 	bool accepted = false;
 	sf::Packet request, response;

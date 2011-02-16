@@ -20,7 +20,7 @@ Character::Character(const long id, const Orientation orientation, const Action 
 
 }
 
-Character::Character(const Character &character) :
+Character::Character(const Character & character) :
 	sf::Drawable(),
 	id(character.id),
 	orientation(character.orientation),
@@ -32,7 +32,7 @@ Character::Character(const Character &character) :
 
 }
 
-Character& Character::operator=(const Character &character) {
+Character & Character::operator=(const Character & character) {
 
 	this->id = character.id;
 	this->orientation = character.orientation;

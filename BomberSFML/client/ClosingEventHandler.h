@@ -15,10 +15,9 @@ class ClosingEventHandler: public EventHandler {
 public:
 
 	ClosingEventHandler();
-	ClosingEventHandler(const ClosingEventHandler& orig);
+	ClosingEventHandler(const ClosingEventHandler & orig);
 	virtual ~ClosingEventHandler();
-
-	void handle(const sf::Event &event);
+	void handle(const sf::Event & event);
 private:
 
 };

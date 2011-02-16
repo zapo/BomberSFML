@@ -20,7 +20,7 @@ public:
 		SMALL
 	};
 
-	Bullet& operator=(Bullet& bullet);
+	Bullet& operator=(Bullet & bullet);
 
 	Bullet(const Type type = SMALL/*, Character::Orientation orientation*/);
 	virtual ~Bullet();
@@ -30,7 +30,7 @@ public:
 
 private:
 
-	virtual void Render(sf::RenderTarget &target) const;
+	virtual void Render(sf::RenderTarget & target) const;
 
 	Type type;
 	static sf::Image bulletImage;

@@ -17,7 +17,6 @@ public:
 	ShootEventHandler();
 	virtual ~ShootEventHandler();
 	void handle(const sf::Event &event);
-
 private:
 };
 

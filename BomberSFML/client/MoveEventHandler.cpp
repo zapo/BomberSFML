@@ -12,8 +12,9 @@
 #include "Window.h"
 #include <iostream>
 
-MoveEventHandler::MoveEventHandler() :
-	EventHandler() {
+MoveEventHandler::MoveEventHandler() {
+	eventTypes.push_back(sf::Event::KeyPressed);
+	eventTypes.push_back(sf::Event::KeyReleased);
 }
 
 MoveEventHandler::~MoveEventHandler() {

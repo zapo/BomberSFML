@@ -11,6 +11,8 @@
 #include "Connection.h"
 
 ShootEventHandler::ShootEventHandler() {
+	eventTypes.push_back(sf::Event::KeyPressed);
+	eventTypes.push_back(sf::Event::KeyReleased);
 }
 
 ShootEventHandler::~ShootEventHandler() {

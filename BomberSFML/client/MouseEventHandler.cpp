@@ -11,8 +11,7 @@
 #include <iostream>
 
 MouseEventHandler::MouseEventHandler() {
-	// TODO Auto-generated constructor stub
-
+	eventTypes.push_back(sf::Event::MouseWheelMoved);
 }
 
 MouseEventHandler::~MouseEventHandler() {

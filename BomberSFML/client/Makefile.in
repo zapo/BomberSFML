@@ -53,7 +53,8 @@ am_client_OBJECTS = BomberSFML.$(OBJEXT) Bullet.$(OBJEXT) \
 	ClosingEventHandler.$(OBJEXT) EventHandler.$(OBJEXT) \
 	MoveEventHandler.$(OBJEXT) Window.$(OBJEXT) \
 	Connection.$(OBJEXT) Character.$(OBJEXT) Game.$(OBJEXT) \
-	ShootEventHandler.$(OBJEXT) MouseEventHandler.$(OBJEXT)
+	ShootEventHandler.$(OBJEXT) MouseEventHandler.$(OBJEXT) \
+	Layer.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
 am__DEPENDENCIES_1 =
 client_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -225,7 +226,9 @@ client_SOURCES = \
     ShootEventHandler.h \
     MouseEventHandler.h \
     MouseEventHandler.cpp \
-    Anim.h
+    Anim.h \
+    Layer.h \
+    Layer.cpp
 
 AM_CPPFLAGS = $(SFML_CFLAGS) -I../../../BomberSFML-network/src/
 client_LDADD = $(SFML_LIBS) ../../../BomberSFML-network/build/libBomberSFML-network.la -lboost_serialization
@@ -323,6 +326,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/EventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Game.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Layer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MouseEventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MoveEventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ShootEventHandler.Po@am__quote@

@@ -30,8 +30,8 @@ public:
 	void init_dynamic();
 
 	Character(const long id = 0, const Orientation orientation = DOWN, const Action currentAction = IDLEING);
-	Character(const Character &character);
-	Character& operator=(const Character &character);
+	Character(const Character & character);
+	Character & operator=(const Character &character);
 	virtual ~Character();
 
 	void move(const sf::Vector2f & position);
@@ -51,7 +51,7 @@ private:
 	friend class boost::serialization::access;
 
 	template <class Archive>
-	void save(Archive &ar, const unsigned int version) const {
+	void save(Archive & ar, const unsigned int version) const {
 
 		sf::Vector2f position = this->GetPosition();
 
@@ -76,7 +76,7 @@ private:
 
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	virtual void Render(sf::RenderTarget &target) const;
+	virtual void Render(sf::RenderTarget & target) const;
 
 	Orientation orientation;
 	Action currentAction;

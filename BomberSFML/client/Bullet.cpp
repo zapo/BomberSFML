@@ -18,7 +18,7 @@ Bullet::Bullet(const Type type/*, int orientation*/) :
 
 }
 
-Bullet& Bullet::operator=(Bullet& bullet) {
+Bullet& Bullet::operator=(Bullet & bullet) {
 
 	this->init_dynamic();
 	this->type = bullet.type;
@@ -45,7 +45,7 @@ bool Bullet::init_dynamic() {
 	//anim[Character::DOWN][SMALL].addFrame(bulletImage, sf::IntRect(936, 84, 948, 116));
 }
 
-void Bullet::Render(sf::RenderTarget &target) const {
+void Bullet::Render(sf::RenderTarget & target) const {
 
 	//target.Draw((*panim)[orientation][type].getCurrentFrame());
 

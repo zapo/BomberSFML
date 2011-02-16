@@ -26,3 +26,9 @@ void EventHandler::setGame(Game& game) {
 	this->game = &game;
 }
 
+bool EventHandler::canHandle(sf::Event::EventType type) {
+
+	return (std::find(eventTypes.begin(), eventTypes.end(), type) != eventTypes.end());
+
+}
+

@@ -24,7 +24,7 @@
 #define __USERID				2
 
 
-int main(int argc, char** argv) {
+int main(int argc, char ** argv) {
 
 	long id = __USERID;
 	sf::IPAddress host = sf::IPAddress::LocalHost;
@@ -45,20 +45,19 @@ int main(int argc, char** argv) {
 	game.addCharacter(id, me);
 	game.setMainCharacter(me);
 
-	ClosingEventHandler ceh = ClosingEventHandler();
-	MouseEventHandler meh = MouseEventHandler();
-	MoveEventHandler moeh = MoveEventHandler();
-	ShootEventHandler seh = ShootEventHandler();
+	ClosingEventHandler ceh;
+	MouseEventHandler 	meh;
+	MoveEventHandler 	moeh;
+	ShootEventHandler 	seh;
 
 	game.addEventHandler(ceh);
 	game.addEventHandler(meh);
 	game.addEventHandler(moeh);
 	game.addEventHandler(seh);
 
-	window.setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.06);
-
+	game.setIsFrameratePrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 40), 0.08);
+	game.setIsLatencyPrinted(true, sf::Vector2f(__SCREEN_WIDH - 100, 60), 0.08);
 	game.run();
-
 
 	return EXIT_SUCCESS;
 }
