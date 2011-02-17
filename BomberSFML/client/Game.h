@@ -10,6 +10,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
+#include "Layer.h"
 
 class Window;
 class Connection;
@@ -21,10 +22,8 @@ public:
 	Game( Window &window, Connection &connection);
 	virtual ~Game();
 
-	bool hasCharacter(const long id) const;
-	void addCharacter(const long id, Character &);
+
 	void addEventHandler(EventHandler & eventHandler);
-	void deleteCharacter(const long id);
 
 	void setMainCharacter(Character &);
     Character & getMainCharacter() const;
@@ -37,16 +36,21 @@ public:
 
 	void updateMainView();
 	void updateCharacters();
-	void updateFramerate();
-	void updateLatency();
+	void updateInterfaceView();
 
 	void setIsFrameratePrinted(bool print, const sf::Vector2f position, float refresh = 1.f);
 	void setIsLatencyPrinted(bool print, const sf::Vector2f position, float refresh = 1.f);
 
 	static void init_static();
 
+	sf::Sprite & getMap() ;
+
 
 private:
+
+	bool hasCharacter(const long id) const;
+	void addCharacter(const long id, Character &);
+	void deleteCharacter(const long id);
 
 	Window * window;
 	Connection * connection;

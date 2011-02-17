@@ -17,14 +17,22 @@ Window::Window(const int width, const int height, const int colors, const string
 
 	sf::RenderWindow(sf::VideoMode(width, height, colors), title),
 			sf::Thread(),
+			mainLayer(Layer(GetDefaultView())),
+			interfaceLayer(Layer(GetInterfaceView())),
 			title(title) {
 
+	interface.SetCenter		(sf::Vector2f(width/2, height/2));
+	interface.SetHalfSize	(sf::Vector2f(width/2, height/2));
 
 	this->SetActive(false);
-
+	addLayer(mainLayer);
+	addLayer(interfaceLayer);
 }
 
-Window::Window(const Window& orig) {
+Window::Window(const Window& orig) :
+		mainLayer(orig.mainLayer),
+		interfaceLayer(orig.interfaceLayer),
+		layers(orig.layers) {
 }
 
 Window::~Window() {
@@ -57,19 +65,19 @@ void Window::Run() {
 
 		drawableObjectsMutex.Lock();
 
-		for (ido = drawableObjects.begin(); ido != drawableObjects.end(); ido++) {
+		for (lit = layers.begin(); lit != layers.end(); lit++) {
 
-			this->SetView(*(ido->first));
+			Layer & layer = **lit;
+			this->SetView(layer.getView());
 
-			for(idoo = ido->second.begin(); idoo != ido->second.end(); idoo++) {
+			vector<sf::Drawable*> & objects = layer.getObjects();
+			vector<sf::Drawable*>::iterator objit;
 
-				for(idooo = idoo->second.begin(); idooo != idoo->second.end(); idooo++) {
+			for(objit = objects.begin(); objit != objects.end(); objit++) {
 
-					const sf::Drawable * dro = *(idooo);
-
-					if (dro != NULL) {
-						this->Draw(*dro);
-					}
+				const sf::Drawable * dro = *(objit);
+				if(dro != NULL) {
+					this->Draw(*dro);
 				}
 			}
 		}
@@ -81,6 +89,12 @@ void Window::Run() {
 
 }
 
+void Window::addLayer(Layer & layer) {
+
+	drawableObjectsMutex.Lock();
+	layers.push_back(&layer);
+	drawableObjectsMutex.Unlock();
+}
 
 
 void Window::addEventHandler(EventHandler &handler) {
@@ -98,37 +112,20 @@ list<EventHandler*> Window::getEventHandlers() const {
 
 }
 
-void Window::removeDrawableObject(sf::Drawable& object, sf::View& view, unsigned int layer, bool free) {
-
-	drawableObjectsMutex.Lock();
-
-	if(drawableObjects.find(&view) != drawableObjects.end()) {
-
-		if(drawableObjects[&view].find(layer) != drawableObjects[&view].end()) {
-
-			drawableObjects[&view][layer].remove(&object);
-		}
-
-	}
-
-	if (free) {
-		delete &object;
-	}
-
-	drawableObjectsMutex.Unlock();
+sf::View& Window::GetInterfaceView() {
+	return interface;
 }
 
-void Window::addDrawableObject(const sf::Drawable& object, sf::View& view, unsigned int layer) {
+Layer & Window::GetMainLayer() {
 
-	drawableObjectsMutex.Lock();
-
-	this->drawableObjects[&view][layer].push_back(&object);
-
-	drawableObjectsMutex.Unlock();
-}
-map<sf::View* ,map<unsigned int, list<const sf::Drawable*> > > Window::getDrawableObjects() const {
-
-	return drawableObjects;
+	return mainLayer;
 
 }
+Layer & Window::GetInterfaceLayer() {
+
+	return interfaceLayer;
+
+}
+
+
 

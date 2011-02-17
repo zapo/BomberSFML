@@ -21,7 +21,7 @@
 #define __SCREEN_HEIGHT 		768
 #define __COLOR 				32
 
-#define __USERID				2
+#define __USERID				19
 
 
 int main(int argc, char ** argv) {
@@ -41,8 +41,6 @@ int main(int argc, char ** argv) {
 	game.loadRessources();
 
 	Character me(id);
-
-	game.addCharacter(id, me);
 	game.setMainCharacter(me);
 
 	ClosingEventHandler ceh;

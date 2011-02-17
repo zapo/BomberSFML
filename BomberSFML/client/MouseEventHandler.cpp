@@ -32,17 +32,14 @@ void MouseEventHandler::handle(const sf::Event &event) {
 			factor = 1/factor;
 		}
 
-		std::cout << factor << std::endl;
-
-
 		halfSize.x *= factor;
 		halfSize.y *= factor;
 
 
-		if(halfSize.x > window.GetWidth() / 2 || halfSize.y > window.GetHeight() / 2) {
+		if(halfSize.x > game->getMap().GetSize().x / 2 || halfSize.y > game->getMap().GetSize().y / 2) {
 
-			halfSize.x = window.GetWidth() / 2;
-			halfSize.y = window.GetHeight() / 2;
+			halfSize.x = game->getMap().GetSize().x / 2;
+			halfSize.y = game->getMap().GetSize().y / 2;
 
 		}
 

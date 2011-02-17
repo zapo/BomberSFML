@@ -19,6 +19,8 @@ sf::Image Game::mapImage;
 Game::Game(Window &window, Connection &connection) :
 	window(&window),
 	connection(&connection),
+	isLatencyPrinted(false),
+	latencyRefresh(1),
 	isFrameratePrinted(false),
 	framerateRefresh(1) {
 
@@ -50,9 +52,14 @@ void Game::addCharacter(long id, Character &character) {
 
 		character.init_dynamic();
 
+		window->drawableObjectsMutex.Lock();
+
 		characters[id] = &character;
 
-		window->addDrawableObject(character, window->GetDefaultView(), 2);
+		window->GetMainLayer().addObject(character, 2);
+
+		window->drawableObjectsMutex.Unlock();
+
 		std::cout << "Character " << id << " added to game" << std::endl;
 	}
 }
@@ -61,7 +68,7 @@ void Game::deleteCharacter(long id) {
 	if (hasCharacter(id)) {
 
 		std::cout << "Deleting character " << id << std::endl;
-		window->removeDrawableObject(*(characters[id]),window->GetDefaultView(), 2);
+		window->GetMainLayer().removeObject((*(characters[id])));
 
 		characters.erase(id);
 
@@ -95,22 +102,16 @@ Connection& Game::getConnection() const {
 
 void Game::run() {
 
-	sf::View interface;
+	window->GetMainLayer().addObject(mapSprite, 0);
 
-	unsigned int width 	= window->GetWidth();
-	unsigned int height = window->GetHeight();
-
-	interface.SetCenter		(sf::Vector2f(width/2, height/2));
-	interface.SetHalfSize	(sf::Vector2f(width/2, height/2));
-
-	window->addDrawableObject(mapSprite, window->GetDefaultView(), 1);
+	addCharacter(getMainCharacter().getId(), getMainCharacter());
 
 	if(isFrameratePrinted) {
-		window->addDrawableObject(framerate, interface, 999);
+		window->GetInterfaceLayer().addObject(framerate, 1);
 	}
 
 	if(isLatencyPrinted) {
-		window->addDrawableObject(latency, interface, 999);
+		window->GetInterfaceLayer().addObject(latency, 1);
 	}
 
 	window->Launch();
@@ -127,8 +128,7 @@ void Game::run() {
 
 			updateCharacters();
 			updateMainView();
-			updateFramerate();
-			updateLatency();
+			updateInterfaceView();
 
 		}
 	}
@@ -184,27 +184,27 @@ void Game::updateMainView() {
 
 	sf::Vector2f viewCenter = mainCharacter->GetPosition();
 
-	if(mainCharacter->GetPosition().x <= window->GetWidth() / 2) {
-		viewCenter.x = window->GetWidth() / 2;
+	if(mainCharacter->GetPosition().x <= window->GetDefaultView().GetHalfSize().x) {
+		viewCenter.x = window->GetDefaultView().GetHalfSize().x;
 	}
 
-	if(mainCharacter->GetPosition().x >= (mapSprite.GetSize().x - window->GetWidth() / 2)) {
-		viewCenter.x = (mapSprite.GetSize().x - window->GetWidth() / 2);
+	if(mainCharacter->GetPosition().x >= (mapSprite.GetSize().x - window->GetDefaultView().GetHalfSize().x)) {
+		viewCenter.x = (mapSprite.GetSize().x - window->GetDefaultView().GetHalfSize().x);
 	}
 
-	if(mainCharacter->GetPosition().y <= window->GetHeight() / 2) {
-		viewCenter.y = window->GetHeight() / 2;
+	if(mainCharacter->GetPosition().y <= window->GetDefaultView().GetHalfSize().y) {
+		viewCenter.y = window->GetDefaultView().GetHalfSize().y;
 	}
 
-	if(mainCharacter->GetPosition().y >= (mapSprite.GetSize().y - window->GetHeight() / 2)) {
-		viewCenter.y = (mapSprite.GetSize().y - window->GetHeight() / 2);
+	if(mainCharacter->GetPosition().y >= (mapSprite.GetSize().y - window->GetDefaultView().GetHalfSize().y)) {
+		viewCenter.y = (mapSprite.GetSize().y - window->GetDefaultView().GetHalfSize().y);
 	}
 
 	window->GetDefaultView().SetCenter(viewCenter);
 
 }
 
-void Game::updateFramerate() {
+void Game::updateInterfaceView() {
 
 	if (framerateClock.GetElapsedTime() >= framerateRefresh) {
 
@@ -217,9 +217,6 @@ void Game::updateFramerate() {
 		framerateClock.Reset();
 
 	}
-}
-
-void Game::updateLatency() {
 
 	if (latencyClock.GetElapsedTime() >= latencyRefresh) {
 
@@ -232,6 +229,7 @@ void Game::updateLatency() {
 		latencyClock.Reset();
 
 	}
+
 }
 
 void Game::setIsFrameratePrinted(bool print, sf::Vector2f position, float refresh) {
@@ -253,4 +251,8 @@ void Game::setIsLatencyPrinted(bool print, sf::Vector2f position, float refresh)
 void Game::init_static() {
 	mapImage.LoadFromFile("build/client/resources/map.png");
 
+}
+
+sf::Sprite & Game::getMap() {
+	return mapSprite;
 }

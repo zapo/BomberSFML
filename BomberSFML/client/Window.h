@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "Layer.h"
 #include <list>
 
 class EventHandler;
@@ -30,22 +31,29 @@ public:
 	void addDrawableObject(const sf::Drawable&, sf::View&, unsigned int);
 	map<sf::View*, map<unsigned int, list<const sf::Drawable*> > >getDrawableObjects() const;
 
+	void addLayer(Layer&);
+
+	Layer & GetMainLayer();
+	Layer & GetInterfaceLayer();
+	sf::View& GetInterfaceView();
+
 	sf::Mutex drawableObjectsMutex;
 
 private:
 
 	virtual void Run();
 
+	sf::View interface;
+	Layer mainLayer;
+	Layer interfaceLayer;
+
 	sf::Mutex eventHandlersMutex;
 	const string title;
 
 	list<EventHandler*> eventHandlers;
 
-	map<sf::View*, map<unsigned int, list<const sf::Drawable*> > > drawableObjects;
-
-	map<sf::View*, map<unsigned int, list<const sf::Drawable*> > >::iterator ido;
-	map<unsigned int, list<const sf::Drawable*> >::iterator idoo;
-	list<const sf::Drawable*>::iterator idooo;
+	vector<Layer*> layers;
+	vector<Layer*>::iterator lit;
 
 	list<EventHandler*>::iterator iho;
 
